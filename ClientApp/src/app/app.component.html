@@ -1,10 +1,28 @@
-<div class='container-fluid'>
-  <div class='row'>
-    <div>
-      <app-nav-menu></app-nav-menu>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+        integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+        crossorigin="anonymous"></script>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">LABORATORIO FIS</a>
     </div>
-    <div >
-      <router-outlet></router-outlet>
-    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">HOME</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" >USUARIOS <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">GESTIÓN</a></li>
+          <li><a href="#">MI USUARIO</a></li>
+     
+        </ul>
+      </li>
+      <li><a href="#">LABORATORIOS</a></li>
+      <li><a href="#">HORARIOS</a></li>
+      <li><a href="#">PERSONAL</a></li>
+    </ul>
   </div>
+</nav>
+  
+<div class="container">
+  <h3>Navbar With Dropdown</h3>
+  <p>This example adds a dropdown menu for the "Page 1" button in the navigation bar.</p>
 </div>

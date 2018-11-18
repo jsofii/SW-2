@@ -1,44 +1,24 @@
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<nav class="navbar navbar-inverse mainNav">
-    <a class="navbar-brand pull-right" style="margin-left: 100; ">{{parentData.name}}</a>
+<nav class="navbar navbar-inverse">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand">ASOFT</a>
-
-
-        </div>
-        <ul class="nav navbar-nav clase">
-            <li [routerLinkActive]='["link-active",4]'>
-                <a [routerLink]="['/principal',parentData.name,0]" (click)='collapse()'>
-                    <span class='glyphicon glyphicon-th-list'></span> Home
-                </a>
-            </li>
-            <li [routerLinkActive]='["link-active"]'>
-                <a [routerLink]='["/comunidad",parentData.name,0]' (click)='collapse()'>
-                    <span class='glyphicon glyphicon-th-list'></span> Comunissssdddssssdddadddd
-                </a>
-            </li>
-
-            <li [routerLinkActive]='["link-active"]'>
-                <a [routerLink]='["/usuario"]' (click)='collapse()'>
-                    <span class='glyphicon glyphicon-user'></span> Usuario
-                </a>
-            </li>
-            <li [routerLinkActive]='["link-active"]'>
-                <a [routerLink]='["/replica"]' (click)='collapse()'>
-                    <span class='glyphicon glyphicon-cog'></span> Replicaddddddddddddddddddddddddddd
-
-                </a>
-            </li>
-
-
-
-
-        </ul>
-
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">WebSiteName</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Page 1-1</a></li>
+            <li><a href="#">Page 1-2</a></li>
+            <li><a href="#">Page 1-3</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Page 2</a></li>
+        <li><a href="#">Page 3</a></li>
+      </ul>
     </div>
-</nav>
+  </nav>
+    
+  <div class="container">
+    <h3>Navbar With Dropdown</h3>
+    <p>This example adds a dropdown menu for the "Page 1" button in the navigation bar.</p>
+  </div>

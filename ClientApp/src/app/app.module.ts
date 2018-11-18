@@ -11,6 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { UsuarioGestionComponent } from './usuario-gestion/usuario-gestion.component';
+import { usuarioServiceService} from './usuario-service/usuario-service.service';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,8 @@ import { UsuarioGestionComponent } from './usuario-gestion/usuario-gestion.compo
     UsuarioComponent,
 
     UsuarioGestionComponent
+
+   
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -35,7 +38,7 @@ import { UsuarioGestionComponent } from './usuario-gestion/usuario-gestion.compo
       { path: 'usuario-gestion', component: UsuarioGestionComponent }
     ])
   ],
-  providers: [],
+  providers: [usuarioServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

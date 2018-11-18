@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace SW_2.Controllers
 {
     [Route("api/[controller]")]
+   
     public class UsuarioController : Controller
     {
-
+    
     }
         
 }

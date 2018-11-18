@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SW-2.Models
+namespace SW_2.Models
 {
     public partial class Laboratorio
     {

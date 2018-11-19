@@ -231,13 +231,13 @@ namespace SW_2.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Idtipopersona).HasColumnName("IDTIPOPERSONA");
+
                 entity.Property(e => e.Nombrecompleto)
                     .IsRequired()
                     .HasColumnName("NOMBRECOMPLETO")
                     .HasMaxLength(100)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Tipopersona).HasColumnName("TIPOPERSONA");
 
                 entity.HasOne(d => d.IdpersonaNavigation)
                     .WithOne(p => p.Persona)

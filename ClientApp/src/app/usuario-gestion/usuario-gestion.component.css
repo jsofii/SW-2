@@ -1,0 +1,14 @@
+.editar{
+    width: 100px;
+    background-color: black!important
+}
+.div1 {
+    margin-left: 120px;
+    margin-right: auto;
+    display: block;
+    height:220px;
+    width:250px;
+    background:url(editar.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}

@@ -3,4 +3,12 @@
 
    
     background-image: url(logo.png); 
+    margin-left: 120px;
+    margin-right: auto;
+    display: block;
+    height:220px;
+    width:250px;
+    background:url(logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
 }

@@ -20,6 +20,13 @@
       <label style="margin-top: 20px" for="usr">Identificación Personal:</label>
       <input  [(ngModel)]="inputIdentificacion" type="text" class="form-control" id="usr">
     </div>
+    <div class="div1 col-lg-6">
+
+    </div>
+    <div class="editar">
+    
+
+    </div>
     <div class="col-lg-2">
 
 
@@ -27,8 +34,14 @@
 
   </div>
   <div class="panel-footer">
-
-    <button (click)="GuardarPersona()"  class="btn btn-success"> GUARDAR</button>
+   
+    <button (click)="GuardarPersona()"  class="btn btn-success glyphicon glyphicon-check"> GUARDAR</button>
+    <button [routerLink]='["/usuario"]'  class="btn btn-danger  pull-right glyphicon glyphicon-arrow-left"> REGRESAR</button>
   </div>
+ 
+
+
+
+
 </div>
 <div class="col-lg-2"></div>

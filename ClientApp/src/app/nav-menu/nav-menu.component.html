@@ -1,22 +1,24 @@
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
-        integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
-        crossorigin="anonymous"></script>
-<nav class="navbar navbar-inverse">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+  crossorigin="anonymous"></script>
+<nav class="navbar navbar-inverse" style="background-color: rgb(36, 56, 82)">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">LABORATORIO FIS</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">USUARIOS</a></li>
-     
+
       <li><a href="#">LABORATORIO</a></li>
-      <li><a href="#">HORARIOS</a></li>
       <li [routerLinkActive]='["link-active"]'>
-          <a [routerLink]='["/usuario"]' >
-              <span class='glyphicon glyphicon-th-list'></span> Home
-          </a>
+        <a [routerLink]='["/home"]'>
+          <span class='glyphicon glyphicon-hourglass'></span> HORARIOS
+        </a>
+      </li>
+
+      <li [routerLinkActive]='["link-active"]'>
+        <a [routerLink]='["/usuario"]'>
+          <span class='glyphicon glyphicon-th-list'></span> USUARIOS
+        </a>
       </li>
     </ul>
   </div>
 </nav>
-  

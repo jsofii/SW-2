@@ -24,6 +24,18 @@ export class usuarioServiceService {
     return this.http.get('https://localhost:5001/api/Usuario/ListaTodo');
 
   }
+  ListaTipoPersona() {
+    return this.http.get('https://localhost:5001/api/TipoPersona/Lista');
+  }
+  AddPersona(nombreCompleto: any, idPersonal: any, idTipoPersona: any) {
+    var temp = {
+      Nombrecompleto: nombreCompleto,
+      Identificacionpersonal: idPersonal,
+      Idtipopersona: idTipoPersona
+    }
+    return this.http.post('https://localhost:5001/api/Persona/Add/', temp);
+
+  }
 
 
 

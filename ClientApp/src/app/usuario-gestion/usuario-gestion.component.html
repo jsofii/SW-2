@@ -1,28 +1,34 @@
-<div class="container">
-
-  <div style="margin-left: 1%" class="panel-group">
-
-
-    <div class="panel panel-success">
-      <div class="panel-heading">GESTIÓN USUARIOS
-        <div class="panel-body">
-
-          <div class="col-lg-6">
-            
-
-          </div>
-          <div class="col-lg-6">
-            
-
-          </div>
-        </div>
-
-
-
-
-
+<div class="col-lg-2"></div>
+<div class="panel panel-success col-lg-8">
+  <div class="panel-heading">REGISTRO DE USUARIOS</div>
+  <div class="panel-body">
+    <div class="col-lg-6">
+      <label for="usr">Nombre:</label>
+      <input  [(ngModel)]="inputUsuario" type="text" class="form-control" id="usr">
+      <label style="margin-top: 20px" for="usr" style="margin-top: 20px">Rol:</label>
+      <div class="dropdown">
+        <button    class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{inputTipoPersonaNombre}}
+          <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li *ngFor="let item of ListaTipoPersona">
+            <label style="margin-right: 10px"(click)="CargarTipoPersonaId(item.idtipopersona, item.nombre)">
+              {{item.nombre}}
+            </label>
+          </li>
+        </ul>
       </div>
+      <label style="margin-top: 20px" for="usr">Identificación Personal:</label>
+      <input  [(ngModel)]="inputIdentificacion" type="text" class="form-control" id="usr">
+    </div>
+    <div class="col-lg-2">
 
 
     </div>
+
   </div>
+  <div class="panel-footer">
+
+    <button (click)="GuardarPersona()"  class="btn btn-success"> GUARDAR</button>
+  </div>
+</div>
+<div class="col-lg-2"></div>

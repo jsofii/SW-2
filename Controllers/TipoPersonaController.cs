@@ -9,12 +9,13 @@ namespace SW_2.Controllers
 {
     [Route("api/[controller]")]
    
-    public class UsuarioController : Controller
+    public class TipoPersonaController : Controller
     {
         baseswContext context=new baseswContext();
         [HttpGet]
-        [Route("ListaTodo")] public List<Persona> Lista(){
-            return this.context.Persona.ToList();
+        [Route("Lista")] 
+        public List<Tipopersona> Lista(){
+            return this.context.Tipopersona.ToList();
         }
     }
         

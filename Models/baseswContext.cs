@@ -169,10 +169,12 @@ namespace SW_2.Models
 
                 entity.ToTable("persona", "basesw");
 
+                entity.HasIndex(e => e.Idtipopersona)
+                    .HasName("FK_PERSONA_TIPOPERSONA");
+
                 entity.Property(e => e.Idpersona)
                     .HasColumnName("IDPERSONA")
-                    .HasColumnType("int(11)")
-                    .ValueGeneratedOnAdd();
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.Identificacionpersonal)
                     .IsRequired()
@@ -190,9 +192,9 @@ namespace SW_2.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.IdpersonaNavigation)
-                    .WithOne(p => p.Persona)
-                    .HasForeignKey<Persona>(d => d.Idpersona)
+                entity.HasOne(d => d.IdtipopersonaNavigation)
+                    .WithMany(p => p.Persona)
+                    .HasForeignKey(d => d.Idtipopersona)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PERSONA_TIPOPERSONA");
             });

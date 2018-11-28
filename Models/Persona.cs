@@ -7,9 +7,6 @@ namespace SW_2.Models
     {
         public Persona()
         {
-            Listanegra = new HashSet<Listanegra>();
-            Prestamoequipo = new HashSet<Prestamoequipo>();
-            Prestamolaboratorio = new HashSet<Prestamolaboratorio>();
             Usuario = new HashSet<Usuario>();
         }
 
@@ -18,10 +15,7 @@ namespace SW_2.Models
         public string Identificacionpersonal { get; set; }
         public int Idtipopersona { get; set; }
 
-        public Tipopersona IdpersonaNavigation { get; set; }
-        public ICollection<Listanegra> Listanegra { get; set; }
-        public ICollection<Prestamoequipo> Prestamoequipo { get; set; }
-        public ICollection<Prestamolaboratorio> Prestamolaboratorio { get; set; }
+        public Tipopersona IdtipopersonaNavigation { get; set; }
         public ICollection<Usuario> Usuario { get; set; }
     }
 }

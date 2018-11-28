@@ -9,8 +9,8 @@ namespace SW_2.Models
         public int Idlaboratorio { get; set; }
         public int Idusuario { get; set; }
         public string Motivoreserva { get; set; }
-        public string Horadeinicio { get; set; }
-        public string Horadefin { get; set; }
+        public int Horadeinicio { get; set; }
+        public int Horadefin { get; set; }
         public DateTime Fecha { get; set; }
         public string Estadoreserva { get; set; }
 

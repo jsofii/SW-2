@@ -11,5 +11,12 @@ export class MateriaComponent implements OnInit {
 
   ngOnInit() {
   }
+  ListaParametro:any[] =["Código","Nombre"];
+  inputParametro="Elegir parámetro"
+  CargarTipoParametro(parametro:any){
+    this.inputParametro=parametro;
+
+  }
+
 
 }

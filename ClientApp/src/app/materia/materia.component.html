@@ -41,14 +41,23 @@
           Buscar por:
         </div>
         <div class="dropdown col-lg-2">
-            <button  class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Elegir
-                parámetro
+            <button  class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">{{inputParametro}}
                 <span class="caret"></span></button>
          
-          <ul class="dropdown-menu">
-            <li><a href="#">Código materia</a></li>
-            <li><a href="#">Nombre</a></li>
-          </ul>
+                <ul class="dropdown-menu">
+                  <li *ngFor="let item of ListaParametro">
+                    <label style="margin-right: 10px"(click)="CargarTipoParametro(item)">
+                      {{item}}
+                    </label>
+                  </li>
+                </ul>
+
+
+
+          <!--ul class="dropdown-menu">
+            <li><a>Código materia</a></li>
+            <li><a>Nombre</a></li>
+          </ul>-->
         </div>
         <div class="col-lg-4">
           <input class="form-control" id="idBusqueda" type="text" placeholder="Buscar..">

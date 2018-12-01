@@ -13,6 +13,7 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { UsuarioGestionComponent } from './usuario-gestion/usuario-gestion.component';
 import { usuarioServiceService} from './usuario-service/usuario-service.service';
 import { MateriaComponent } from './materia/materia.component';
+import { materiaServiceService } from './materia-service/materia-service.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { MateriaComponent } from './materia/materia.component';
       { path: 'materia', component: MateriaComponent }
     ])
   ],
-  providers: [usuarioServiceService],
+  providers: [usuarioServiceService,materiaServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

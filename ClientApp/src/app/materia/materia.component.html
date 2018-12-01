@@ -78,26 +78,13 @@
           </tr>
         </thead>
         <tbody id="myTable">
-          <tr>
-            <td>materia1</td>
-            <td>sic123</td>
+          <tr *ngFor="let materia of ListaTodasMaterias">
+            
+            <td>{{materia.nombre}}</td>
 
+            <td>{{materia.codigo}}</td>
           </tr>
-          <tr>
-            <td>materia2</td>
-            <td>sic321</td>
-
-          </tr>
-          <tr>
-            <td>materia3</td>
-            <td>sic555</td>
-
-          </tr>
-          <tr>
-            <td>materia4</td>
-            <td>sic666</td>
-
-          </tr>
+          
         </tbody>
       </table>
 

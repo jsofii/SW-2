@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { materiaServiceService} from '../materia-service/materia-service.service';
 
 @Component({
   selector: 'app-materia',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MateriaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private serviceMateria: materiaServiceService ) { }
+  ListaTodasMaterias:any;
+
+  ObtenerTodasMaterias(){
+    this.serviceMateria.ListaTodasMaterias().subscribe(
+      
+      data=>{
+        this.ListaTodasMaterias=data;
+      }
+
+    )
+  }
 
   ngOnInit() {
+    this.ObtenerTodasMaterias();
   }
   ListaParametro:any[] =["Código","Nombre"];
   inputParametro="Elegir parámetro"
@@ -20,3 +33,5 @@ export class MateriaComponent implements OnInit {
 
 
 }
+
+

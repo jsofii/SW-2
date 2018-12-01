@@ -12,6 +12,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { UsuarioGestionComponent } from './usuario-gestion/usuario-gestion.component';
 import { usuarioServiceService} from './usuario-service/usuario-service.service';
+import { MateriaComponent } from './materia/materia.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import { usuarioServiceService} from './usuario-service/usuario-service.service'
     FetchDataComponent,
     UsuarioComponent,
 
-    UsuarioGestionComponent
+    UsuarioGestionComponent,
+
+    MateriaComponent
 
    
   ],
@@ -35,7 +38,8 @@ import { usuarioServiceService} from './usuario-service/usuario-service.service'
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'usuario', component: UsuarioComponent },
-      { path: 'usuario-gestion', component: UsuarioGestionComponent }
+      { path: 'usuario-gestion', component: UsuarioGestionComponent },
+      { path: 'materia', component: MateriaComponent }
     ])
   ],
   providers: [usuarioServiceService],

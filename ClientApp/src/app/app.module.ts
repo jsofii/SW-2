@@ -14,6 +14,7 @@ import { UsuarioGestionComponent } from './usuario-gestion/usuario-gestion.compo
 import { usuarioServiceService} from './usuario-service/usuario-service.service';
 import { MateriaComponent } from './materia/materia.component';
 import { materiaServiceService } from './materia-service/materia-service.service';
+import { MateriaGestionComponent } from './materia-gestion/materia-gestion.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { materiaServiceService } from './materia-service/materia-service.service
 
     UsuarioGestionComponent,
 
-    MateriaComponent
+    MateriaComponent,
+
+    MateriaGestionComponent
 
    
   ],
@@ -40,7 +43,8 @@ import { materiaServiceService } from './materia-service/materia-service.service
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'usuario', component: UsuarioComponent },
       { path: 'usuario-gestion', component: UsuarioGestionComponent },
-      { path: 'materia', component: MateriaComponent }
+      { path: 'materia', component: MateriaComponent },
+      { path: 'materia-gestion', component: MateriaGestionComponent },
     ])
   ],
   providers: [usuarioServiceService,materiaServiceService],

@@ -33,7 +33,10 @@ export class UsuarioGestionComponent implements OnInit {
     this.inputTipoPersonaNombre=nombre;
     this.inputTipoPersonaId=tipoPersonaId;
   }
+
   GuardarPersona(){
+
+    
     this.serviceUsuario.AddPersona(this.inputUsuario,this.inputIdentificacion, this.inputTipoPersonaId).subscribe(
       data=>{
         

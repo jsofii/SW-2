@@ -51,6 +51,8 @@ namespace SW_2.Controllers
             return View();
 
         }
+
+        
         baseswContext context=new baseswContext();
         [HttpPost]
         [Route("Add")] 

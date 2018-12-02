@@ -24,6 +24,17 @@ export class materiaServiceService {
 
   }
   
+  AddMateria(nombreMateria: any, codMateria: any) {
+    var temp = {
+      Nombre: nombreMateria,
+      Codigo: codMateria
+      
+    }
+
+    
+    return this.http.post('https://localhost:5001/api/Materia/Addmat/', temp);
+
+  }
 
 
 }

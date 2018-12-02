@@ -33,7 +33,7 @@ export class usuarioServiceService {
       Identificacionpersonal: idPersonal,
       Idtipopersona: idTipoPersona
     }
-    return this.http.post('https://localhost:5001/api/Persona/Addmat/', temp);
+    return this.http.post('https://localhost:5001/api/Persona/Add/', temp);
 
   }
 

@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="panel panel-success col-lg-12">
+    <div class="panel-heading">REGISTRO DE MATERIAS</div>
+
+    <div class="panel-body">
+      <div class="col-lg-6">
+        <label for="mat">Nombre de la materia:</label>
+        <input [(ngModel)]="inputMateria" type="text" class="form-control" id="mat">
+       
+
+        <label style="margin-top: 20px" for="mat">Código de la materia:</label>
+        <input [(ngModel)]="inputCodigo" type="text" class="form-control" id="mat">
+      </div>
+
+    </div>
+
+
+    <div class="panel-footer">
+
+      <button (click)="GuardarMateria()" class="btn btn-success glyphicon glyphicon-check"> GUARDAR</button>
+      <button [routerLink]='["/materia"]' class="btn btn-danger pull-right glyphicon glyphicon-arrow-left"> REGRESAR</button>
+    </div>
+  </div>
+
+
+
+</div>

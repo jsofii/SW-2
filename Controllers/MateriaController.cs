@@ -17,6 +17,22 @@ namespace SW_2.Controllers
         public List<Materia> Lista(){
             return this.context.Materia.ToList();
         }
+
+
+        [HttpPost]
+        [Route("Addmat")] 
+        public List<Materia> Lista([FromBody]Materia temp){
+            Materia materia= new Materia{
+                Nombre=temp.Nombre,
+                Codigo=temp.Codigo
+                
+            };
+            context.Materia.Add(materia);
+            context.SaveChanges();
+            return this.context.Materia.ToList();
+        }
+
+
     }
         
 }

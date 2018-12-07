@@ -60,7 +60,9 @@ namespace SW_2.Controllers
             Persona persona= new Persona{
                 Nombrecompleto=temp.Nombrecompleto,
                 Identificacionpersonal=temp.Identificacionpersonal,
-                Idtipopersona=temp.Idtipopersona
+                Idtipopersona=temp.Idtipopersona,
+                Correo=temp.Correo
+                
             };
             context.Persona.Add(persona);
             context.SaveChanges();

@@ -27,11 +27,12 @@ export class usuarioServiceService {
   ListaTipoPersona() {
     return this.http.get('https://localhost:5001/api/TipoPersona/Lista');
   }
-  AddPersona(nombreCompleto: any, idPersonal: any, idTipoPersona: any) {
+  AddPersona(nombreCompleto: any, idPersonal: any, idTipoPersona: any, correoE: any) {
     var temp = {
       Nombrecompleto: nombreCompleto,
       Identificacionpersonal: idPersonal,
-      Idtipopersona: idTipoPersona
+      Idtipopersona: idTipoPersona,
+      Correo: correoE
     }
     return this.http.post('https://localhost:5001/api/Persona/Add/', temp);
 

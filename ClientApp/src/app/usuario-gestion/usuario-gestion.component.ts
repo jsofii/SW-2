@@ -19,6 +19,7 @@ export class UsuarioGestionComponent implements OnInit {
   inputTipoPersona:any;
   inputTipoPersonaId:any;
   inputIdentificacion:any;
+  inputCorreo:any;
   ListaTipoPersona:any;
   inputTipoPersonaNombre="Seleccione un rol";
   CargarTipoPersona(){
@@ -37,7 +38,7 @@ export class UsuarioGestionComponent implements OnInit {
   GuardarPersona(){
 
     
-    this.serviceUsuario.AddPersona(this.inputUsuario,this.inputIdentificacion, this.inputTipoPersonaId).subscribe(
+    this.serviceUsuario.AddPersona(this.inputUsuario,this.inputIdentificacion, this.inputTipoPersonaId,this.inputCorreo).subscribe(
       data=>{
         
       }

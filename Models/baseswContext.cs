@@ -29,7 +29,7 @@ namespace SW_2.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=cesar1996;database=basesw");
+                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=;database=basesw");
             }
         }
 
@@ -176,8 +176,12 @@ namespace SW_2.Models
                     .HasColumnName("IDPERSONA")
                     .HasColumnType("int(11)");
 
+                entity.Property(e => e.Correo)
+                    .HasColumnName("correo")
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Identificacionpersonal)
-                    .IsRequired()
                     .HasColumnName("IDENTIFICACIONPERSONAL")
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -286,12 +290,6 @@ namespace SW_2.Models
                 entity.Property(e => e.Idusuario)
                     .HasColumnName("IDUSUARIO")
                     .HasColumnType("int(11)");
-
-                entity.Property(e => e.Correo)
-                    .IsRequired()
-                    .HasColumnName("CORREO")
-                    .HasMaxLength(45)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Estado)
                     .HasColumnName("ESTADO")

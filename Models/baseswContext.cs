@@ -177,7 +177,7 @@ namespace SW_2.Models
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Correo)
-                    .HasColumnName("correo")
+                    .HasColumnName("CORREO")
                     .HasMaxLength(45)
                     .IsUnicode(false);
 

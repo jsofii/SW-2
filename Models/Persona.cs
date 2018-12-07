@@ -14,6 +14,7 @@ namespace SW_2.Models
         public string Nombrecompleto { get; set; }
         public string Identificacionpersonal { get; set; }
         public int Idtipopersona { get; set; }
+        public string Correo { get; set; }
 
         public Tipopersona IdtipopersonaNavigation { get; set; }
         public ICollection<Usuario> Usuario { get; set; }

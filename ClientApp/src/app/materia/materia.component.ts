@@ -31,6 +31,16 @@ export class MateriaComponent implements OnInit {
 
   }
 
+  DeleteMateria(idmateria:number){
+    this.serviceMateria.DeleteMateria(idmateria).subscribe(
+      data=>{
+        this.ObtenerTodasMaterias();
+
+      }
+    )
+  }
+
+
 
 }
 

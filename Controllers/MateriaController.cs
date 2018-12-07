@@ -32,6 +32,20 @@ namespace SW_2.Controllers
             return this.context.Materia.ToList();
         }
 
+        [HttpDelete]
+        [Route("Eliminar/{idmateria}")]
+        public List<Materia> Eliminar(int idmateria)
+        {
+            Materia materia= new Materia
+            {
+               Idmateria=idmateria
+            };
+            
+            context.Remove(materia);
+            context.SaveChanges();
+            return context.Materia.ToList();
+        }
+
 
     }
         

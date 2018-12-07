@@ -36,5 +36,13 @@ export class materiaServiceService {
 
   }
 
+  DeleteMateria(idmateria: number){
+    return this.http.delete('https://localhost:5001/api/Materia/Eliminar/' + idmateria);
+  
+  }
 
+  
+
+
+  
 }

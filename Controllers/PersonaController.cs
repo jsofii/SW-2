@@ -54,6 +54,11 @@ namespace SW_2.Controllers
 
         
         baseswContext context=new baseswContext();
+        [HttpGet]
+        [Route("ListaPersonas")] public List<Persona> Lista(){
+            return this.context.Persona.ToList();
+        }
+
         [HttpPost]
         [Route("Add")] 
         public List<Persona> Lista([FromBody]Persona temp){
@@ -68,6 +73,8 @@ namespace SW_2.Controllers
             context.SaveChanges();
             return this.context.Persona.ToList();
         }
+
+        
     }
         
 }

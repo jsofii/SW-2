@@ -19,8 +19,25 @@ export class UsuarioComponent implements OnInit {
 
     )
   }
+
+  ListaTiposUsuarios:any=this.serviceUsuario.ListaTipoPersona();
+  TipoUsuario:any;
+  ObtenerTipoUsuario(parametro:any){
+    this.TipoUsuario=this.ListaTiposUsuarios.find(x => x.idtipopersona == parametro).nombre;
+  }
+      
+    
+  
+
+
   ngOnInit() {
     this.ObtenerTodoUsuario();
+  }
+  ListaParametro:any[] =["Nombre Completo","Identificación","Rol"];
+  inputParametro="Elegir parámetro"
+  CargarTipoParametro(parametro:any){
+    this.inputParametro=parametro;
+
   }
 
 }

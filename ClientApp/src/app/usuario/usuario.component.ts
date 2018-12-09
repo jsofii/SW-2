@@ -19,8 +19,21 @@ export class UsuarioComponent implements OnInit {
 
     )
   }
+
+  
+      
+    
+  
+
+
   ngOnInit() {
     this.ObtenerTodoUsuario();
+  }
+  ListaParametro:any[] =["Nombre Completo","Identificación","Rol"];
+  inputParametro="Elegir parámetro"
+  CargarTipoParametro(parametro:any){
+    this.inputParametro=parametro;
+
   }
 
 }

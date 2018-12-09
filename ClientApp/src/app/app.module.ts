@@ -15,6 +15,7 @@ import { usuarioServiceService} from './usuario-service/usuario-service.service'
 import { MateriaComponent } from './materia/materia.component';
 import { materiaServiceService } from './materia-service/materia-service.service';
 import { MateriaGestionComponent } from './materia-gestion/materia-gestion.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { MateriaGestionComponent } from './materia-gestion/materia-gestion.compo
 
     MateriaComponent,
 
-    MateriaGestionComponent
+    MateriaGestionComponent,
+
+    LoginComponent
 
    
   ],

@@ -10,7 +10,11 @@ namespace SW_2.Controllers
     [Route("api/[controller]")]
    
     public class UsuarioController : Controller
+
     {
+        public class UsuarioJoin{
+
+        }
         baseswContext context=new baseswContext();
         [HttpGet]
         [Route("ListaTodo")] public List<Persona> Lista(){

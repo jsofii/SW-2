@@ -21,7 +21,7 @@ export class usuarioServiceService {
 
 
   ListaTodosUsuarios() {
-    return this.http.get('https://localhost:5001/api/Usuario/ListaTodo');
+    return this.http.get('https://localhost:5001/api/Persona/InfoPersonas');
 
   }
   ListaTipoPersona() {

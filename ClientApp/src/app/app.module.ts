@@ -16,6 +16,9 @@ import { MateriaComponent } from './materia/materia.component';
 import { materiaServiceService } from './materia-service/materia-service.service';
 import { MateriaGestionComponent } from './materia-gestion/materia-gestion.component';
 import { LoginComponent } from './login/login.component';
+import { ReservaComponent } from './reserva/reserva.component';
+import { HorarioComponent } from './horario/horario.component';
+import { loginServiceService } from './login-service/login-service.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,11 @@ import { LoginComponent } from './login/login.component';
 
     MateriaGestionComponent,
 
-    LoginComponent
+    LoginComponent,
+
+    ReservaComponent,
+
+    HorarioComponent
 
    
   ],
@@ -48,9 +55,12 @@ import { LoginComponent } from './login/login.component';
       { path: 'usuario-gestion', component: UsuarioGestionComponent },
       { path: 'materia', component: MateriaComponent },
       { path: 'materia-gestion', component: MateriaGestionComponent },
+      { path: 'horario', component: HorarioComponent },
+      {path: 'login', component: LoginComponent},
+      {path:'reserva', component: ReservaComponent}
     ])
   ],
-  providers: [usuarioServiceService,materiaServiceService],
+  providers: [usuarioServiceService,materiaServiceService, loginServiceService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

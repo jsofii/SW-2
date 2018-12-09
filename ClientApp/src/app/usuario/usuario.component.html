@@ -59,16 +59,8 @@
                   <tr class="active" *ngFor="let usr of ListaTodoUsuario ">
                       
                     <td class="col-lg-5">{{usr.nombrecompleto}}</td>
-      
                     <td class="col-lg-5">{{usr.identificacionpersonal}}</td>
-
-                    
-                    <div *ngIf="usr" > 
-                      
-                    <td class="col-lg-5">{{tipousuario}}</td>
-                    </div>
-                    
-                    
+                    <td class="col-lg-5">{{usr.nombre}}</td>
                     <td class="col-lg-5">{{usr.correo}}</td>
                     <td><button class="btn btn-success"><i class="fa fa-edit"></i> Editar</button></td>
                     <td><button class="btn btn-danger" ><i class="fa fa-minus-circle"></i> Eliminar</button></td>

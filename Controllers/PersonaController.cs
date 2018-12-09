@@ -54,10 +54,7 @@ namespace SW_2.Controllers
 
         
         baseswContext context=new baseswContext();
-        [HttpGet]
-        [Route("ListaPersonas")] public List<Persona> Lista(){
-            return this.context.Persona.ToList();
-        }
+        
 
         [HttpPost]
         [Route("Add")] 
@@ -74,7 +71,40 @@ namespace SW_2.Controllers
             return this.context.Persona.ToList();
         }
 
+        public class JoinPersona
+        {
+            public int Idpersona { get; set; }
+            public string Nombrecompleto { get; set; }
+            public string Identificacionpersonal { get; set; }
+            public string Correo { get; set; }
+            public int Idtipopersona { get; set; }
+            public string Nombre { get; set; }
+        }
+
+        
+        [HttpGet]
+        [Route("InfoPersonas")]
+        public List<JoinPersona> Lista()
+        {
+            var query = from persona in context.Persona
+                        join
+            tipoPersona in context.Tipopersona on persona.Idtipopersona equals tipoPersona.Idtipopersona
+                        select new JoinPersona
+                        {
+                            Idpersona = persona.Idpersona,
+                            Nombrecompleto = persona.Nombrecompleto,
+                            Identificacionpersonal = persona.Identificacionpersonal,
+                            Correo = persona.Correo,
+                            Idtipopersona = persona.Idtipopersona,
+                            Nombre = tipoPersona.Nombre
+                        };
+
+            List<JoinPersona> lista = query.ToList();
+            return lista;
+        }
         
     }
+
+    
         
 }

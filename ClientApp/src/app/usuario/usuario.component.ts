@@ -20,11 +20,7 @@ export class UsuarioComponent implements OnInit {
     )
   }
 
-  ListaTiposUsuarios:any=this.serviceUsuario.ListaTipoPersona();
-  TipoUsuario:any;
-  ObtenerTipoUsuario(parametro:any){
-    this.TipoUsuario=this.ListaTiposUsuarios.find(x => x.idtipopersona == parametro).nombre;
-  }
+  
       
     
   

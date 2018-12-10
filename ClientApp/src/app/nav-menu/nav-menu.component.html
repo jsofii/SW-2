@@ -6,8 +6,16 @@
       <a class="navbar-brand" href="#">LABORATORIO FIS</a>
     </div>
     <ul class="nav navbar-nav">
-
-      <li><a href="#">LABORATORIO</a></li>
+        <li [routerLinkActive]='["link-active"]'>
+            <a [routerLink]='["/home"]'>
+              <span class='glyphicon glyphicon-hourglass'></span>PRINCIPAL
+            </a>
+          </li>
+        <li [routerLinkActive]='["link-active"]'>
+            <a [routerLink]='["/laboratorio"]'>
+              <span class='glyphicon glyphicon-hourglass'></span> LABORATORIOS
+            </a>
+          </li>
       <li [routerLinkActive]='["link-active"]'>
         <a [routerLink]='["/reserva"]'>
           <span class='glyphicon glyphicon-hourglass'></span> RESERVA

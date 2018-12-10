@@ -11,7 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { UsuarioGestionComponent } from './usuario-gestion/usuario-gestion.component';
-import { usuarioServiceService} from './usuario-service/usuario-service.service';
+import { usuarioServiceService } from './usuario-service/usuario-service.service';
 import { MateriaComponent } from './materia/materia.component';
 import { materiaServiceService } from './materia-service/materia-service.service';
 import { MateriaGestionComponent } from './materia-gestion/materia-gestion.component';
@@ -19,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { HorarioComponent } from './horario/horario.component';
 import { loginServiceService } from './login-service/login-service.service';
+import { LaboratorioComponent } from './laboratorio/laboratorio.component';
 
 @NgModule({
   declarations: [
@@ -39,16 +40,18 @@ import { loginServiceService } from './login-service/login-service.service';
 
     ReservaComponent,
 
-    HorarioComponent
+    HorarioComponent,
 
-   
+    LaboratorioComponent
+
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'usuario', component: UsuarioComponent },
@@ -56,11 +59,12 @@ import { loginServiceService } from './login-service/login-service.service';
       { path: 'materia', component: MateriaComponent },
       { path: 'materia-gestion', component: MateriaGestionComponent },
       { path: 'horario', component: HorarioComponent },
-      {path: 'login', component: LoginComponent},
-      {path:'reserva', component: ReservaComponent}
+      { path: 'login', component: LoginComponent },
+      { path: 'reserva', component: ReservaComponent },
+      { path: 'laboratorio', component: LaboratorioComponent }
     ])
   ],
-  providers: [usuarioServiceService,materiaServiceService, loginServiceService ],
+  providers: [usuarioServiceService, materiaServiceService, loginServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

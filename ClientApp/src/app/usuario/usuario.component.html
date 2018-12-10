@@ -1,36 +1,32 @@
-
-
-
 <body>
 
-  <div class= "col-lg-2"></div>
+  <div class="col-lg-2"></div>
   <div class="col-lg-8">
     <div class="panel panel-success">
-        <div class="panel-heading">
-            <button [routerLink]='["/usuario-gestion"]' class="btn btn-success center-block"><i class="fa fa-plus-circle"></i>
-              Nuevo Usuario</button>
-          </div>
-     
-      <div class="panel-body">
-          <h2 style="margin-left: 15px">Lista de Usuarios</h2>
+      <div class="panel-heading">
+        <button [routerLink]='["/usuario-gestion"]' class="btn btn-success center-block"><i class="fa fa-plus-circle"></i>
+          Nuevo Usuario</button>
+      </div>
 
-          <div>
+      <div class="panel-body">
+        <h2 style="margin-left: 15px">Lista de Usuarios</h2>
+
+        <div>
           <br>
           <div style="margin-left: 15px">
             <div class="col-lg-2">
               Buscar por:
             </div>
-            <div class="dropdown col-lg-2">
-              <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">{{inputParametro}}
-                <span class="caret"></span></button>
 
-              <ul class="dropdown-menu">
-                <li *ngFor="let item of ListaParametro">
-                  <label style="margin-left: 15px" (click)="CargarTipoParametro(item)">
-                    {{item}}
-                  </label>
-                </li>
-              </ul>
+            <div class="dropdown col-lg-4">
+              <div class="form-group">
+                <select class="form-control" id="sel1">
+                  <option>Seleccione una opción</option>
+                  <option *ngFor="let item of ListaParametro">{{item}}</option>
+
+                </select>
+              </div>
+
 
 
             </div>
@@ -43,41 +39,41 @@
 
         <div class="col-lg-12">
 
-            <div class="panel-body">
-      
-              <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th class="col-lg-5">Nombre Completo</th>
-                    <th class="col-lg-5">Identificación</th>
-                    <th class="col-lg-5">Rol</th>
-                    <th class="col-lg-5">Correo</th>
-      
-                  </tr>
-                </thead>
-                <tbody id="myTable">
-                  <tr class="active" *ngFor="let usr of ListaTodoUsuario ">
-                      
-                    <td class="col-lg-5">{{usr.nombrecompleto}}</td>
-                    <td class="col-lg-5">{{usr.identificacionpersonal}}</td>
-                    <td class="col-lg-5">{{usr.nombre}}</td>
-                    <td class="col-lg-5">{{usr.correo}}</td>
-                    <td><button class="btn btn-success"><i class="fa fa-edit"></i> Editar</button></td>
-                    <td><button class="btn btn-danger" ><i class="fa fa-minus-circle"></i> Eliminar</button></td>
-                  </tr>
-      
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <div class="panel-body">
 
-        
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th class="col-lg-5">Nombre Completo</th>
+                  <th class="col-lg-5">Identificación</th>
+                  <th class="col-lg-5">Rol</th>
+                  <th class="col-lg-5">Correo</th>
+
+                </tr>
+              </thead>
+              <tbody id="myTable">
+                <tr class="active" *ngFor="let usr of ListaTodoUsuario ">
+
+                  <td class="col-lg-5">{{usr.nombrecompleto}}</td>
+                  <td class="col-lg-5">{{usr.identificacionpersonal}}</td>
+                  <td class="col-lg-5">{{usr.nombre}}</td>
+                  <td class="col-lg-5">{{usr.correo}}</td>
+                  <td><button class="btn btn-success"><i class="fa fa-edit"></i> Editar</button></td>
+                  <td><button class="btn btn-danger"><i class="fa fa-minus-circle"></i> Eliminar</button></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
 
 
       </div>
     </div>
 
   </div>
-  <div class= "col-lg-2"></div>
+  <div class="col-lg-2"></div>
 
 </body>

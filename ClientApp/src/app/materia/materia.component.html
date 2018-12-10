@@ -36,24 +36,16 @@
             <div class="col-lg-2">
               Buscar por:
             </div>
-            <div class="dropdown col-lg-2">
-              <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">{{inputParametro}}
-                <span class="caret"></span></button>
+            <div class="dropdown col-lg-4">
+              <div class="form-group">
+                <select class="form-control" id="sel1">
+                  <option>Seleccione una opción</option>
+                  <option *ngFor="let item of ListaParametro">{{item}}</option>
 
-              <ul class="dropdown-menu">
-                <li *ngFor="let item of ListaParametro">
-                  <label style="margin-left: 50px" (click)="CargarTipoParametro(item)">
-                    {{item}}
-                  </label>
-                </li>
-              </ul>
+                </select>
+              </div>
 
 
-
-              <!--ul class="dropdown-menu">
-                <li><a>Código materia</a></li>
-                <li><a>Nombre</a></li>
-              </ul>-->
             </div>
             <div class="col-lg-4">
               <input style="margin-left: 40px" class="form-control" id="idBusqueda" type="text" placeholder="Buscar..">
@@ -64,25 +56,26 @@
         <div class="col-lg-12">
 
           <div class="panel-body">
-    
+
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th class="col-lg-5">Nombre</th>
                   <th class="col-lg-5">Código</th>
-    
+
                 </tr>
               </thead>
               <tbody id="myTable">
                 <tr class="active" *ngFor="let materia of ListaTodasMaterias">
-    
+
                   <td class="col-lg-5">{{materia.nombre}}</td>
-    
+
                   <td class="col-lg-5">{{materia.codigo}}</td>
                   <td><button class="btn btn-success"><i class="fa fa-edit"></i> Editar</button></td>
-                  <td><button class="btn btn-danger" (click)="DeleteMateria(materia.idmateria)"><i class="fa fa-minus-circle"></i> Eliminar</button></td>
+                  <td><button class="btn btn-danger" (click)="DeleteMateria(materia.idmateria)"><i class="fa fa-minus-circle"></i>
+                      Eliminar</button></td>
                 </tr>
-    
+
               </tbody>
             </table>
           </div>

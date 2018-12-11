@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { materiaServiceService } from '../materia-service/materia-service.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-materia-gestion',
@@ -7,23 +8,46 @@ import { materiaServiceService } from '../materia-service/materia-service.servic
   styleUrls: ['./materia-gestion.component.css']
 })
 export class MateriaGestionComponent implements OnInit {
-
-  constructor(private serviceMateria:materiaServiceService) { }
+  idmateria: any;
+  constructor(private serviceMateria: materiaServiceService, private activeRoute: ActivatedRoute) {
+    this.idmateria = this.activeRoute.snapshot.params.idmateria;
+    if (this.idmateria != 0) {
+      this.cargarMateria();
+    }
+  }
 
   ngOnInit() {
   }
 
-  inputMateria:any;
-  inputCodigo:any;
-  
+  inputMateria: any;
+  inputCodigo: any;
+  materiaAux: any;
 
-  GuardarMateria(){
-    
-    this.serviceMateria.AddMateria(this.inputMateria,this.inputCodigo).subscribe(
-      data=>{
-        
+  cargarMateria() {
+    this.serviceMateria.GetMateriaId(5).subscribe(
+      data => {
+        this.materiaAux = data;
+        this.inputMateria = this.materiaAux.nombre;
+        this.inputCodigo = this.materiaAux.codigo;
       }
     )
+  }
+  GuardarMateria() {
+    if (this.idmateria == 0) {
+      this.serviceMateria.AddMateria(this.inputMateria, this.inputCodigo).subscribe(
+        data => {
+
+        }
+      )
+    }else{
+      this.serviceMateria.EditMateria(this.idmateria, this.inputMateria, this.inputCodigo).subscribe(
+        data=>{
+
+        }
+      )
+    }
+
+
   }
 
 }

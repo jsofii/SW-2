@@ -23,6 +23,22 @@ export class materiaServiceService {
     return this.http.get('https://localhost:5001/api/Materia/ListaMaterias');
 
   }
+  GetMateriaId(id:number)
+  {
+    return this.http.get('https://localhost:5001/api/Materia/Get/'+ id);
+  }
+  EditMateria(idmateria: any,nombreMateria: any, codMateria: any){
+    var temp = {
+      Idmateria: idmateria,
+      Nombre: nombreMateria,
+      Codigo: codMateria
+      
+    }
+
+    
+    return this.http.put('https://localhost:5001/api/Materia/Edit/', temp);
+
+  }
   
   AddMateria(nombreMateria: any, codMateria: any) {
     var temp = {

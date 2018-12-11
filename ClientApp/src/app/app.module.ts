@@ -57,7 +57,7 @@ import { LaboratorioComponent } from './laboratorio/laboratorio.component';
       { path: 'usuario', component: UsuarioComponent },
       { path: 'usuario-gestion', component: UsuarioGestionComponent },
       { path: 'materia', component: MateriaComponent },
-      { path: 'materia-gestion', component: MateriaGestionComponent },
+      { path: 'materia-gestion/:idmateria', component: MateriaGestionComponent },
       { path: 'horario', component: HorarioComponent },
       { path: 'login', component: LoginComponent },
       { path: 'reserva', component: ReservaComponent },

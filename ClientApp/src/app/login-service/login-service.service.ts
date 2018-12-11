@@ -35,6 +35,14 @@ export class loginServiceService {
     return this.http.post('https://localhost:5001/api/Materia/Addmat/', temp);
 
   }
+  verificar(usuario:any, contrasenia:any) {
+
+   return  this.http.get('https://localhost:5001/api/Usuario/verificarUsuario/' + usuario + '/' + contrasenia);
+
+   
+
+
+  }
 
   DeleteMateria(idmateria: number){
     return this.http.delete('https://localhost:5001/api/Materia/Eliminar/' + idmateria);

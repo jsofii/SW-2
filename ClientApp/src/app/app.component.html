@@ -1,10 +1,10 @@
 <div >
   
-  <div *ngIf="log"   >
+  <div *ngIf="!log"   >
     <app-login (logIn)="Enter($event)"  (nombre)="Nombre($event)" ></app-login>
   </div>
   
-  <div *ngIf="!log">
+  <div *ngIf="log">
     <div >
     
       <app-nav-menu ></app-nav-menu>

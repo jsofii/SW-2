@@ -32,12 +32,20 @@ export class MateriaComponent implements OnInit {
   }
 
   DeleteMateria(idmateria:number){
+    
+    if(confirm("SE ELIMINARA?")){
+
+    
     this.serviceMateria.DeleteMateria(idmateria).subscribe(
       data=>{
+       
         this.ObtenerTodasMaterias();
 
       }
     )
+  }else{
+    
+  }
   }
   
 

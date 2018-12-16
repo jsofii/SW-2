@@ -1,4 +1,4 @@
-
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <body>
 
   
@@ -19,14 +19,8 @@
 
 
       <div class="panel panel-info">
-        <div style="height: 50px;" class="panel-heading">
-          <label class="pull-right" for="">
-            <button class="btn btn-success">AGREGAR MATERIA</button>
-          </label>
-        </div>
         <div class="panel-body">
           <div class="col-lg-6">
-            <label for="">Elegir laboratorio</label>
             <div class="form-group">
               <legend for="sel1">Seleccione un laboratorio:</legend>
               <select class="form-control" id="sel1">
@@ -37,8 +31,8 @@
               </select>
             </div>
           </div>
+
           <div class="col-lg-6">
-            <label for="">Elegir ciclo</label>
             <div class="form-group">
               <legend for="sel1">Seleccione un ciclo:</legend>
               <select class="form-control" id="sel1">
@@ -49,8 +43,38 @@
               </select>
             </div>
           </div>
+
+          <div class="panel-heading">
+              <button class="btn btn-primary center-block"><i class="fa fa-check-square"></i>
+                Aceptar</button>
+            </div>
+
+          <div class="col-lg-6">
+              <div class="form-group">
+                <legend for="sel1">Seleccione una materia:</legend>
+                <select class="form-control" id="sel1">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                  <legend for="sel1">Seleccione un profesor:</legend>
+                  <select class="form-control" id="sel1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
+                </div>
+              </div>
+          
           <div>
-            <table class="table">
+            <table class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th>HORA</th>
@@ -64,18 +88,37 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Default</td>
-                  <td>Defaultson</td>
-                  <td>def@somemail.com</td>
-                </tr>
-
+                  <tr class="active" *ngFor="let horaInit of listaHoras ">
+                    <td>{{horaInit}}</td>
+                      <td class="active" *ngFor="let dia of listaDias ">
+                          <label class="switch">
+                              <input type="checkbox">
+                              <span class="slider"></span>
+                            </label>
+                      </td>
+                    </tr>
+                
               </tbody>
+              <tfoot>
+                  <tr>
+                      <td></td>
+                      <td></td>
+                      <td><button class="btn btn-success btn-lg"><i class="fa fa-plus-circle"></i>
+                        Guardar</button></td>
+                      <td><button class="btn btn-primary  btn-lg"><i class="fa fa-pencil"></i>
+                        Editar</button></td>
+                      <td> <button class="btn btn-danger  btn-lg"><i class="fa fa-minus-circle"></i>
+                        Eliminar</button></td>
+                        <td></td>
+                        <td></td>
+                  
+      
+                    </tr>
+                </tfoot>
             </table>
           </div>
-        </div>
-        <div class="panel-footer">
-
+          
+        
         </div>
       </div>
 

@@ -24,7 +24,7 @@ export class MateriaGestionComponent implements OnInit {
   materiaAux: any;
 
   cargarMateria() {
-    this.serviceMateria.GetMateriaId(5).subscribe(
+    this.serviceMateria.GetMateriaId(this.idmateria).subscribe(
       data => {
         this.materiaAux = data;
         this.inputMateria = this.materiaAux.nombre;

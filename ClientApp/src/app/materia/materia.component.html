@@ -71,7 +71,8 @@
                   <td class="col-lg-5">{{materia.nombre}}</td>
 
                   <td class="col-lg-5">{{materia.codigo}}</td>
-                  <td><button [routerLink]="['/materia-gestion', materia.idmateria]" class="btn btn-success"><i class="fa fa-edit"></i> Editar</button></td>
+                  <td><button data-toggle="modal" data-target="#myModal" class="btn btn-success"><i class="fa fa-edit"></i>
+                      Editar</button></td>
                   <td><button class="btn btn-danger" (click)="DeleteMateria(materia.idmateria)"><i class="fa fa-minus-circle"></i>
                       Eliminar</button></td>
                 </tr>
@@ -89,6 +90,41 @@
 
 
   </div>
+  <div class="modal modal-success" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">REGISTRO DE USUARIOS</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-lg-6">
+            <label for="mat">Nombre de la materia:</label>
+            <input [(ngModel)]="inputMateria" type="text" class="form-control" id="mat">
+
+
+            <label style="margin-top: 20px" for="mat">Código de la materia:</label>
+            <input [(ngModel)]="inputCodigo" type="text" class="form-control" id="mat">
+            <button (click)="GuardarMateria()" class="btn btn-success glyphicon glyphicon-check"> GUARDAR</button>
+            <button [routerLink]='["/materia"]' class="btn btn-danger pull-right glyphicon glyphicon-arrow-left">
+              REGRESAR</button>
+          </div>
+         
+
+
+
+
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
 
 
   <!---

@@ -1,3 +1,118 @@
-<p>
-  laboratorio works!
-</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+</head>
+<body>
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <button  (click)="Acero()" class="btn btn-success center-block" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-circle"></i>
+          Nuevo laboratorio</button>
+
+
+      </div>
+
+      <div class="panel-body">
+        <h2 style="margin-left: 15px">Lista de laboratorios</h2>
+        <div>
+          <br>
+          <div style="margin-left: 15px">
+            <div class="col-lg-2">
+              Buscar por:
+            </div>
+            <div class="dropdown col-lg-4">
+              <div class="form-group">
+                <select class="form-control" id="sel1">
+                  <option>Seleccione una opción</option>
+                  <option *ngFor="let item of ListaParametro">{{item}}</option>
+
+                </select>
+              </div>
+
+
+            </div>
+            <div class="col-lg-4">
+              <input style="margin-left: 40px" class="form-control" id="idBusqueda" type="text" placeholder="Buscar..">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12">
+
+          <div class="panel-body">
+
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th class="col-lg-5">Número</th>
+                  <th class="col-lg-5">Nombre</th>
+
+                </tr>
+              </thead>
+              <tbody id="myTable">
+                <tr class="active" *ngFor="let laboratorio of ListaTodosLaboratorios">
+
+                  <td class="col-lg-5">{{laboratorio.numero}}</td>
+
+                  <td class="col-lg-5">{{laboratorio.nombre}}</td>
+                  <td><button data-toggle="modal" data-target="#myModal" class="btn btn-success" (click)="CambiarValor(laboratorio.idlaboratorio)"><i class="fa fa-edit"></i>
+                      Editar</button></td>
+                  <td><button class="btn btn-danger" (click)="DeleteLaboratorio(laboratorio.idlaboratorio)"><i class="fa fa-minus-circle"></i>
+                      Eliminar</button></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+  <div class="modal modal-success" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">REGISTRO DE LABORATORIOS</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-lg-6">
+            <label for="mat">Número de laboratorio:</label>
+            <input [(ngModel)]="inputNumero" type="text" class="form-control" id="mat" value="{{inputNumero}}">
+
+
+            <label style="margin-top: 20px" for="mat">Nombre de laboratorio:</label>
+            <input  [(ngModel)]="inputNombre" type="text" class="form-control" id="mat" value="{{inputNombre}}">
+            <button (click)="GuardarLaboratorio()" class="btn btn-success glyphicon glyphicon-check"> GUARDAR</button>
+            <button [routerLink]='["/laboratorio"]' class="btn btn-danger pull-right glyphicon glyphicon-arrow-left">
+              REGRESAR</button>
+          </div>
+         
+
+
+
+
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+</body>
+</html>

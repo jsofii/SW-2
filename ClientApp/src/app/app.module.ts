@@ -20,6 +20,7 @@ import { ReservaComponent } from './reserva/reserva.component';
 import { HorarioComponent } from './horario/horario.component';
 import { loginServiceService } from './login-service/login-service.service';
 import { LaboratorioComponent } from './laboratorio/laboratorio.component';
+import { laboratorioServiceService } from './laboratorio-service/laboratorio-service.service';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,7 @@ import { LaboratorioComponent } from './laboratorio/laboratorio.component';
       { path: 'laboratorio', component: LaboratorioComponent }
     ])
   ],
-  providers: [usuarioServiceService, materiaServiceService, loginServiceService],
+  providers: [usuarioServiceService, materiaServiceService, loginServiceService,laboratorioServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

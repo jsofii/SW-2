@@ -90,11 +90,11 @@
         <div class="modal-body">
           <div class="col-lg-6">
             <label for="mat">Número de laboratorio:</label>
-            <input [(ngModel)]="inputNumero" type="text" class="form-control" id="mat" value="{{inputNumero}}">
+            <input [(ngModel)]="inputNumero" type="text" class="form-control" id="mat">
 
 
             <label style="margin-top: 20px" for="mat">Nombre de laboratorio:</label>
-            <input  [(ngModel)]="inputNombre" type="text" class="form-control" id="mat" value="{{inputNombre}}">
+            <input  [(ngModel)]="inputNombre" type="text" class="form-control" id="mat">
             <button (click)="GuardarLaboratorio()" class="btn btn-success glyphicon glyphicon-check"> GUARDAR</button>
             <button [routerLink]='["/laboratorio"]' class="btn btn-danger pull-right glyphicon glyphicon-arrow-left">
               REGRESAR</button>

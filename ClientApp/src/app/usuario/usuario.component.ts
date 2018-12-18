@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { usuarioServiceService} from '../usuario-service/usuario-service.service';
-
+import { FilterpipePipe} from '../filterpipe.pipe';
+import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.component.html',
@@ -9,6 +10,7 @@ import { usuarioServiceService} from '../usuario-service/usuario-service.service
 export class UsuarioComponent implements OnInit {
 
   constructor(private serviceUsuario: usuarioServiceService) { }
+  busqueda:any;
   ListaTodoUsuario:any;
   ObtenerTodoUsuario(){
     this.serviceUsuario.ListaTodosUsuarios().subscribe(

@@ -17,6 +17,7 @@ namespace SW_2.Models
 
         public virtual DbSet<Carrera> Carrera { get; set; }
         public virtual DbSet<Ciclo> Ciclo { get; set; }
+        public virtual DbSet<Horario> Horario { get; set; }
         public virtual DbSet<Laboratorio> Laboratorio { get; set; }
         public virtual DbSet<Materia> Materia { get; set; }
         public virtual DbSet<Persona> Persona { get; set; }
@@ -30,7 +31,7 @@ namespace SW_2.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=cesar1996;database=basesw");
+                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=sofi;database=basesw");
             }
         }
 
@@ -76,6 +77,65 @@ namespace SW_2.Models
                     .HasColumnName("NOMBRE")
                     .HasMaxLength(30)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Horario>(entity =>
+            {
+                entity.HasKey(e => e.Idhorario);
+
+                entity.ToTable("horario", "basesw");
+
+                entity.HasIndex(e => e.Idciclo)
+                    .HasName("FK_HORARIO_CICLO");
+
+                entity.HasIndex(e => e.Idlaboratorio)
+                    .HasName("FK_HORARIO_LABORATORIO1");
+
+                entity.HasIndex(e => e.Idmateria)
+                    .HasName("FK_HORARIO_MATERIA");
+
+                entity.Property(e => e.Idhorario)
+                    .HasColumnName("IDHORARIO")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Dia)
+                    .HasColumnName("DIA")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Horadefin)
+                    .HasColumnName("HORADEFIN")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Horadeinicio)
+                    .HasColumnName("HORADEINICIO")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Idciclo)
+                    .HasColumnName("IDCICLO")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Idlaboratorio)
+                    .HasColumnName("IDLABORATORIO")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Idmateria)
+                    .HasColumnName("IDMATERIA")
+                    .HasColumnType("int(11)");
+
+                entity.HasOne(d => d.IdcicloNavigation)
+                    .WithMany(p => p.Horario)
+                    .HasForeignKey(d => d.Idciclo)
+                    .HasConstraintName("FK_HORARIO_CICLO");
+
+                entity.HasOne(d => d.IdlaboratorioNavigation)
+                    .WithMany(p => p.Horario)
+                    .HasForeignKey(d => d.Idlaboratorio)
+                    .HasConstraintName("FK_HORARIO_LABORATORIO1");
+
+                entity.HasOne(d => d.IdmateriaNavigation)
+                    .WithMany(p => p.Horario)
+                    .HasForeignKey(d => d.Idmateria)
+                    .HasConstraintName("FK_HORARIO_MATERIA");
             });
 
             modelBuilder.Entity<Laboratorio>(entity =>

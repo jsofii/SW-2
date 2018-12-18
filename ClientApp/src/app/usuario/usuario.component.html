@@ -31,7 +31,7 @@
 
             </div>
             <div class="col-lg-4">
-              <input class="form-control" id="idBusqueda" type="text" placeholder="Buscar..">
+              <input [(ngModel)]="busqueda"  class="form-control" id="idBusqueda" type="text" placeholder="Buscar..">
             </div>
           </div>
         </div>
@@ -52,7 +52,7 @@
                 </tr>
               </thead>
               <tbody id="myTable">
-                <tr class="active" *ngFor="let usr of ListaTodoUsuario ">
+                <tr class="active" *ngFor="let usr of ListaTodoUsuario | filterpipe : busqueda">
 
                   <td class="col-lg-5">{{usr.nombrecompleto}}</td>
                   <td class="col-lg-5">{{usr.identificacionpersonal}}</td>

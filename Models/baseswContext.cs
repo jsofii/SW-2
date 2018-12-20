@@ -370,9 +370,8 @@ namespace SW_2.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Password)
-                    .IsRequired()
-                    .HasColumnName("PASSWORD")
-                    .HasMaxLength(32)
+                    .HasColumnName("password")
+                    .HasMaxLength(4000)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.IdpersonaNavigation)

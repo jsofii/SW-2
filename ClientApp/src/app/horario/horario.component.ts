@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { cicloServiceService} from '../ciclo-service/ciclo-service.service';
-import { laboratorioServiceService } from '../laboratorio-service/laboratorio-service.service';
-import { usuarioServiceService } from '../usuario-service/usuario-service.service';
-import { materiaServiceService } from '../materia-service/materia-service.service';
-import { runInThisContext } from 'vm';
 
 
 @Component({
@@ -15,16 +11,10 @@ import { runInThisContext } from 'vm';
 
 export class HorarioComponent implements OnInit {
 
-  constructor( private serviceLaboratorio:laboratorioServiceService, 
-    private serviceusuario:usuarioServiceService,
-    private servicemateria:materiaServiceService,private serviceCiclo: cicloServiceService) { 
-   
-  }
+  constructor(private serviceCiclo: cicloServiceService) { }
+
   ngOnInit() {
     this.ObtenerTodosCiclos();
-    this.CargarLaboratorios();
-    this.CargarMaterias();
-    this.CargarProfesores();
   }
   
   ListaTodosCiclos:any;
@@ -51,61 +41,6 @@ export class HorarioComponent implements OnInit {
     )
   }else{ 
   }
-}
-
-inputLaboratorioNombre="Seleccione el Laboratorio";
-inputLaboratorioID:any;
-ListaLaboratorios:any;
-CargarLaboratorios(){
-  this.serviceLaboratorio.ListaTodosLaboratorios().subscribe(
-    data=>{
-      this.ListaLaboratorios=data;
-    }
-  )
-}
-
-CargarLaboratoriosID(idlaboratorio:any, nombre:any)
-  {
-    this.inputLaboratorioNombre=nombre;
-    this.inputLaboratorioID=idlaboratorio;
-  }
-
-inputCicloNombre="Seleccione el Ciclo";
-inputCicloID:any;
-CargarCicloID(idciclo:any,nombre:any){
-  this.inputCicloNombre=nombre;
-  this.inputCicloID=idciclo;
-}
-
-inputProfesorNombre="Seleccione el Profesor";
-inputProfesorID:any;
-ListaProfesores:any;
-CargarProfesores(){
-this.serviceusuario.ListaTodosUsuarios().subscribe(
-    data=>{
-      this.ListaProfesores=data;
-    }
-  )
-}
-CargarProfesorID(idpersona:any,nombrecompleto:any){
-    this.inputProfesorNombre=nombrecompleto;
-    this.inputProfesorID=idpersona;
-}
-
-inputMateriaNombre="Seleccione la Materia";
-inputMateriaID:any;
-ListaMaterias:any;
-CargarMaterias(){
-  this.servicemateria.ListaTodasMaterias().subscribe(
-    data=>{
-      this.ListaMaterias=data;
-    }
-  )
-}
-
-CargarMateriaID(idmateria:any,nombre:any){
-  this.inputMateriaID=idmateria;
-  this.inputMateriaNombre=nombre;
 }
 
  listaDias:any[] = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];

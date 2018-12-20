@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="panel panel-success col-lg-12">
+      <div class="panel-heading">REGISTRO DE CICLOS</div>
+  
+      <div class="panel-body">
+        <div class="col-lg-6">
+          <label for="ciclo">Nombre del ciclo:</label>
+          <input [(ngModel)]="inputMateria" type="text" class="form-control" id="ciclo">
+         
+  
+          <label style="margin-top: 20px" for="ciclo">Fecha de inicio:</label>
+          <input [(ngModel)]="inputCodigo" type="text" class="form-control" id="ciclo">
+
+          <label style="margin-top: 20px" for="ciclo">Fecha de fin:</label>
+          <input [(ngModel)]="inputCodigo" type="text" class="form-control" id="ciclo">
+        </div>
+  
+      </div>
+  
+  
+      <div class="panel-footer">
+  
+        <button (click)="GuardarMateria()" class="btn btn-success glyphicon glyphicon-check"> GUARDAR</button>
+        <button [routerLink]='["/horario"]' class="btn btn-danger pull-right glyphicon glyphicon-arrow-left"> REGRESAR</button>
+      </div>
+    </div>
+  
+  
+  
+  </div>

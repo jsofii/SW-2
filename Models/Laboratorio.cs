@@ -7,6 +7,7 @@ namespace SW_2.Models
     {
         public Laboratorio()
         {
+            Horario = new HashSet<Horario>();
             Reservalaboratorio = new HashSet<Reservalaboratorio>();
         }
 
@@ -14,6 +15,7 @@ namespace SW_2.Models
         public int Numero { get; set; }
         public string Nombre { get; set; }
 
+        public ICollection<Horario> Horario { get; set; }
         public ICollection<Reservalaboratorio> Reservalaboratorio { get; set; }
     }
 }

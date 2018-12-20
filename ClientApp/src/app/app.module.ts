@@ -21,6 +21,9 @@ import { HorarioComponent } from './horario/horario.component';
 import { loginServiceService } from './login-service/login-service.service';
 import { LaboratorioComponent } from './laboratorio/laboratorio.component';
 import { laboratorioServiceService } from './laboratorio-service/laboratorio-service.service';
+import { CicloGestionComponent } from './ciclo-gestion/ciclo-gestion.component';
+import { cicloServiceService } from './ciclo-service/ciclo-service.service';
+
 
 @NgModule({
   declarations: [
@@ -43,8 +46,8 @@ import { laboratorioServiceService } from './laboratorio-service/laboratorio-ser
 
     HorarioComponent,
 
-    LaboratorioComponent
-
+    LaboratorioComponent,
+    CicloGestionComponent,
 
   ],
   imports: [
@@ -62,10 +65,11 @@ import { laboratorioServiceService } from './laboratorio-service/laboratorio-ser
       { path: 'horario', component: HorarioComponent },
       { path: 'login', component: LoginComponent },
       { path: 'reserva', component: ReservaComponent },
-      { path: 'laboratorio', component: LaboratorioComponent }
+      { path: 'laboratorio', component: LaboratorioComponent },
+      { path: 'ciclo-gestion', component: CicloGestionComponent },
     ])
   ],
-  providers: [usuarioServiceService, materiaServiceService, loginServiceService,laboratorioServiceService],
+  providers: [usuarioServiceService, materiaServiceService, loginServiceService,laboratorioServiceService,cicloServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

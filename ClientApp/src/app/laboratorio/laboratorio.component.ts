@@ -21,10 +21,14 @@ export class LaboratorioComponent implements OnInit {
 
   CambiarValor(idlab:number){
     this.idlaboratorio = idlab;
+    this.cargarLaboratorio();
+    
   }  
 
   Acero(){
     this.idlaboratorio = 0;
+    this.inputNumero="";
+    this.inputNombre="";
   }  
 
 
@@ -71,8 +75,8 @@ export class LaboratorioComponent implements OnInit {
     this.serviceLaboratorio.GetLaboratorioId(this.idlaboratorio).subscribe(
       data => {
         this.laboratorioAux = data;
-        this.inputNumero = this.laboratorioAux.Numero;
-        this.inputNombre = this.laboratorioAux.Nombre;
+        this.inputNumero = this.laboratorioAux.numero;
+        this.inputNombre = this.laboratorioAux.nombre;
       }
     )
   }

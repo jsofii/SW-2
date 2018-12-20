@@ -1,79 +1,277 @@
 <body>
 
+
   <div class="col-lg-2"></div>
+
   <div class="col-lg-8">
-    <div class="panel panel-success">
-      <div class="panel-heading">
-        <button [routerLink]='["/usuario-gestion"]' class="btn btn-success center-block"><i class="fa fa-plus-circle"></i>
-          Nuevo Usuario</button>
-      </div>
+    <ul class="nav nav-tabs">
 
-      <div class="panel-body">
-        <h2 style="margin-left: 15px">Lista de Usuarios</h2>
 
-        <div>
-          <br>
-          <div style="margin-left: 15px">
-            <div class="col-lg-2">
-              Buscar por:
+      <li class="active"><a href="#personal" data-toggle="tab">PERSONAL</a>
+      </li>
+      <li><a href="#usuario" data-toggle="tab">USUARIOS</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="personal" style="margin-top: 20px;">
+
+
+        <body>
+
+
+          <div class="col-lg-12">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h5 style="margin-left: 15px">Lista personal Facultad de Ingeniería de Sistemas</h5>
+                <!-- <button data-toggle="modal" data-target="#myModal" class="btn btn-success center-block"><i class="fa fa-plus-circle"></i>
+                  Nuevo Usuario</button> -->
+              </div>
+
+              <div class="panel-body">
+              
+
+                <div>
+                  <br>
+                  <div style="margin-left: 15px">
+                    <div class="col-lg-2">
+                      Buscar por:
+                    </div>
+
+                    <div class="dropdown col-lg-4">
+                      <div class="form-group">
+                        <select class="form-control" id="sel1">
+                          <option>Seleccione una opción</option>
+                          <option *ngFor="let item of ListaParametro">{{item}}</option>
+
+                        </select>
+                      </div>
+
+
+
+                    </div>
+                    <div class="col-lg-4">
+                      <input [(ngModel)]="busqueda" class="form-control" id="idBusqueda" type="text" placeholder="Buscar..">
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-lg-12">
+
+                  <div class="panel-body">
+
+                    <table class="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th class="col-lg-5">Nombre Completo</th>
+                          <th class="col-lg-5">Identificación</th>
+                          <th class="col-lg-5">Rol</th>
+                          <th class="col-lg-5">Correo</th>
+
+                        </tr>
+                      </thead>
+                      <tbody id="myTable">
+                        <tr class="active" *ngFor="let usr of ListaTodoUsuario | filterpipe : busqueda">
+
+                          <td class="col-lg-5">{{usr.nombrecompleto}}</td>
+                          <td class="col-lg-5">{{usr.identificacionpersonal}}</td>
+                          <td class="col-lg-5">{{usr.nombre}}</td>
+                          <td class="col-lg-5">{{usr.correo}}</td>
+                          <td><button (click)="seleccionarPersona(usr.idpersona)" data-toggle="modal" data-target="#myModal" class="btn btn-success"><i class="fa fa-edit"></i> REGISTRAR</button></td>
+
+                        </tr>
+
+                      </tbody>
+                    </table>
+                    <div class="modal modal-success" id="myModal" role="dialog">
+                      <div class="modal-dialog">
+
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">GESTIÓN USUARIO</h4>
+                          </div>
+                          <div class="modal-body">
+                            <label for="usr">Nombre de usuario:</label>
+                            <input [(ngModel)]="inputNombreUsuario" type="text" class="form-control" id="usr">
+                            <label for="usr">Contraseña</label>
+                            <input [(ngModel)]="inputPassword" type="text" class="form-control" id="usr">
+                            <label style="margin-top: 20px" for="usr" style="margin-top: 20px">ESTADO:<span style="margin-left: 5px" class="badge">{{inputEstado}}</span></label>
+                            <div class="dropdown">
+                              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{inputTipoPersonaNombre}}
+                                <span class="caret"></span></button>
+                              <ul class="dropdown-menu">
+                                <li>
+                                  <label (click)="select('ACTIVO')" for="">ACTIVO</label>
+                                </li>
+                                <li>
+                                    <label (click)="select('NO ACTIVO')" for="">NO ACTIVO</label>
+                                  </li>
+                                <!-- <li *ngFor="let item of ListaTipoPersona">
+                                  <label style="margin-right: 10px" (click)="CargarTipoPersonaId(item.idtipopersona, item.nombre)">
+                                    {{item.nombre}}
+                                  </label>
+                                </li> -->
+                              </ul>
+                            </div>
+                            <!-- <label style="margin-top: 20px" for="usr">Identificación Personal:</label>
+                            <input [(ngModel)]="inputIdentificacion" type="text" class="form-control" id="usr">
+                            <label style="margin-top: 20px" for="usr">Correo Institucional:</label>
+                            <input [(ngModel)]="inputCorreo" type="text" class="form-control" id="usr"> -->
+
+
+
+
+
+
+                          </div>
+                          <div class="modal-footer">
+                            <button (click)="GuardarUsuario()" class="btn btn-success glyphicon glyphicon-check">
+                              GUARDAR</button>
+
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                       
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+              </div>
             </div>
 
-            <div class="dropdown col-lg-4">
-              <div class="form-group">
-                <select class="form-control" id="sel1">
-                  <option>Seleccione una opción</option>
-                  <option *ngFor="let item of ListaParametro">{{item}}</option>
+          </div>
 
+
+        </body>
+
+
+      </div>
+
+      <div class="tab-pane" id="usuario" style="margin-top: 20px;">
+
+
+        <div class="panel panel-info">
+          <div style="height: 50px;" class="panel-heading">
+
+            <h5>Usuarios del sistema</h5>
+          </div>
+          <div class="panel-body">
+            <div class="col-lg-6">
+              <label for="">BUSCAR POR</label>
+              <div class="form-group">
+
+                <select class="form-control" id="sel1">
+                  <option>Elegir un parámetro</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
                 </select>
               </div>
 
-
+            </div>
+            <div class="col-lg-6">
+              <label for="">Bucar:</label>
+              <input type="text" class="form-control" id="usr">
 
             </div>
-            <div class="col-lg-4">
-              <input class="form-control" id="idBusqueda" type="text" placeholder="Buscar..">
+            <div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>NOMBRE USUARIO</th>
+                    <th>ESTADO</th>
+                    <th>ACCIONES</th>
+                  
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of listaUsuarios">
+                    <td>{{item.nombreusuario}}</td>
+                    <td>{{item.estado}}</td>
+                    <td>
+                      <button data-toggle="modal" data-target="#EditarUsuario" (click)="CargarUsuario(item.idusuario)" class="btn btn-success">EDITAR</button>
+                      <button (click)="EliminarUsuario(item.idusuario)" class="btn btn-danger">ELIMINAR</button>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
             </div>
           </div>
-        </div>
 
+          <div class="panel-footer">
 
-        <div class="col-lg-12">
-
-          <div class="panel-body">
-
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th class="col-lg-5">Nombre Completo</th>
-                  <th class="col-lg-5">Identificación</th>
-                  <th class="col-lg-5">Rol</th>
-                  <th class="col-lg-5">Correo</th>
-
-                </tr>
-              </thead>
-              <tbody id="myTable">
-                <tr class="active" *ngFor="let usr of ListaTodoUsuario ">
-
-                  <td class="col-lg-5">{{usr.nombrecompleto}}</td>
-                  <td class="col-lg-5">{{usr.identificacionpersonal}}</td>
-                  <td class="col-lg-5">{{usr.nombre}}</td>
-                  <td class="col-lg-5">{{usr.correo}}</td>
-                  <td><button class="btn btn-success"><i class="fa fa-edit"></i> Editar</button></td>
-                  <td><button class="btn btn-danger"><i class="fa fa-minus-circle"></i> Eliminar</button></td>
-                </tr>
-
-              </tbody>
-            </table>
           </div>
-        </div>
+          <div class="modal modal-success" id="EditarUsuario" role="dialog">
+              <div class="modal-dialog">
 
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">GESTIÓN USUARIO</h4>
+                  </div>
+                  <div class="modal-body">
+                    <label for="usr">Nombre de usuario:</label>
+                    <input [(ngModel)]="inputNombreUsuario" type="text" class="form-control" id="usr">
+                    <label for="usr">Contraseña</label>
+                    <input [(ngModel)]="inputPassword" type="text" class="form-control" id="usr">
+                    <label style="margin-top: 20px" for="usr" style="margin-top: 20px">ESTADO:<span style="margin-left: 5px" class="badge">{{inputEstado}}</span></label>
+                    <div class="dropdown">
+                      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{inputTipoPersonaNombre}}
+                        <span class="caret"></span></button>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <label (click)="select('ACTIVO')" for="">ACTIVO</label>
+                        </li>
+                        <li>
+                            <label (click)="select('NO ACTIVO')" for="">NO ACTIVO</label>
+                          </li>
+                        <!-- <li *ngFor="let item of ListaTipoPersona">
+                          <label style="margin-right: 10px" (click)="CargarTipoPersonaId(item.idtipopersona, item.nombre)">
+                            {{item.nombre}}
+                          </label>
+                        </li> -->
+                      </ul>
+                    </div>
+                    <!-- <label style="margin-top: 20px" for="usr">Identificación Personal:</label>
+                    <input [(ngModel)]="inputIdentificacion" type="text" class="form-control" id="usr">
+                    <label style="margin-top: 20px" for="usr">Correo Institucional:</label>
+                    <input [(ngModel)]="inputCorreo" type="text" class="form-control" id="usr"> -->
+
+
+
+
+
+
+                  </div>
+                  <div class="modal-footer">
+                    <button (click)="EditarUsuario()" class="btn btn-success glyphicon glyphicon-check">
+                      GUARDAR</button>
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+               
+
+              </div>
+            </div>
+
+        </div>
 
 
 
       </div>
     </div>
-
   </div>
-  <div class="col-lg-2"></div>
 
+
+  <div class="col-lg-2"></div>
 </body>

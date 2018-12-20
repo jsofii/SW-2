@@ -23,7 +23,7 @@ import { LaboratorioComponent } from './laboratorio/laboratorio.component';
 import { laboratorioServiceService } from './laboratorio-service/laboratorio-service.service';
 import { CicloGestionComponent } from './ciclo-gestion/ciclo-gestion.component';
 import { cicloServiceService } from './ciclo-service/ciclo-service.service';
-
+import { FilterpipePipe } from './filterpipe.pipe';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,11 @@ import { cicloServiceService } from './ciclo-service/ciclo-service.service';
     HorarioComponent,
 
     LaboratorioComponent,
+
     CicloGestionComponent,
+
+    FilterpipePipe
+
 
   ],
   imports: [
@@ -69,7 +73,9 @@ import { cicloServiceService } from './ciclo-service/ciclo-service.service';
       { path: 'ciclo-gestion', component: CicloGestionComponent },
     ])
   ],
+
   providers: [usuarioServiceService, materiaServiceService, loginServiceService,laboratorioServiceService,cicloServiceService],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

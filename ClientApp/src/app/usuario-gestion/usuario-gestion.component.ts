@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { usuarioServiceService } from '../usuario-service/usuario-service.service';
+import { FilterpipePipe} from '../filterpipe.pipe';
 
 @Component({
   selector: 'app-usuario-gestion',

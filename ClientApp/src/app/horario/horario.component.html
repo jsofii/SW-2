@@ -1,6 +1,6 @@
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <body>
-
+  
   
     <div class= "col-lg-2"></div>
 
@@ -92,7 +92,7 @@
                     <td>{{horaInit}}</td>
                       <td class="active" *ngFor="let dia of listaDias ">
                           <label class="switch">
-                              <input type="checkbox">
+                              <input [checked]="boton" type="checkbox">
                               <span class="slider"></span>
                             </label>
                       </td>
@@ -101,9 +101,9 @@
               </tbody>
               <tfoot>
                   <tr>
+                      <td></td>b
                       <td></td>
-                      <td></td>
-                      <td><button class="btn btn-success btn-lg"><i class="fa fa-plus-circle"></i>
+                      <td><button [(ngModel)]="boton" class="btn tn-success btn-lg"><i class="fa fa-plus-circle"></i>
                         Guardar</button></td>
                       <td><button class="btn btn-primary  btn-lg"><i class="fa fa-pencil"></i>
                         Editar</button></td>

@@ -7,8 +7,10 @@ import { materiaServiceService} from '../materia-service/materia-service.service
   styleUrls: ['./materia.component.css']
 })
 export class MateriaComponent implements OnInit {
-
-  constructor(private serviceMateria: materiaServiceService ) { }
+idmateria:any;
+  constructor(private serviceMateria: materiaServiceService ) {
+    this.idmateria=0;
+   }
   ListaTodasMaterias:any;
 
   ObtenerTodasMaterias(){
@@ -30,6 +32,32 @@ export class MateriaComponent implements OnInit {
     this.inputParametro=parametro;
 
   }
+ 
+  inputMateria:any;
+  inputCodigo:any;
+  CambiarValor(idmat:number){
+    this.idmateria = idmat;
+    this.cargarMateria();
+    
+  }  
+
+  Acero(){
+    this.idmateria = 0;
+    this.inputMateria="";
+    this.inputCodigo="";
+  }  
+
+  materiaAux: any;
+
+  cargarMateria() {
+    this.serviceMateria.GetMateriaId(this.idmateria).subscribe(
+      data => {
+        this.materiaAux = data;
+        this.inputMateria = this.materiaAux.nombre;
+        this.inputCodigo = this.materiaAux.codigo;
+      }
+    )
+  }
 
   DeleteMateria(idmateria:number){
     
@@ -48,7 +76,23 @@ export class MateriaComponent implements OnInit {
   }
   }
   
+  GuardarMateria() {
+    if (this.idmateria == 0) {
+      this.serviceMateria.AddMateria(this.inputMateria, this.inputCodigo).subscribe(
+        data => {
+          this.ObtenerTodasMaterias();
+        }
+      )
+    }else{
+      this.serviceMateria.EditMateria(this.idmateria, this.inputMateria, this.inputCodigo).subscribe(
+        data=>{
+          this.ObtenerTodasMaterias();
+        }
+      )
+    }
 
+
+  }
 
 
 }

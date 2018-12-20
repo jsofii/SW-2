@@ -22,11 +22,11 @@ export class cicloServiceService {
   {
     return this.http.get('https://localhost:5001/api/Ciclo/Get/'+ id);
   }
-  EditCiclo(idciclo: any,nombreCiclo: any, fechaincio: any,fechaifin: any){
+  EditCiclo(idciclo: any,nombreCiclo: any, fechainicio: any,fechaifin: any){
     var temp = {
       Idciclo: idciclo,
       Nombre: nombreCiclo,
-      Fechaincio: fechaincio,
+      Fechainicio: fechainicio,
       Fechafin: fechaifin
       
     }
@@ -36,10 +36,10 @@ export class cicloServiceService {
 
   }
   
-  AddCiclo(nombreCiclo: any, fechaincio: any,fechaifin: any) {
+  AddCiclo(nombreCiclo: any, fechainicio: any,fechaifin: any) {
     var temp = {
       Nombre: nombreCiclo,
-      Fechaincio: fechaincio,
+      Fechainicio: fechainicio,
       Fechafin: fechaifin
     }
 

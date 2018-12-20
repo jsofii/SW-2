@@ -27,6 +27,24 @@ export class usuarioServiceService {
   ListaTipoPersona() {
     return this.http.get('https://localhost:5001/api/TipoPersona/Lista');
   }
+  ListaUsuario(){
+     return this.http.get('https://localhost:5001/api/Usuario/ListaUsuario');
+  }
+  RemoveUsuario(idusuario:number){
+    return this.http.delete('https://localhost:5001/api/Usuario/DeleteUsuario/'+idusuario);
+  }
+  EditarUsuario(idusuario:number, nombreusuario:string, password:string, estado:string){
+    var user={
+      Idusuario:idusuario,
+      Nombreusuario:nombreusuario,
+      Password:password,
+      Estado:estado
+    }
+    return this.http.post('https://localhost:5001/api/Usuario/Editar/',user);
+  }
+  CargarUsuario(idusuario:number){
+    return this.http.get('https://localhost:5001/api/Usuario/UsuarioEditar/'+idusuario);
+  }
   AddPersona(nombreCompleto: any, idPersonal: any, idTipoPersona: any, correoE: any) {
     var temp = {
       Nombrecompleto: nombreCompleto,
@@ -36,6 +54,15 @@ export class usuarioServiceService {
     }
     return this.http.post('https://localhost:5001/api/Persona/Add/', temp);
 
+  }
+  AddUser(idpersona:number, nombreUsuario:string, password:string, estado:string){
+    var user={
+      Idpersona: idpersona,
+      Nombreusuario: nombreUsuario,
+      Password: password,
+      Estado:estado
+    }
+    return this.http.post('https://localhost:5001/api/Usuario/addUsuario/', user);
   }
 
 

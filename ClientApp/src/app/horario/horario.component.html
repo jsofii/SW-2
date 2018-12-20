@@ -151,56 +151,73 @@
 
 
         <div class="panel panel-info">
-            <div style="height: 50px;" class="panel-heading">
-              <label for="">
-                LISTA DE CICLOS
-              </label>
+            
+            <div class="panel-heading">
+              <button [routerLink]='["/ciclo-gestion"]' class="btn btn-success center-block"><i class="fa fa-plus-circle"></i>
+                Nuevo Ciclo</button>
             </div>
-            <div class="panel-body">
-              <div class="col-lg-6">
-                <label for="">BUSCAR POR</label>
+
+
+         </div>
+         <div class="panel-body">
+          <h2 style="margin-left: 15px">Lista de ciclos</h2>
+          <div>
+            <br>
+            <div style="margin-left: 15px">
+              <div class="col-lg-2">
+                Buscar por:
+              </div>
+              <div class="dropdown col-lg-4">
                 <div class="form-group">
-                  
                   <select class="form-control" id="sel1">
-                    <option>Elegir un parámetro</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
+                    <option>Seleccione una opción</option>
+                    <option *ngFor="let item of ListaParametro">{{item}}</option>
+  
                   </select>
                 </div>
-                
+  
+  
               </div>
-              <div class="col-lg-6">
-                <label for="">Bucar:</label>
-                <input type="text" class="form-control" id="usr">
-                
+              <div class="col-lg-4">
+                <input style="margin-left: 40px" class="form-control" id="idBusqueda" type="text" placeholder="Buscar..">
               </div>
-              <div>
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>NOMBRE</th>
-                      <th>FECHA INICIO</th>
-                      <th>FECHA FIN</th>
-                  
-      
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Default</td>
-                      <td>Defaultson</td>
-                      <td>def@somemail.com</td>
-                    </tr>
-      
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="panel-footer">
-      
             </div>
           </div>
+  
+          <div class="col-lg-12">
+  
+            <div class="panel-body">
+  
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th class="col-lg-5">Nombre</th>
+                    <th class="col-lg-5">Fecha Incio</th>
+                    <th class="col-lg-5">Fecha Fin</th>
+                  </tr>
+                </thead>
+                <tbody id="myTable">
+                  <tr class="active" *ngFor="let ciclo of ListaTodosCiclos">
+  
+                    <td class="col-lg-5">{{ciclo.nombre}}</td>
+  
+                    <td class="col-lg-5">{{ciclo.fechainicio}}</td>
+
+                    <td class="col-lg-5">{{ciclo.fechafin}}</td>
+                    
+                    <td><button data-toggle="modal" data-target="#myModal" class="btn btn-success"><i class="fa fa-edit"></i>
+                        Editar</button></td>
+                    <td><button class="btn btn-danger" (click)="DeleteCiclo(ciclo.idciclo)"><i class="fa fa-minus-circle"></i>
+                        Eliminar</button></td>
+                  </tr>
+  
+                </tbody>
+              </table>
+            </div>
+          </div>
+  
+  
+        </div>
       
 
 

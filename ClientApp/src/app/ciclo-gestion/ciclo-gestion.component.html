@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="panel panel-success col-lg-12">
+      <div class="panel-heading">REGISTRO DE CICLOS</div>
+  
+      <div class="panel-body">
+        <div class="col-lg-6">
+          <label for="ciclo">Nombre del ciclo:</label>
+          <input [(ngModel)]="inputCiclo" type="text" class="form-control" id="ciclo">
+         
+  
+          <label style="margin-top: 20px" for="ciclo">Fecha de inicio:</label>
+          <input [(ngModel)]="inputFechaInicio" type="text" pattern="^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$" class="form-control" id="ciclo" #ciclo="ngModel">
+          <div *ngIf="ciclo.errors && (ciclo.dirty || ciclo.touched)" class="alert alert-danger">
+            <div [hidden]="!ciclo.errors.required">
+              Necesita ingresar Fecha inicio
+            </div>
+            <div [hidden]="!ciclo.errors.pattern">
+              El formato de fecha es yyyy-mm-dd
+            </div>
+          </div>
+
+          <label style="margin-top: 20px" for="fechafin">Fecha de fin:</label>
+          <input [(ngModel)]="inputFechaFin" type="text" pattern="^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$" class="form-control" id="ciclo" #fechafin="ngModel">
+          <div *ngIf="fechafin.errors && (fechafin.dirty || fechafin.touched)" class="alert alert-danger">
+              <div [hidden]="!fechafin.errors.required">
+                Necesita ingresar Fecha inicio
+              </div>
+              <div [hidden]="!fechafin.errors.pattern">
+                El formato de fecha es yyyy-mm-dd
+              </div>
+            </div>
+        </div>
+  
+      </div>
+  
+  
+      <div class="panel-footer">
+  
+        <button  (click)="GuardarCiclo()" class="btn btn-success glyphicon glyphicon-check"> GUARDAR</button>
+        <button [routerLink]='["/horario"]' class="btn btn-danger pull-right glyphicon glyphicon-arrow-left"> REGRESAR</button>
+      </div>
+    </div>
+  
+  
+  
+  </div>

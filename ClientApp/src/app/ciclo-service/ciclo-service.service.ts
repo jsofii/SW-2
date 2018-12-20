@@ -48,7 +48,7 @@ export class cicloServiceService {
 
   }
 
-  DeleteMateria(idciclo: number){
+  DeleteCiclo(idciclo: number){
     return this.http.delete('https://localhost:5001/api/Ciclo/Eliminar/' + idciclo);
   
   }

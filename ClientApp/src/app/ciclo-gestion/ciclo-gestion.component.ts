@@ -17,16 +17,18 @@ export class CicloGestionComponent implements OnInit {
   }
 
 
-  inputMateria: any;
-  inputCodigo: any;
-  materiaAux: any;
+  inputCiclo: any;
+  inputFechaInicio: any;
+  inputFechaFin: any; 
+  cicloAux: any;
 
   cargarCiclo() {
     this.serviceCiclo.GetCicloId(this.idciclo).subscribe(
       data => {
-        this.materiaAux = data;
-        this.inputMateria = this.materiaAux.nombre;
-        this.inputCodigo = this.materiaAux.codigo;
+        this.cicloAux = data;
+        this.inputCiclo = this.cicloAux.nombre;
+        this.inputFechaInicio = this.cicloAux.fechainicio;
+        this.inputFechaFin = this.cicloAux.fechafin;
       }
     )
   }
@@ -34,15 +36,15 @@ export class CicloGestionComponent implements OnInit {
   ngOnInit() {
    
   }
-  /*GuardarMateria() {
-    if (this.idmateria == 0) {
-      this.serviceMateria.AddMateria(this.inputMateria, this.inputCodigo).subscribe(
+  GuardarCiclo() {
+    if (this.idciclo == 0) {
+      this.serviceCiclo.AddCiclo(this.inputCiclo, this.inputFechaInicio,this.inputFechaFin).subscribe(
         data => {
 
         }
       )
     }else{
-      this.serviceMateria.EditMateria(this.idmateria, this.inputMateria, this.inputCodigo).subscribe(
+      this.serviceCiclo.EditCiclo(this.idciclo, this.inputCiclo, this.inputFechaInicio,this.inputFechaFin).subscribe(
         data=>{
 
         }
@@ -50,6 +52,6 @@ export class CicloGestionComponent implements OnInit {
     }
 
 
-  }*/
+  }
 
 }

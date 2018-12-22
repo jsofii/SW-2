@@ -14,3 +14,31 @@ export class PersonaAux {
     }   
     
 }
+
+
+export class LaboratorioAux {
+    numero: number;
+    nombre: string;
+    
+    constructor(numero:any, nombre:any){
+        this.numero=numero;
+      
+        this.nombre=nombre;
+
+    }   
+    
+}
+
+
+export class MateriaAux {
+    nombre: string;
+    codigo: string;
+    
+    constructor(nombre:any, codigo:any){
+        this.nombre=nombre;
+      
+        this.codigo=codigo;
+
+    }   
+    
+}

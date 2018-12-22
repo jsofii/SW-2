@@ -24,6 +24,8 @@ import { laboratorioServiceService } from './laboratorio-service/laboratorio-ser
 import { CicloGestionComponent } from './ciclo-gestion/ciclo-gestion.component';
 import { cicloServiceService } from './ciclo-service/ciclo-service.service';
 import { FilterpipePipe } from './filterpipe.pipe';
+import { FiltrolaboPipe } from './laboratorio/filtrolabo.pipe';
+import { PipemateriaPipe } from './materia/pipemateria.pipe';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,11 @@ import { FilterpipePipe } from './filterpipe.pipe';
 
     CicloGestionComponent,
 
-    FilterpipePipe
+    FilterpipePipe,
+
+    FiltrolaboPipe,
+
+    PipemateriaPipe
 
 
   ],

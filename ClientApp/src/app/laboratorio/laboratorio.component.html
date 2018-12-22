@@ -37,7 +37,7 @@
 
             </div>
             <div class="col-lg-4">
-              <input style="margin-left: 40px" class="form-control" id="idBusqueda" type="text" placeholder="Buscar..">
+              <input style="margin-left: 40px" class="form-control" id="idBusqueda" [(ngModel)]="busquedalabo" type="text" placeholder="Buscar..">
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@
                 </tr>
               </thead>
               <tbody id="myTable">
-                <tr class="active" *ngFor="let laboratorio of ListaTodosLaboratorios">
+                <tr class="active" *ngFor="let laboratorio of ListaTodosLaboratorios | filtrolabo:busquedalabo">
 
                   <td class="col-lg-5">{{laboratorio.numero}}</td>
 

@@ -35,7 +35,7 @@ export class UsuarioComponent implements OnInit {
   inputIdentificacion:any;
   inputCorreo:any;
   ListaTipoPersona:any;
-  inputTipoPersonaNombre="Seleccione un rol";
+  inputTipoPersonaNombre="Seleccione un estado";
   select(estado:string){
     this.inputEstado=estado;
   }

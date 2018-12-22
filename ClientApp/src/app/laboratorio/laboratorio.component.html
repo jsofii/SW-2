@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  
+
 </head>
+
 <body>
   <div class="col-lg-2"></div>
   <div class="col-lg-8">
     <div class="panel panel-success">
       <div class="panel-heading">
-        <button  (click)="Acero()" class="btn btn-success center-block" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-circle"></i>
+        <button (click)="Acero()" class="btn btn-success center-block" data-toggle="modal" data-target="#myModal"><i
+            class="fa fa-plus-circle"></i>
           Nuevo laboratorio</button>
 
 
@@ -37,7 +40,8 @@
 
             </div>
             <div class="col-lg-4">
-              <input style="margin-left: 40px" class="form-control" id="idBusqueda" [(ngModel)]="busquedalabo" type="text" placeholder="Buscar..">
+              <input style="margin-left: 40px" class="form-control" id="idBusqueda" [(ngModel)]="busquedalabo" type="text"
+                placeholder="Buscar..">
             </div>
           </div>
         </div>
@@ -60,7 +64,8 @@
                   <td class="col-lg-5">{{laboratorio.numero}}</td>
 
                   <td class="col-lg-5">{{laboratorio.nombre}}</td>
-                  <td><button data-toggle="modal" data-target="#myModal" class="btn btn-success" (click)="CambiarValor(laboratorio.idlaboratorio)"><i class="fa fa-edit"></i>
+                  <td><button data-toggle="modal" data-target="#myModal" class="btn btn-success" (click)="CambiarValor(laboratorio.idlaboratorio)"><i
+                        class="fa fa-edit"></i>
                       Editar</button></td>
                   <td><button class="btn btn-danger" (click)="DeleteLaboratorio(laboratorio.idlaboratorio)"><i class="fa fa-minus-circle"></i>
                       Eliminar</button></td>
@@ -79,40 +84,49 @@
 
 
   </div>
-  <div class="modal modal-success" id="myModal" role="dialog">
+  <div class="modal" id="myModal" role="dialog">
     <div class="modal-dialog">
 
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">REGISTRO DE LABORATORIOS</h4>
+          <h4 class="modal-title">GESTIÓN DE LABORATORIOS</h4>
         </div>
         <div class="modal-body">
-          <div class="col-lg-6">
-            <label for="mat">Número de laboratorio:</label>
-            <input [(ngModel)]="inputNumero" type="text" class="form-control" id="mat">
+
+          <label for="mat">Número de laboratorio:</label>
+          <input [(ngModel)]="inputNumero" type="text" class="form-control" id="mat" pattern="[0-9]+" #inputNum="ngModel">
+          <div *ngIf="inputNum.errors && (inputNum.dirty || inputNum.touched)" class="alert alert-danger">
+              <div [hidden]="!inputNum.errors.required">
+                Necesita ingresar número de laboratorio.
+              </div>
+              <div [hidden]="!inputNum.errors.pattern">
+                Necesita ingresar un número entero.
+              </div>
+            </div>
 
 
-            <label style="margin-top: 20px" for="mat">Nombre de laboratorio:</label>
-            <input  [(ngModel)]="inputNombre" type="text" class="form-control" id="mat">
-            <button (click)="GuardarLaboratorio()" class="btn btn-success glyphicon glyphicon-check"> GUARDAR</button>
-            <button [routerLink]='["/laboratorio"]' class="btn btn-danger pull-right glyphicon glyphicon-arrow-left">
-              REGRESAR</button>
-          </div>
-         
+          <label style="margin-top: 20px" for="mat">Nombre de laboratorio:</label>
+          <input [(ngModel)]="inputNombre" type="text" class="form-control" id="mat">
 
 
 
 
-        
+
+
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button (click)="GuardarLaboratorio()" class="btn btn-success glyphicon glyphicon-check"> GUARDAR</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+
     </div>
-
-  </div>
   </div>
 
 </body>
+
 </html>

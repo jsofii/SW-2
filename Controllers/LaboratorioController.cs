@@ -34,6 +34,7 @@ namespace SW_2.Controllers
         [Route("Addlab")]
         public List<Laboratorio> Lista([FromBody]Laboratorio temp)
         {
+            
             Laboratorio laboratorio = new Laboratorio
             {
                 Numero = temp.Numero,

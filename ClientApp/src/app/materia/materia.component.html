@@ -102,16 +102,33 @@
           <h4 class="modal-title">GESTIÓN DE MATERIAS</h4>
         </div>
         <div class="modal-body">
-         
-            <label for="mat">Nombre de la materia:</label>
-            <input [(ngModel)]="inputMateria" type="text" class="form-control" id="mat">
+
+          <label for="mat">Nombre de la materia:</label>
+          <input [(ngModel)]="inputMateria" type="text" class="form-control" id="mat">
 
 
-            <label style="margin-top: 20px" for="mat">Código de la materia:</label>
-            <input [(ngModel)]="inputCodigo" type="text" class="form-control" id="mat">
+          <label style="margin-top: 20px" for="mat">Código de la materia:</label>
+          <input [(ngModel)]="inputCodigo" type="text" class="form-control" id="mat">
 
 
-         
+          <label style="margin-top: 20px" for="usr" style="margin-top: 20px">Carrera:<span style="margin-left: 5px"
+              class="badge">{{inputCarrera}}</span></label>
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Seleccione una carrera:
+              <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li>
+                <label (click)="select(1)" for="">Ingeniería de Sistemas</label>
+              </li>
+              <li>
+                <label (click)="select(2)" for="">Ingeniería en Computación</label>
+              </li>
+              <li>
+                <label (click)="select(3)" for="">Ingeniería en Software</label>
+              </li>
+          
+            </ul>
+          </div>
 
 
 

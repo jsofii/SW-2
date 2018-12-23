@@ -34,7 +34,7 @@ export class MateriaGestionComponent implements OnInit {
   }
   GuardarMateria() {
     if (this.idmateria == 0) {
-      this.serviceMateria.AddMateria(this.inputMateria, this.inputCodigo).subscribe(
+      this.serviceMateria.AddMateria(this.inputMateria, this.inputCodigo,1).subscribe(
         data => {
 
         }

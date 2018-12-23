@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { materiaServiceService} from '../materia-service/materia-service.service';
+import { materiaServiceService } from '../materia-service/materia-service.service';
 
 @Component({
   selector: 'app-materia',
@@ -7,85 +7,117 @@ import { materiaServiceService} from '../materia-service/materia-service.service
   styleUrls: ['./materia.component.css']
 })
 export class MateriaComponent implements OnInit {
-idmateria:any;
-  constructor(private serviceMateria: materiaServiceService ) {
-    this.idmateria=0;
-   }
-  ListaTodasMaterias:any;
+  idmateria: any;
+  constructor(private serviceMateria: materiaServiceService) {
+    this.idmateria = 0;
+  }
+  ListaTodasMaterias: any;
 
-  ObtenerTodasMaterias(){
+  ObtenerTodasMaterias() {
     this.serviceMateria.ListaTodasMaterias().subscribe(
-      
-      data=>{
-        this.ListaTodasMaterias=data;
+
+      data => {
+        this.ListaTodasMaterias = data;
       }
 
     )
   }
 
+  //ListaCarreras: any[] = ["Ingeniería en Sistemas", "Ingeniería en Computación", "Ingeniería en Software"];
+  inputCarrera: any;
+
+
+
   ngOnInit() {
     this.ObtenerTodasMaterias();
   }
-  ListaParametro:any[] =["Código","Nombre"];
-  inputParametro="Elegir parámetro"
-  CargarTipoParametro(parametro:any){
-    this.inputParametro=parametro;
+  ListaParametro: any[] = ["Código", "Nombre"];
+  inputParametro = "Elegir parámetro"
+  CargarTipoParametro(parametro: any) {
+    this.inputParametro = parametro;
 
   }
- 
-  inputMateria:any;
-  inputCodigo:any;
-  CambiarValor(idmat:number){
+
+  inputMateria: any;
+  inputCodigo: any;
+  carreraAux: number;
+
+  select(aux: number) {
+    this.carreraAux = aux;
+    if (aux == 1) {
+      this.inputCarrera = "Ingeniería en Sistemas";
+    } else if (aux == 2) {
+      this.inputCarrera = "Ingeniería en Computación";
+    } else if (aux == 3) {
+      this.inputCarrera = "Ingeniería en Software";
+    }
+  }
+
+  CambiarValor(idmat: number) {
     this.idmateria = idmat;
     this.cargarMateria();
-    
-  }  
+    this.inputCarrera = "";
+    /*  if (this.carreraAux== 1) {
+       this.inputCarrera = "Ingeniería en Sistemas";
+     } else if (this.carreraAux == 2) {
+       this.inputCarrera = "Ingeniería en Computación";
+     } else if (this.carreraAux == 3) {
+       this.inputCarrera = "Ingeniería en Software";
+     }*/
+  }
 
-  Acero(){
+  Acero() {
     this.idmateria = 0;
-    this.inputMateria="";
-    this.inputCodigo="";
-  }  
+    this.inputMateria = "";
+    this.inputCodigo = "";
+    this.inputCarrera = "";
+    this.carreraAux = 0;
+  }
+
 
   materiaAux: any;
-
   cargarMateria() {
     this.serviceMateria.GetMateriaId(this.idmateria).subscribe(
       data => {
         this.materiaAux = data;
         this.inputMateria = this.materiaAux.nombre;
         this.inputCodigo = this.materiaAux.codigo;
+        this.carreraAux = this.materiaAux.carrera;
       }
     )
   }
 
-  DeleteMateria(idmateria:number){
-    
-    if(confirm("SE ELIMINARA?")){
+  DeleteMateria(idmateria: number) {
 
-    
-    this.serviceMateria.DeleteMateria(idmateria).subscribe(
-      data=>{
-       
-        this.ObtenerTodasMaterias();
+    if (confirm("SE ELIMINARA?")) {
 
-      }
-    )
-  }else{
-    
+
+      this.serviceMateria.DeleteMateria(idmateria).subscribe(
+        data => {
+
+          this.ObtenerTodasMaterias();
+
+        }
+      )
+    } else {
+
+    }
   }
-  }
-  
+
   GuardarMateria() {
     if (this.idmateria == 0) {
-      this.serviceMateria.AddMateria(this.inputMateria, this.inputCodigo).subscribe(
+      this.serviceMateria.AddMateria(this.inputMateria, this.inputCodigo, this.carreraAux).subscribe(
         data => {
+
+          if (data == null) {
+            alert("ATENCIÓN: Ya existe una materia con ese código.")
+          }
           this.ObtenerTodasMaterias();
         }
       )
-    }else{
-      this.serviceMateria.EditMateria(this.idmateria, this.inputMateria, this.inputCodigo).subscribe(
-        data=>{
+    } else {
+      this.serviceMateria.EditMateria(this.idmateria, this.inputMateria, this.inputCodigo, this.carreraAux).subscribe(
+        data => {
           this.ObtenerTodasMaterias();
         }
       )

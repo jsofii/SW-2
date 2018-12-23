@@ -18,6 +18,7 @@ namespace SW_2.Controllers
         {
             return this.context.Materia.ToList();
         }
+
         [HttpGet]
         [Route("Get/{id}")]
         public Materia Materia(int id)
@@ -33,25 +34,39 @@ namespace SW_2.Controllers
         [Route("Addmat")]
         public List<Materia> Lista([FromBody]Materia temp)
         {
-            Materia materia = new Materia
-            {
-                Nombre = temp.Nombre,
-                Codigo = temp.Codigo
+            List<Materia> listaaux = Lista();
 
-            };
-            context.Materia.Add(materia);
-            context.SaveChanges();
-            return this.context.Materia.ToList();
+            bool existe = listaaux.Any(item => item.Codigo == temp.Codigo);
+
+            if (!existe)
+            {
+                Materia materia = new Materia
+                {
+                    Nombre = temp.Nombre,
+                    Codigo = temp.Codigo,
+                    Carrera = temp.Carrera
+
+                };
+                context.Materia.Add(materia);
+                context.SaveChanges();
+                return this.context.Materia.ToList();
+            }
+
+            return null;
+
         }
+
+
         [HttpPut]
         [Route("Edit")]
         public List<Materia> EditLider([FromBody] Materia temp)
         {
-           Materia materia = new Materia
+            Materia materia = new Materia
             {
-               Idmateria=temp.Idmateria,
-               Nombre=temp.Nombre,
-               Codigo=temp.Codigo
+                Idmateria = temp.Idmateria,
+                Nombre = temp.Nombre,
+                Codigo = temp.Codigo,
+                Carrera = temp.Carrera
 
             };
             context.Update<Materia>(materia);

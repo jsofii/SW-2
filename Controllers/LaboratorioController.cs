@@ -34,17 +34,29 @@ namespace SW_2.Controllers
         [Route("Addlab")]
         public List<Laboratorio> Lista([FromBody]Laboratorio temp)
         {
-            
-            Laboratorio laboratorio = new Laboratorio
-            {
-                Numero = temp.Numero,
-                Nombre = temp.Nombre
+            List<Laboratorio> listaaux = Lista();
+           
+            bool existe = listaaux.Any(item => item.Numero == temp.Numero);
 
-            };
-            context.Laboratorio.Add(laboratorio);
-            context.SaveChanges();
-            return this.context.Laboratorio.ToList();
+            if (!existe)
+            {
+                Laboratorio laboratorio = new Laboratorio
+                {
+                    Numero = temp.Numero,
+                    Nombre = temp.Nombre
+
+                };
+                context.Laboratorio.Add(laboratorio);
+                context.SaveChanges();
+                return this.context.Laboratorio.ToList();
+            }
+
+            return null;
+
+
         }
+
+
         [HttpPut]
         [Route("Edit")]
         public List<Laboratorio> Editlaboratorio([FromBody] Laboratorio temp)

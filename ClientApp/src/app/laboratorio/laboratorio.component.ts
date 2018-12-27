@@ -89,7 +89,7 @@ export class LaboratorioComponent implements OnInit {
 
         data => {
           if (data == null) {
-              alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
+            alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
           }
           this.ObtenerTodosLaboratorios();
         }
@@ -99,6 +99,9 @@ export class LaboratorioComponent implements OnInit {
 
       this.serviceLaboratorio.EditLaboratorio(this.idlaboratorio, this.inputNumero, this.inputNombre).subscribe(
         data => {
+          if (data == null) {
+            alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
+          }
           this.ObtenerTodosLaboratorios();
         }
       )

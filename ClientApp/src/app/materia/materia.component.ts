@@ -118,6 +118,9 @@ export class MateriaComponent implements OnInit {
     } else {
       this.serviceMateria.EditMateria(this.idmateria, this.inputMateria, this.inputCodigo, this.carreraAux).subscribe(
         data => {
+          if (data == null) {
+            alert("ATENCIÓN: Ya existe una materia con ese código.")
+          }
           this.ObtenerTodasMaterias();
         }
       )

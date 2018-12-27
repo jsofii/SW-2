@@ -7,6 +7,9 @@ import {MateriaAux} from '../pipe.data'
 export class PipemateriaPipe implements PipeTransform {
 
   transform(items: MateriaAux[], searchText: string): any[] {
+    
+
+
     if (!items) return [];
   if (!searchText) return items;
   searchText = searchText.toLowerCase();

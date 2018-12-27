@@ -40,11 +40,11 @@ export class MateriaGestionComponent implements OnInit {
         }
       )
     }else{
-      this.serviceMateria.EditMateria(this.idmateria, this.inputMateria, this.inputCodigo).subscribe(
+     /* this.serviceMateria.EditMateria(this.idmateria, this.inputMateria, this.inputCodigo).subscribe(
         data=>{
 
         }
-      )
+      )*/
     }
 
 

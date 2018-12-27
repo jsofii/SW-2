@@ -59,19 +59,28 @@ namespace SW_2.Controllers
 
         [HttpPut]
         [Route("Edit")]
-        public List<Materia> EditLider([FromBody] Materia temp)
+        public List<Materia> EditMateria([FromBody] Materia temp)
         {
-            Materia materia = new Materia
-            {
-                Idmateria = temp.Idmateria,
-                Nombre = temp.Nombre,
-                Codigo = temp.Codigo,
-                Carrera = temp.Carrera
+           /*  List<Materia> listaaux = Lista();
 
-            };
-            context.Update<Materia>(materia);
-            context.SaveChanges();
-            return context.Materia.ToList();
+            bool existe = listaaux.Any(item => item.Codigo == temp.Codigo);
+
+            if (!existe)
+            {*/
+                Materia materia = new Materia
+                {
+                    Idmateria = temp.Idmateria,
+                    Nombre = temp.Nombre,
+                    Codigo = temp.Codigo,
+                    Carrera = temp.Carrera
+
+                };
+                context.Update<Materia>(materia);
+                context.SaveChanges();
+                return context.Materia.ToList();
+            //}
+          //  return null;
+
         }
 
         [HttpDelete]

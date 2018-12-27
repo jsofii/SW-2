@@ -35,7 +35,7 @@ namespace SW_2.Controllers
         public List<Laboratorio> Lista([FromBody]Laboratorio temp)
         {
             List<Laboratorio> listaaux = Lista();
-           
+
             bool existe = listaaux.Any(item => item.Numero == temp.Numero);
 
             if (!existe)
@@ -61,17 +61,40 @@ namespace SW_2.Controllers
         [Route("Edit")]
         public List<Laboratorio> Editlaboratorio([FromBody] Laboratorio temp)
         {
-            Laboratorio laboratorio = new Laboratorio
+           /*List<Laboratorio> listaaux = Lista();
+            Laboratorio aux=null;
+            
+            foreach (var l in listaaux)
             {
-                Idlaboratorio = temp.Idlaboratorio,
-                Numero = temp.Numero,
-                Nombre = temp.Nombre
+                if (l.Idlaboratorio==temp.Idlaboratorio)
+                {
+                    aux = l;
+                    
+                    break;
+                }
+            }
+            listaaux.Remove(aux);
+            //aux=null;
+
+            bool existe = listaaux.Any(item => item.Numero == temp.Numero);
+
+            if (existe == false)
+            { */ 
+                Laboratorio laboratorio = new Laboratorio
+                {
+                    Idlaboratorio = temp.Idlaboratorio,
+                    Numero = temp.Numero,
+                    Nombre = temp.Nombre
 
 
-            };
-            context.Update<Laboratorio>(laboratorio);
-            context.SaveChanges();
-            return context.Laboratorio.ToList();
+                };
+                context.Update<Laboratorio>(laboratorio);
+                context.SaveChanges();
+                return context.Laboratorio.ToList();
+            //}
+
+           // return null;
+
         }
 
         [HttpDelete]

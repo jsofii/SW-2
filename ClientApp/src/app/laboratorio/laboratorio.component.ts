@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { laboratorioServiceService } from '../laboratorio-service/laboratorio-service.service';
 import { Alert } from 'selenium-webdriver';
+import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
 
 @Component({
   selector: 'app-laboratorio',
@@ -85,32 +86,35 @@ export class LaboratorioComponent implements OnInit {
 
   GuardarLaboratorio() {
     if (this.idlaboratorio == 0) {
-      this.serviceLaboratorio.AddLaboratorio(this.inputNumero, this.inputNombre).subscribe(
+      if(isNaN(this.inputNumero)){
+        alert('ATENCIÓN: "Número de laboratorio" solo acepta caracteres numericos');
+     }else {
+        if(/^[a-zA-Z-]*$/.test(this.inputNombre) == false) {
+          alert('ATENCIÓN: "Nombre de laboratorio" no acepta caracteres especiales o numericos.');
+        }else{
+          this.serviceLaboratorio.AddLaboratorio(this.inputNumero, this.inputNombre).subscribe(
 
-        data => {
-          if (data == null) {
-            alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
-          }
-          this.ObtenerTodosLaboratorios();
+            data => {
+              if (data == null) {
+                alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
+              }
+              this.ObtenerTodosLaboratorios();
+            }
+          )
         }
-      )
-    } else {
-      //this.cargarLaboratorio();
+     }
+     
+  } else {
+    //this.cargarLaboratorio();
 
-      this.serviceLaboratorio.EditLaboratorio(this.idlaboratorio, this.inputNumero, this.inputNombre).subscribe(
-        data => {
-          if (data == null) {
-            alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
-          }
-          this.ObtenerTodosLaboratorios();
+    this.serviceLaboratorio.EditLaboratorio(this.idlaboratorio, this.inputNumero, this.inputNombre).subscribe(
+      data => {
+        if (data == null) {
+          alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
         }
-      )
+        this.ObtenerTodosLaboratorios();
+      }
+    )
     }
-
-
   }
-
-
-
-
 }

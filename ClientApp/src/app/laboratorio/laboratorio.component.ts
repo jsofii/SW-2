@@ -105,16 +105,24 @@ export class LaboratorioComponent implements OnInit {
      }
      
   } else {
-    //this.cargarLaboratorio();
-
-    this.serviceLaboratorio.EditLaboratorio(this.idlaboratorio, this.inputNumero, this.inputNombre).subscribe(
-      data => {
-        if (data == null) {
-          alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
-        }
-        this.ObtenerTodosLaboratorios();
+    if(isNaN(this.inputNumero)){
+      alert('ATENCIÓN: "Número de laboratorio" solo acepta caracteres numericos');
+   }else {
+      if(/^[a-zA-Z-]*$/.test(this.inputNombre) == false) {
+        alert('ATENCIÓN: "Nombre de laboratorio" no acepta caracteres especiales o numericos.');
+      }else{
+        this.serviceLaboratorio.EditLaboratorio(this.idlaboratorio, this.inputNumero, this.inputNombre).subscribe(
+          data => {
+            if (data == null) {
+              alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
+            }
+            this.ObtenerTodosLaboratorios();
+          }
+        )
       }
-    )
+   }
+    //this.cargarLaboratorio();
+    
     }
   }
 }

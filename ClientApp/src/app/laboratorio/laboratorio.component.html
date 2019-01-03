@@ -107,7 +107,15 @@
 
 
           <label style="margin-top: 20px" for="mat">Nombre de laboratorio:</label>
-          <input [(ngModel)]="inputNombre" type="text" class="form-control" id="mat">
+          <input [(ngModel)]="inputNombre" type="text" class="form-control" id="mat" pattern="[A-Za-z-]+" #inputNom="ngModel">
+          <div *ngIf="inputNom.errors && (inputNom.dirty || inputNom.touched)" class="alert alert-danger">
+            <div [hidden]="!inputNom.errors.required">
+              Necesita ingresar nombre de laboratorio.
+            </div>
+            <div [hidden]="!inputNom.errors.pattern">
+              No se acepta caracteres especiales o numericos.
+            </div>
+          </div>
 
 
 

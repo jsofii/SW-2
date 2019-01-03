@@ -87,7 +87,7 @@ namespace SW_2.Controllers
         [Route("verificarUsuario/{usuario}/{contrasenna}")]
         public bool VerificarUsuario(string usuario, string contrasenna)
         {
-             Usuario user = (from item in context.Usuario
+            Usuario user = (from item in context.Usuario
                             where item.Nombreusuario == usuario
                             select item).FirstOrDefault<Usuario>();
             if (BCrypt.Net.BCrypt.Verify(contrasenna, user.Password)){
@@ -95,7 +95,7 @@ namespace SW_2.Controllers
             }else{
                 return false;
             }
-          
+            
           
         }
         

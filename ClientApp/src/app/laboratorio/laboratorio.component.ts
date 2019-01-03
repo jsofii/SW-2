@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { laboratorioServiceService } from '../laboratorio-service/laboratorio-service.service';
 import { Alert } from 'selenium-webdriver';
-import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
 
 @Component({
   selector: 'app-laboratorio',
@@ -102,8 +101,7 @@ export class LaboratorioComponent implements OnInit {
             }
           )
         }
-     }
-     
+      }
   } else {
     if(isNaN(this.inputNumero)){
       alert('ATENCIÓN: "Número de laboratorio" solo acepta caracteres numericos');
@@ -124,5 +122,11 @@ export class LaboratorioComponent implements OnInit {
     //this.cargarLaboratorio();
     
     }
+
+
   }
+
+
+
+
 }

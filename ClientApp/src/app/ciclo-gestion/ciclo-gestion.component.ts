@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { cicloServiceService } from '../ciclo-service/ciclo-service.service';
 import { ActivatedRoute } from '@angular/router';
+import { Alert } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-ciclo-gestion',
@@ -8,14 +9,18 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./ciclo-gestion.component.css']
 })
 export class CicloGestionComponent implements OnInit {
-  idciclo: any;
+  idciclo:any;
   constructor(private serviceCiclo: cicloServiceService, private activeRoute: ActivatedRoute) {
+    
+    
+    
+  }
+  ngOnInit() {
     this.idciclo = this.activeRoute.snapshot.params.idciclo;
     if (this.idciclo != 0) {
       this.cargarCiclo();
     }
   }
-
 
   inputCiclo: any;
   inputFechaInicio: any;
@@ -33,20 +38,42 @@ export class CicloGestionComponent implements OnInit {
     )
   }
 
-  ngOnInit() {
-   
+  
+  CambiarValor(idcicl: number) {
+    this.idciclo = idcicl;
+    alert(this.idciclo);
+    this.cargarCiclo();
+    
   }
+
   GuardarCiclo() {
+    
     if (this.idciclo == 0) {
+      
+    
       this.serviceCiclo.AddCiclo(this.inputCiclo, this.inputFechaInicio,this.inputFechaFin).subscribe(
         data => {
+          if (data == null) {
+            alert("ATENCIÓN: Ya existe un ciclo con ese nombre.")
+          }else{
+            
+            alert("Ciclo registrado exitosamente!");
+          }
+          
 
         }
       )
     }else{
+      
+      alert(this.idciclo);
       this.serviceCiclo.EditCiclo(this.idciclo, this.inputCiclo, this.inputFechaInicio,this.inputFechaFin).subscribe(
         data=>{
-
+          if (data == null) {
+            alert("ATENCIÓN: Ya existe un ciclo con ese nombre.")
+          }else{
+            
+          alert("Ciclo modificado exitosamente!");
+          }
         }
       )
     }

@@ -76,7 +76,7 @@ import { PipemateriaPipe } from './materia/pipemateria.pipe';
       { path: 'login', component: LoginComponent },
       { path: 'reserva', component: ReservaComponent },
       { path: 'laboratorio', component: LaboratorioComponent },
-      { path: 'ciclo-gestion', component: CicloGestionComponent },
+      { path: 'ciclo-gestion/:idciclo', component: CicloGestionComponent },
     ])
   ],
 

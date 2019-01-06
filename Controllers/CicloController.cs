@@ -33,32 +33,43 @@ namespace SW_2.Controllers
         [Route("Addciclo")]
         public List<Ciclo> Lista([FromBody]Ciclo temp)
         {
-            Ciclo ciclo = new Ciclo
-            {
-                Nombre = temp.Nombre,
-                Fechainicio = temp.Fechainicio,
-                Fechafin= temp.Fechafin
+            List<Ciclo> listaaux = Lista();
 
-            };
-            context.Ciclo.Add(ciclo);
-            context.SaveChanges();
-            return this.context.Ciclo.ToList();
+            bool existe = listaaux.Any(item => item.Nombre == temp.Nombre);
+
+            if (!existe)
+            {
+
+                DateTime fechaAux = temp.Fechafin;
+                Ciclo ciclo = new Ciclo
+                {
+                    Nombre = temp.Nombre,
+                    Fechainicio = temp.Fechainicio,
+                    Fechafin= new DateTime(fechaAux.Year,fechaAux.Month,fechaAux.Day,23,59,59)
+
+                };
+
+                context.Ciclo.Add(ciclo);
+                context.SaveChanges();
+                return this.context.Ciclo.ToList();
+            }
+
+            return null;
         }
         [HttpPut]
         [Route("Edit")]
         public List<Ciclo> EditLider([FromBody] Ciclo temp)
         {
-           Ciclo ciclo = new Ciclo
-            {
-               Idciclo=temp.Idciclo,
-               Nombre=temp.Nombre,              
-               Fechainicio = temp.Fechainicio,
-               Fechafin= temp.Fechafin
 
-            };
-            context.Update<Ciclo>(ciclo);
+            List<Ciclo> listaaux = Lista();
+            Ciclo ciclo = this.context.Ciclo.Find(temp.Idciclo);
+            ciclo.Nombre=temp.Nombre;
+            ciclo.Fechainicio=temp.Fechainicio;
+            ciclo.Fechafin=temp.Fechafin;
             context.SaveChanges();
-            return context.Ciclo.ToList();
+            return this.context.Ciclo.ToList();
+            
+
         }
 
         [HttpDelete]

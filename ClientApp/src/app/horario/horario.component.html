@@ -94,7 +94,11 @@
               </div>
             </div>
           
-            
+          <div class="panel-heading">
+            <legend align="center"> {{'Horario del laboratorio "' + inputLaboratorioNombre + '" para el ciclo "'+ inputCicloNombre+'"'}} </legend>
+          </div>
+
+
           <div>
             <table class="table table-bordered table-striped">
               <thead>
@@ -153,7 +157,7 @@
         <div class="panel panel-info">
             
             <div class="panel-heading">
-              <button [routerLink]='["/ciclo-gestion"]' class="btn btn-success center-block"><i class="fa fa-plus-circle"></i>
+              <button [routerLink]='["/ciclo-gestion",0]' class="btn btn-success center-block"><i class="fa fa-plus-circle"></i>
                 Nuevo Ciclo</button>
             </div>
 
@@ -205,7 +209,7 @@
 
                     <td class="col-lg-5">{{ciclo.fechafin}}</td>
                     
-                    <td><button data-toggle="modal" data-target="#myModal" class="btn btn-success"><i class="fa fa-edit"></i>
+                    <td><button [routerLink]='["/ciclo-gestion",ciclo.idciclo]' class="btn btn-success " ><i class="fa fa-edit"></i>
                         Editar</button></td>
                     <td><button class="btn btn-danger" (click)="DeleteCiclo(ciclo.idciclo)"><i class="fa fa-minus-circle"></i>
                         Eliminar</button></td>

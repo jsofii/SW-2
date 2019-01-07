@@ -1,61 +1,62 @@
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
 <body>
-  
-  
-    <div class= "col-lg-2"></div>
-
-    <div class="col-lg-8">
-  <ul class="nav nav-tabs">
 
 
-    <li class="active"><a href="#ciclo" data-toggle="tab">HORARIO</a>
-    </li>
-    <li><a href="#horario" data-toggle="tab">CICLO</a>
-    </li>
-  </ul>
+  <div class="col-lg-2"></div>
 
-  <div class="tab-content">
-    <div class="tab-pane active" id="ciclo" style="margin-top: 20px;">
+  <div class="col-lg-8">
+    <ul class="nav nav-tabs">
 
-      <div class="panel panel-info">
-        <div class="panel-body">
-          <div class="col-lg-6">
-            <div class="form-group">
-              <legend for="sel1">Seleccione un laboratorio:</legend>
-              <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{inputLaboratorioNombre}}
-                  <span class="caret"></span></button>
-                <ul class="dropdown-menu scrollable-menu" role="menu">
-                  <li *ngFor="let item of ListaLaboratorios">
-                    <a (click)="CargarLaboratoriosID(item.idlaboratorio, item.nombre)">
+
+      <li class="active"><a href="#ciclo" data-toggle="tab">HORARIO</a>
+      </li>
+      <li><a href="#horario" data-toggle="tab">CICLO</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="ciclo" style="margin-top: 20px;">
+
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <legend for="sel1">Seleccione un laboratorio:</legend>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{inputLaboratorioNombre}}
+                    <span class="caret"></span></button>
+                  <ul class="dropdown-menu scrollable-menu" role="menu">
+                    <li *ngFor="let item of ListaLaboratorios">
+                      <a (click)="CargarLaboratoriosID(item.idlaboratorio, item.nombre)">
                         {{item.nombre}}
-                   </a>
-                  </li>
-                </ul>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
 
-    
 
-          <div class="col-lg-6">
-            <div class="form-group">
-              <legend for="sel1">Seleccione un Ciclo:</legend>
-              <div class="btn-group">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{inputCicloNombre}}
-                  <span class="caret"></span></button>
-                <ul class="dropdown-menu scrollable-menu" role="menu">
-                  <li *ngFor="let item of ListaTodosCiclos">
-                    <a (click)="CargarCicloID(item.idciclo, item.nombre)">
+
+            <div class="col-lg-6">
+              <div class="form-group">
+                <legend for="sel1">Seleccione un Ciclo:</legend>
+                <div class="btn-group">
+                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{inputCicloNombre}}
+                    <span class="caret"></span></button>
+                  <ul class="dropdown-menu scrollable-menu" role="menu">
+                    <li *ngFor="let item of ListaTodosCiclos">
+                      <a (click)="CargarCicloID(item.idciclo, item.nombre)">
                         {{item.nombre}}
-                    </a>
-                  </li>
-                </ul>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="panel-heading">
+            <div class="panel-heading">
               <button class="btn btn-primary center-block"><i class="fa fa-check-square"></i>
                 Aceptar</button>
             </div>
@@ -70,7 +71,7 @@
                     <li *ngFor="let prof of ListaProfesores">
                       <a (click)="CargarProfesorID(prof.idpersona, prof.nombrecompleto)">
                         {{prof.nombrecompleto}}
-                    </a>
+                      </a>
                     </li>
                   </ul>
                 </div>
@@ -87,89 +88,97 @@
                     <li *ngFor="let item of ListaMaterias">
                       <a (click)="CargarMateriaID(item.idmateria, item.nombre)">
                         {{item.nombre}}
-                    </a>
+                      </a>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
-          
-          <div class="panel-heading">
-            <legend align="center"> {{'Horario del laboratorio "' + inputLaboratorioNombre + '" para el ciclo "'+ inputCicloNombre+'"'}} </legend>
-          </div>
 
-
-          <div>
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>HORA</th>
-                  <th>LUNES</th>
-                  <th>MARTES</th>
-                  <th>MIÉRCOLES</th>
-                  <th>JUEVES</th>
-                  <th>VIERNES</th>
-                  <th>SÁBADO</th>
-
-                </tr>
-              </thead>
-              <tbody>
-                  <tr class="active" *ngFor="let horaInit of listaHoras ">
-                    <td>{{horaInit}}</td>
-                      <td class="active" *ngFor="let dia of listaDias ">
-                        
-                          <label class="switch">
-                              <label *ngFor="let item of listaHorarios">
-                                <!-- <h1>l.......{{dia}}....{{item.horadeinicio}}</h1> -->
-                                
-                                  <input *ngIf="estaEnRango(item.horadeinicio, item.horadefin, horaInit, dia, item.dia) " [checked]="true" type="checkbox">
-                                  <span class="slider"></span>
-                              </label>
-                             
-                            </label>
-                      </td>
-                    </tr>
-                
-              </tbody>
-              <tfoot>
-                  <tr>
-                      <td></td>
-                      <td></td>
-                      <td><button [(ngModel)]="boton" class="btn tn-success btn-lg"><i class="fa fa-plus-circle"></i>
-                        Guardar</button></td>
-                      <td><button class="btn btn-primary  btn-lg"><i class="fa fa-pencil"></i>
-                        Editar</button></td>
-                      <td> <button class="btn btn-danger  btn-lg"><i class="fa fa-minus-circle"></i>
-                        Eliminar</button></td>
-                        <td></td>
-                        <td></td>
-                  
-      
-                    </tr>
-                </tfoot>
-            </table>
-          </div>
-          
-        
-        </div>
-      </div>
-
-
-    </div>
-
-    <div class="tab-pane" id="horario" style="margin-top: 20px;">
-
-
-        <div class="panel panel-info">
-            
             <div class="panel-heading">
-              <button [routerLink]='["/ciclo-gestion",0]' class="btn btn-success center-block"><i class="fa fa-plus-circle"></i>
-                Nuevo Ciclo</button>
+              <legend align="center"> {{'Horario del laboratorio "' + inputLaboratorioNombre + '" para el ciclo "'+
+                inputCicloNombre+'"'}} </legend>
             </div>
 
 
-         </div>
-         <div class="panel-body">
+            <div>
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>HORA</th>
+                    <th>LUNES</th>
+                    <th>MARTES</th>
+                    <th>MIÉRCOLES</th>
+                    <th>JUEVES</th>
+                    <th>VIERNES</th>
+                    <th>SÁBADO</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="active" *ngFor="let horaInit of listaHoras ">
+                    <td>{{horaInit}}</td>
+                    <td class="active" *ngFor="let dia of listaDias ">
+
+                      <label class="switch">
+                        <label *ngFor="let item of listaHorarios">
+
+                          <div *ngIf="item.dia==dia && horaInit>=item.horadeinicio && horaInit<=item.horadefin; else templateName ">
+
+                            <input [checked]="true" type="checkbox">
+                            <span class="slider"></span>
+                          </div>
+                          
+                          <!-- <h1>l.......{{dia}}....{{item.horadeinicio}}</h1> -->
+
+
+                        </label>
+
+
+                      </label>
+                    </td>
+                  </tr>
+
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td><button [(ngModel)]="boton" class="btn tn-success btn-lg"><i class="fa fa-plus-circle"></i>
+                        Guardar</button></td>
+                    <td><button class="btn btn-primary  btn-lg"><i class="fa fa-pencil"></i>
+                        Editar</button></td>
+                    <td> <button class="btn btn-danger  btn-lg"><i class="fa fa-minus-circle"></i>
+                        Eliminar</button></td>
+                    <td></td>
+                    <td></td>
+
+
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+
+
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="tab-pane" id="horario" style="margin-top: 20px;">
+
+
+        <div class="panel panel-info">
+
+          <div class="panel-heading">
+            <button [routerLink]='["/ciclo-gestion",0]' class="btn btn-success center-block"><i class="fa fa-plus-circle"></i>
+              Nuevo Ciclo</button>
+          </div>
+
+
+        </div>
+        <div class="panel-body">
           <h2 style="margin-left: 15px">Lista de ciclos</h2>
           <div>
             <br>
@@ -182,22 +191,22 @@
                   <select class="form-control" id="sel1">
                     <option>Seleccione una opción</option>
                     <option *ngFor="let item of ListaParametro">{{item}}</option>
-  
+
                   </select>
                 </div>
-  
-  
+
+
               </div>
               <div class="col-lg-4">
                 <input style="margin-left: 40px" class="form-control" id="idBusqueda" type="text" placeholder="Buscar..">
               </div>
             </div>
           </div>
-  
+
           <div class="col-lg-12">
-  
+
             <div class="panel-body">
-  
+
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -208,34 +217,33 @@
                 </thead>
                 <tbody id="myTable">
                   <tr class="active" *ngFor="let ciclo of ListaTodosCiclos">
-  
+
                     <td class="col-lg-5">{{ciclo.nombre}}</td>
-  
+
                     <td class="col-lg-5">{{ciclo.fechainicio}}</td>
 
                     <td class="col-lg-5">{{ciclo.fechafin}}</td>
-                    
-                    <td><button [routerLink]='["/ciclo-gestion",ciclo.idciclo]' class="btn btn-success " ><i class="fa fa-edit"></i>
+
+                    <td><button [routerLink]='["/ciclo-gestion",ciclo.idciclo]' class="btn btn-success "><i class="fa fa-edit"></i>
                         Editar</button></td>
                     <td><button class="btn btn-danger" (click)="DeleteCiclo(ciclo.idciclo)"><i class="fa fa-minus-circle"></i>
                         Eliminar</button></td>
                   </tr>
-  
+
                 </tbody>
               </table>
             </div>
           </div>
-  
-  
+
+
         </div>
-      
 
 
+
+      </div>
     </div>
   </div>
-</div>
 
-  
-  <div class= "col-lg-2"></div>
+
+  <div class="col-lg-2"></div>
 </body>
-

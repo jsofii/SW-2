@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { cicloServiceService} from '../ciclo-service/ciclo-service.service';
+import { cicloServiceService } from '../ciclo-service/ciclo-service.service';
 import { laboratorioServiceService } from '../laboratorio-service/laboratorio-service.service';
 import { usuarioServiceService } from '../usuario-service/usuario-service.service';
 import { materiaServiceService } from '../materia-service/materia-service.service';
+import { horarioServiceService } from '../horario-service/horario-service.service';
 import { runInThisContext } from 'vm';
 
 
@@ -15,107 +16,123 @@ import { runInThisContext } from 'vm';
 
 export class HorarioComponent implements OnInit {
 
-  constructor( private serviceLaboratorio:laboratorioServiceService, 
-    private serviceusuario:usuarioServiceService,
-    private servicemateria:materiaServiceService,private serviceCiclo: cicloServiceService) { 
-   
+  constructor(private serviceLaboratorio: laboratorioServiceService,
+    private serviceusuario: usuarioServiceService,
+    private servicemateria: materiaServiceService, private serviceCiclo: cicloServiceService,
+    private servicehorario: horarioServiceService) {
+
   }
   ngOnInit() {
     this.ObtenerTodosCiclos();
     this.CargarLaboratorios();
     this.CargarMaterias();
+    this.CargarHorarioMateria();
     this.CargarProfesores();
   }
-  
-  ListaTodosCiclos:any;
 
-  ObtenerTodosCiclos(){
+  ListaTodosCiclos: any;
+
+  ObtenerTodosCiclos() {
     this.serviceCiclo.ListaTodosCiclos().subscribe(
-      
-      data=>{
-        this.ListaTodosCiclos=data;
-      }
-      )
-  }
 
-  DeleteCiclo(idciclo:number){
-    
-    if(confirm("SE ELIMINARA?")){
-
-    this.serviceCiclo.DeleteCiclo(idciclo).subscribe(
-      data=>{
-       
-        this.ObtenerTodosCiclos();
-
+      data => {
+        this.ListaTodosCiclos = data;
       }
     )
-  }else{ 
-  }
-}
-
-inputLaboratorioNombre="Seleccione el Laboratorio";
-inputLaboratorioID:any;
-ListaLaboratorios:any;
-CargarLaboratorios(){
-  this.serviceLaboratorio.ListaTodosLaboratorios().subscribe(
-    data=>{
-      this.ListaLaboratorios=data;
-    }
-  )
-}
-
-CargarLaboratoriosID(idlaboratorio:any, nombre:any)
-  {
-    this.inputLaboratorioNombre=nombre;
-    this.inputLaboratorioID=idlaboratorio;
   }
 
-inputCicloNombre="Seleccione el Ciclo";
-inputCicloID:any;
-CargarCicloID(idciclo:any,nombre:any){
-  this.inputCicloNombre=nombre;
-  this.inputCicloID=idciclo;
-}
+  DeleteCiclo(idciclo: number) {
 
-inputProfesorNombre="Seleccione el Profesor";
-inputProfesorID:any;
-ListaProfesores:any;
-CargarProfesores(){
-this.serviceusuario.ListaTodosUsuarios().subscribe(
-    data=>{
-      this.ListaProfesores=data;
+    if (confirm("SE ELIMINARA?")) {
+
+      this.serviceCiclo.DeleteCiclo(idciclo).subscribe(
+        data => {
+
+          this.ObtenerTodosCiclos();
+
+        }
+      )
+    } else {
     }
-  )
-}
-CargarProfesorID(idpersona:any,nombrecompleto:any){
-    this.inputProfesorNombre=nombrecompleto;
-    this.inputProfesorID=idpersona;
-}
+  }
 
-inputMateriaNombre="Seleccione la Materia";
-inputMateriaID:any;
-ListaMaterias:any;
-CargarMaterias(){
-  this.servicemateria.ListaTodasMaterias().subscribe(
-    data=>{
-      this.ListaMaterias=data;
-    }
-  )
-}
+  inputLaboratorioNombre = "Seleccione el Laboratorio";
+  inputLaboratorioID: any;
+  ListaLaboratorios: any;
+  CargarLaboratorios() {
+    this.serviceLaboratorio.ListaTodosLaboratorios().subscribe(
+      data => {
+        this.ListaLaboratorios = data;
+      }
+    )
+  }
 
-CargarMateriaID(idmateria:any,nombre:any){
-  this.inputMateriaID=idmateria;
-  this.inputMateriaNombre=nombre;
-}
+  CargarLaboratoriosID(idlaboratorio: any, nombre: any) {
+    this.inputLaboratorioNombre = nombre;
+    this.inputLaboratorioID = idlaboratorio;
+  }
 
- listaDias:any[] = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
- listaHoras :any[] = ['07:00 - 08:00','08:00 - 09:00','09:00 - 10:00','10:00 - 11:00','11:00 - 12:00','12:00 - 13:00'
- ,'13:00 - 14:00','14:00 - 15:00','15:00 - 16:00','16:00 - 17:00','17:00 - 18:00','18:00 - 19:00','19:00 - 20:00','20:00 - 21:00','21:00 - 22:00'];
- ListaParametro:any[] =["Nombre","Fecha Inicio","Fecha Fin"];
- inputParametro="Elegir parámetro"
- CargarTipoParametro(parametro:any){
-   this.inputParametro=parametro;
- }
+  inputCicloNombre = "Seleccione el Ciclo";
+  inputCicloID: any;
+  CargarCicloID(idciclo: any, nombre: any) {
+    this.inputCicloNombre = nombre;
+    this.inputCicloID = idciclo;
+  }
 
+  inputProfesorNombre = "Seleccione el Profesor";
+  inputProfesorID: any;
+  ListaProfesores: any;
+  CargarProfesores() {
+    this.serviceusuario.ListaTodosUsuarios().subscribe(
+      data => {
+        this.ListaProfesores = data;
+      }
+    )
+  }
+  CargarProfesorID(idpersona: any, nombrecompleto: any) {
+    this.inputProfesorNombre = nombrecompleto;
+    this.inputProfesorID = idpersona;
+  }
+
+  inputMateriaNombre = "Seleccione la Materia";
+  inputMateriaID: any;
+  ListaMaterias: any;
+  CargarMaterias() {
+    this.servicemateria.ListaTodasMaterias().subscribe(
+      data => {
+        this.ListaMaterias = data;
+      }
+    )
+  }
+
+  CargarMateriaID(idmateria: any, nombre: any) {
+    this.inputMateriaID = idmateria;
+    this.inputMateriaNombre = nombre;
+  }
+
+  listaDias: any[] = [1,2,3,4,5,6];
+  listaHoras: any[] = [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22];
+  listaHoras2: any[] = ['07:00 - 08:00', '08:00 - 09:00', '09:00 - 10:00', '10:00 - 11:00', '11:00 - 12:00', '12:00 - 13:00'
+    , '13:00 - 14:00', '14:00 - 15:00', '15:00 - 16:00', '16:00 - 17:00', '17:00 - 18:00', '18:00 - 19:00', '19:00 - 20:00', '20:00 - 21:00', '21:00 - 22:00'];
+  ListaParametro: any[] = ["Nombre", "Fecha Inicio", "Fecha Fin"];
+  inputParametro = "Elegir parámetro"
+  CargarTipoParametro(parametro: any) {
+    this.inputParametro = parametro;
+  }
+  listaHorarios: any;
+  CargarHorarioMateria() {
+    this.servicehorario.ListaHorarioMateria().subscribe(
+      data => {
+        this.listaHorarios = data;
+      }
+    )
+  }
+  estaEnRango(horaInicio:number, horafin:number, horaInit:number, dia:number, dias:number){
+   if(horaInit>=horaInicio && horaInit<=horafin && dia==dias){
+    return true;
+   }else{
+     return false;
+   }
+  }
 
 }

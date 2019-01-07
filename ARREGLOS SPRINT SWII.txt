@@ -1,0 +1,10 @@
+Nombres de usuario no repetidos 
+contraseñas con password fields 
+mostrar datos solo cuando se busca
+no numero de laboratorios repetidos 
+el cod de la materia debe ser unico 
+la creacion de horario seleccionar materia y grupo
+validaciones en la marcha
+¬_¬
+
+T_T

@@ -23,6 +23,7 @@ import { LaboratorioComponent } from './laboratorio/laboratorio.component';
 import { laboratorioServiceService } from './laboratorio-service/laboratorio-service.service';
 import { CicloGestionComponent } from './ciclo-gestion/ciclo-gestion.component';
 import { cicloServiceService } from './ciclo-service/ciclo-service.service';
+import {horarioServiceService} from './horario-service/horario-service.service';
 import { FilterpipePipe } from './filterpipe.pipe';
 import { FiltrolaboPipe } from './laboratorio/filtrolabo.pipe';
 import { PipemateriaPipe } from './materia/pipemateria.pipe';
@@ -80,7 +81,7 @@ import { PipemateriaPipe } from './materia/pipemateria.pipe';
     ])
   ],
 
-  providers: [usuarioServiceService, materiaServiceService, loginServiceService,laboratorioServiceService,cicloServiceService],
+  providers: [usuarioServiceService, materiaServiceService, loginServiceService,laboratorioServiceService,cicloServiceService, horarioServiceService],
   bootstrap: [AppComponent]
 
 })

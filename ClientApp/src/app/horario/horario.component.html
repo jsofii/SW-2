@@ -117,9 +117,15 @@
                   <tr class="active" *ngFor="let horaInit of listaHoras ">
                     <td>{{horaInit}}</td>
                       <td class="active" *ngFor="let dia of listaDias ">
+                        
                           <label class="switch">
-                              <input  type="checkbox">
-                              <span class="slider"></span>
+                              <label *ngFor="let item of listaHorarios">
+                                <!-- <h1>l.......{{dia}}....{{item.horadeinicio}}</h1> -->
+                                
+                                  <input *ngIf="estaEnRango(item.horadeinicio, item.horadefin, horaInit, dia, item.dia) " [checked]="true" type="checkbox">
+                                  <span class="slider"></span>
+                              </label>
+                             
                             </label>
                       </td>
                     </tr>

@@ -61,39 +61,18 @@ namespace SW_2.Controllers
         [Route("Edit")]
         public List<Laboratorio> Editlaboratorio([FromBody] Laboratorio temp)
         {
-           /*List<Laboratorio> listaaux = Lista();
-            Laboratorio aux=null;
-            
-            foreach (var l in listaaux)
-            {
-                if (l.Idlaboratorio==temp.Idlaboratorio)
-                {
-                    aux = l;
-                    
-                    break;
-                }
-            }
-            listaaux.Remove(aux);
-            //aux=null;
-
-            bool existe = listaaux.Any(item => item.Numero == temp.Numero);
-
-            if (existe == false)
-            { */ 
+       
                 Laboratorio laboratorio = new Laboratorio
                 {
-                    Idlaboratorio = temp.Idlaboratorio,
+                    Idlaboratorio= temp.Idlaboratorio,
                     Numero = temp.Numero,
                     Nombre = temp.Nombre
 
-
                 };
-                context.Update<Laboratorio>(laboratorio);
+                context.Laboratorio.Update(laboratorio);
                 context.SaveChanges();
-                return context.Laboratorio.ToList();
-            //}
-
-           // return null;
+                return this.context.Laboratorio.ToList();
+         
 
         }
 

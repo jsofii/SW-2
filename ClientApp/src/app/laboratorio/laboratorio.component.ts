@@ -11,11 +11,12 @@ export class LaboratorioComponent implements OnInit {
   idlaboratorio: any;
   constructor(private serviceLaboratorio: laboratorioServiceService) {
     this.idlaboratorio = 0;
+    this.ListaTodosLaboratorios=new Array<any>();
     /*if(this.idlaboratorio!=0){
       this.cargarLaboratorio();
     }*/
   }
-  ListaTodosLaboratorios: any;
+  ListaTodosLaboratorios: Array<any>;
   ngOnInit() {
     this.ObtenerTodosLaboratorios();
   }
@@ -28,17 +29,18 @@ export class LaboratorioComponent implements OnInit {
 
   Acero() {
     this.idlaboratorio = 0;
-    this.inputNumero = "";
+    this.inputNumero = 0;
     this.inputNombre = "";
   }
 
 
-
+lista:any;
   ObtenerTodosLaboratorios() {
     this.serviceLaboratorio.ListaTodosLaboratorios().subscribe(
 
       data => {
-        this.ListaTodosLaboratorios = data;
+        this.lista = data;
+        this.ListaTodosLaboratorios=this.lista;
       }
 
     )
@@ -68,7 +70,7 @@ export class LaboratorioComponent implements OnInit {
   }
 
 
-  inputNumero: any;
+  inputNumero: number;
   inputNombre: any;
   laboratorioAux: any;
 
@@ -82,7 +84,7 @@ export class LaboratorioComponent implements OnInit {
     )
   }
 
-
+laboaux:any;
   GuardarLaboratorio() {
     if (this.idlaboratorio == 0) {
       if(isNaN(this.inputNumero)){
@@ -109,6 +111,13 @@ export class LaboratorioComponent implements OnInit {
       if(/^[a-zA-Z-]*$/.test(this.inputNombre) == false) {
         alert('ATENCIÓN: "Nombre de laboratorio" no acepta caracteres especiales o numericos.');
       }else{
+       
+        const index = this.ListaTodosLaboratorios.map(e => e.idlaboratorio).indexOf(this.idlaboratorio);
+        this.laboaux=this.ListaTodosLaboratorios[index];
+        this.ListaTodosLaboratorios.splice(index,1);
+        const index2 = this.ListaTodosLaboratorios.map(x => x.numero).indexOf(Number(this.inputNumero));
+       
+        if(index2==-1){
         this.serviceLaboratorio.EditLaboratorio(this.idlaboratorio, this.inputNumero, this.inputNombre).subscribe(
           data => {
             if (data == null) {
@@ -117,6 +126,8 @@ export class LaboratorioComponent implements OnInit {
             this.ObtenerTodosLaboratorios();
           }
         )
+      }else{
+        this.ObtenerTodosLaboratorios();
       }
    }
     //this.cargarLaboratorio();
@@ -129,4 +140,5 @@ export class LaboratorioComponent implements OnInit {
 
 
 
+}
 }

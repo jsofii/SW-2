@@ -119,17 +119,18 @@
                   <tr class="active" *ngFor="let horaInit of listaHoras ">
                     <td>{{horaInit}}</td>
                     <td class="active" *ngFor="let dia of listaDias ">
-
+                      
                       <label class="switch">
+                      
                         <label *ngFor="let item of listaHorarios">
-
+                          
                           <div *ngIf="item.dia==dia && horaInit>=item.horadeinicio && horaInit<=item.horadefin; else templateName ">
 
                             <input [checked]="true" type="checkbox">
                             <span class="slider"></span>
                           </div>
                           
-                          <!-- <h1>l.......{{dia}}....{{item.horadeinicio}}</h1> -->
+                       
 
 
                         </label>

@@ -31,7 +31,7 @@ namespace SW_2.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=cesar1996;database=basesw");
+                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=sofi;database=basesw");
             }
         }
 
@@ -94,11 +94,20 @@ namespace SW_2.Models
                 entity.HasIndex(e => e.Idmateria)
                     .HasName("FK_HORARIO_MATERIA");
 
-                entity.HasIndex(e => e.Idsemana)
-                    .HasName("FK_HORARIO_SEMANA_idx");
-
                 entity.Property(e => e.Idhorario)
                     .HasColumnName("IDHORARIO")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Dia)
+                    .HasColumnName("DIA")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Horadefin)
+                    .HasColumnName("HORADEFIN")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Horadeinicio)
+                    .HasColumnName("HORADEINICIO")
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Idciclo)
@@ -111,10 +120,6 @@ namespace SW_2.Models
 
                 entity.Property(e => e.Idmateria)
                     .HasColumnName("IDMATERIA")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.Idsemana)
-                    .HasColumnName("IDSEMANA")
                     .HasColumnType("int(11)");
 
                 entity.HasOne(d => d.IdcicloNavigation)
@@ -131,12 +136,6 @@ namespace SW_2.Models
                     .WithMany(p => p.Horario)
                     .HasForeignKey(d => d.Idmateria)
                     .HasConstraintName("FK_HORARIO_MATERIA");
-
-                entity.HasOne(d => d.IdsemanaNavigation)
-                    .WithMany(p => p.Horario)
-                    .HasForeignKey(d => d.Idsemana)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_HORARIO_SEMANA");
             });
 
             modelBuilder.Entity<Laboratorio>(entity =>
@@ -371,8 +370,7 @@ namespace SW_2.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Password)
-                    .IsRequired()
-                    .HasColumnName("PASSWORD")
+                    .HasColumnName("password")
                     .HasMaxLength(4000)
                     .IsUnicode(false);
 

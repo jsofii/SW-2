@@ -11,7 +11,7 @@ export class LaboratorioComponent implements OnInit {
   idlaboratorio: any;
   constructor(private serviceLaboratorio: laboratorioServiceService) {
     this.idlaboratorio = 0;
-    this.ListaTodosLaboratorios=new Array<any>();
+    this.ListaTodosLaboratorios = new Array<any>();
     /*if(this.idlaboratorio!=0){
       this.cargarLaboratorio();
     }*/
@@ -34,13 +34,13 @@ export class LaboratorioComponent implements OnInit {
   }
 
 
-lista:any;
+  lista: any;
   ObtenerTodosLaboratorios() {
     this.serviceLaboratorio.ListaTodosLaboratorios().subscribe(
 
       data => {
         this.lista = data;
-        this.ListaTodosLaboratorios=this.lista;
+        this.ListaTodosLaboratorios = this.lista;
       }
 
     )
@@ -84,15 +84,15 @@ lista:any;
     )
   }
 
-laboaux:any;
+  laboaux: any;
   GuardarLaboratorio() {
     if (this.idlaboratorio == 0) {
-      if(isNaN(this.inputNumero)){
+      if (isNaN(this.inputNumero)) {
         alert('ATENCIÓN: "Número de laboratorio" solo acepta caracteres numericos');
-     }else {
-        if(/^[a-zA-Z-]*$/.test(this.inputNombre) == false) {
+      } else {
+        if (/^[a-zA-Z-]*$/.test(this.inputNombre) == false) {
           alert('ATENCIÓN: "Nombre de laboratorio" no acepta caracteres especiales o numericos.');
-        }else{
+        } else {
           this.serviceLaboratorio.AddLaboratorio(this.inputNumero, this.inputNombre).subscribe(
 
             data => {
@@ -104,41 +104,42 @@ laboaux:any;
           )
         }
       }
-  } else {
-    if(isNaN(this.inputNumero)){
-      alert('ATENCIÓN: "Número de laboratorio" solo acepta caracteres numericos');
-   }else {
-      if(/^[a-zA-Z-]*$/.test(this.inputNombre) == false) {
-        alert('ATENCIÓN: "Nombre de laboratorio" no acepta caracteres especiales o numericos.');
-      }else{
-       
-        const index = this.ListaTodosLaboratorios.map(e => e.idlaboratorio).indexOf(this.idlaboratorio);
-        this.laboaux=this.ListaTodosLaboratorios[index];
-        this.ListaTodosLaboratorios.splice(index,1);
-        const index2 = this.ListaTodosLaboratorios.map(x => x.numero).indexOf(Number(this.inputNumero));
-       
-        if(index2==-1){
-        this.serviceLaboratorio.EditLaboratorio(this.idlaboratorio, this.inputNumero, this.inputNombre).subscribe(
-          data => {
-            if (data == null) {
-              alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
-            }
+    } else {
+      if (isNaN(this.inputNumero)) {
+        alert('ATENCIÓN: "Número de laboratorio" solo acepta caracteres numericos');
+      } else {
+        if (/^[a-zA-Z-]*$/.test(this.inputNombre) == false) {
+          alert('ATENCIÓN: "Nombre de laboratorio" no acepta caracteres especiales o numericos.');
+        } else {
+
+          const index = this.ListaTodosLaboratorios.map(e => e.idlaboratorio).indexOf(this.idlaboratorio);
+          this.laboaux = this.ListaTodosLaboratorios[index];
+          this.ListaTodosLaboratorios.splice(index, 1);
+          const index2 = this.ListaTodosLaboratorios.map(x => x.numero).indexOf(Number(this.inputNumero));
+
+          if (index2 == -1) {
+            this.serviceLaboratorio.EditLaboratorio(this.idlaboratorio, this.inputNumero, this.inputNombre).subscribe(
+              data => {
+                if (data == null) {
+                  alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
+                }
+                this.ObtenerTodosLaboratorios();
+              }
+            )
+          } else {
+            alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
             this.ObtenerTodosLaboratorios();
           }
-        )
-      }else{
-        this.ObtenerTodosLaboratorios();
+        }
+        //this.cargarLaboratorio();
+
       }
-   }
-    //this.cargarLaboratorio();
-    
+
+
     }
 
 
+
+
   }
-
-
-
-
-}
 }

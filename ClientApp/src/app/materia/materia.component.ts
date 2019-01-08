@@ -104,6 +104,8 @@ export class MateriaComponent implements OnInit {
     }
   }
 
+
+  materiaaux:any;
   GuardarMateria() {
     if (this.idmateria == 0) {
       this.serviceMateria.AddMateria(this.inputMateria, this.inputCodigo, this.carreraAux).subscribe(
@@ -116,14 +118,26 @@ export class MateriaComponent implements OnInit {
         }
       )
     } else {
-      this.serviceMateria.EditMateria(this.idmateria, this.inputMateria, this.inputCodigo, this.carreraAux).subscribe(
-        data => {
-          if (data == null) {
-            alert("ATENCIÓN: Ya existe una materia con ese código.")
+
+      const index = this.ListaTodasMaterias.map(e => e.idmateria).indexOf(this.idmateria);
+      this.materiaaux = this.ListaTodasMaterias[index];
+      this.ListaTodasMaterias.splice(index, 1);
+      const index2 = this.ListaTodasMaterias.map(x => x.codigo).indexOf(Number(this.inputCodigo));
+
+      if(index2==-1){
+        this.serviceMateria.EditMateria(this.idmateria, this.inputMateria, this.inputCodigo, this.carreraAux).subscribe(
+          data => {
+            if (data == null) {
+              alert("ATENCIÓN: Ya existe una materia con ese código.");
+            }
+            this.ObtenerTodasMaterias();
           }
-          this.ObtenerTodasMaterias();
-        }
-      )
+        )
+      }else{
+        alert("ATENCIÓN: Ya existe una materia con ese código.");
+        this.ObtenerTodasMaterias();
+      }
+      
     }
 
 

@@ -27,6 +27,7 @@ import {horarioServiceService} from './horario-service/horario-service.service';
 import { FilterpipePipe } from './filterpipe.pipe';
 import { FiltrolaboPipe } from './laboratorio/filtrolabo.pipe';
 import { PipemateriaPipe } from './materia/pipemateria.pipe';
+import { FiltrousuarioPipe } from './usuario/filtrousuario.pipe';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,9 @@ import { PipemateriaPipe } from './materia/pipemateria.pipe';
 
     FiltrolaboPipe,
 
-    PipemateriaPipe
+    PipemateriaPipe,
+
+    FiltrousuarioPipe
 
 
   ],

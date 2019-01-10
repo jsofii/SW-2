@@ -90,38 +90,52 @@ namespace SW_2.Controllers
             Usuario user = (from item in context.Usuario
                             where item.Nombreusuario == usuario
                             select item).FirstOrDefault<Usuario>();
-        
-            if (BCrypt.Net.BCrypt.Verify(contrasenna, user.Password)){
+
+            if (BCrypt.Net.BCrypt.Verify(contrasenna, user.Password))
+            {
                 return true;
-            }else{
+            }
+            else
+            {
                 return false;
             }
-          
-         
-        }
-        
 
-       
+
+        }
+
+
+
         [HttpPost]
         [Route("addUsuario")]
         public string AddUsuario([FromBody] Usuario temp)
         {
-            string password=  BCrypt.Net.BCrypt.HashPassword(temp.Password);
-            Usuario user = new Usuario
+
+            List<Usuario> listaaux = ListaUsuarios();
+
+            bool existe = listaaux.Any(item => item.Nombreusuario == temp.Nombreusuario);
+
+            if (!existe)
             {
-                Idpersona = temp.Idpersona,
-                Nombreusuario = temp.Nombreusuario,
-                Password = password,
-                Estado = temp.Estado
-            };
+                string password = BCrypt.Net.BCrypt.HashPassword(temp.Password);
+                Usuario user = new Usuario
+                {
+                    Idpersona = temp.Idpersona,
+                    Nombreusuario = temp.Nombreusuario,
+                    Password = password,
+                    Estado = temp.Estado
+                };
 
 
-            
+
                 this.context.Usuario.Add(user);
                 this.context.SaveChanges();
                 return "TRUE";
-            
-           
+            }
+
+            return "FALSE";
+
+
+
 
         }
     }

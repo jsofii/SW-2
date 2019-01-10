@@ -42,3 +42,16 @@ export class MateriaAux {
     }   
     
 }
+
+
+export class UsuarioAux {
+    nombreusuario: string;
+    
+    constructor(nombre:any){
+        this.nombreusuario=nombre;
+      
+        
+
+    }   
+    
+}

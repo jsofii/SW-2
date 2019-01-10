@@ -118,17 +118,17 @@ export class MateriaComponent implements OnInit {
         }
       )
     } else {
-
+      
       const index = this.ListaTodasMaterias.map(e => e.idmateria).indexOf(this.idmateria);
       this.materiaaux = this.ListaTodasMaterias[index];
       this.ListaTodasMaterias.splice(index, 1);
-      const index2 = this.ListaTodasMaterias.map(x => x.codigo).indexOf(Number(this.inputCodigo));
+      const index2 = this.ListaTodasMaterias.map(x => x.codigo).indexOf(String(this.inputCodigo));
 
       if(index2==-1){
         this.serviceMateria.EditMateria(this.idmateria, this.inputMateria, this.inputCodigo, this.carreraAux).subscribe(
           data => {
             if (data == null) {
-              alert("ATENCIÓN: Ya existe una materia con ese código.");
+              //alert("ATENCIÓN: Ya existe una materia con ese código.");
             }
             this.ObtenerTodasMaterias();
           }

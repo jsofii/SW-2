@@ -90,7 +90,7 @@ export class LaboratorioComponent implements OnInit {
       if (isNaN(this.inputNumero)) {
         alert('ATENCIÓN: "Número de laboratorio" solo acepta caracteres numericos');
       } else {
-        if (/^[a-zA-Z-]*$/.test(this.inputNombre) == false) {
+        if (/^[a-zA-Z- ]*$/.test(this.inputNombre) == false) {
           alert('ATENCIÓN: "Nombre de laboratorio" no acepta caracteres especiales o numericos.');
         } else {
           this.serviceLaboratorio.AddLaboratorio(this.inputNumero, this.inputNombre).subscribe(
@@ -108,7 +108,7 @@ export class LaboratorioComponent implements OnInit {
       if (isNaN(this.inputNumero)) {
         alert('ATENCIÓN: "Número de laboratorio" solo acepta caracteres numericos');
       } else {
-        if (/^[a-zA-Z-]*$/.test(this.inputNombre) == false) {
+        if (/^[a-zA-Z- ]*$/.test(this.inputNombre) == false) {
           alert('ATENCIÓN: "Nombre de laboratorio" no acepta caracteres especiales o numericos.');
         } else {
 

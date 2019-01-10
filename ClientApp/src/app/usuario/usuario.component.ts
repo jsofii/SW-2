@@ -41,6 +41,9 @@ export class UsuarioComponent implements OnInit {
   }
   seleccionarPersona(idpersona: number) {
     this.idpersonaSelected = idpersona;
+    this.inputNombreUsuario="";
+    this.inputPassword="";
+    this.inputEstado="";
   }
   GuardarUsuario() {
     this.serviceUsuario.AddUser(this.idpersonaSelected, this.inputNombreUsuario, this.inputPassword, this.inputEstado).subscribe(

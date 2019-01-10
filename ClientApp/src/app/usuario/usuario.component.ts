@@ -48,14 +48,17 @@ export class UsuarioComponent implements OnInit {
   GuardarUsuario() {
     this.serviceUsuario.AddUser(this.idpersonaSelected, this.inputNombreUsuario, this.inputPassword, this.inputEstado).subscribe(
       data => {
-        if (data == "TRUE") {
+
+        if(data==null){
+          alert("User Name ya existente.");
+        }else{
           alert("USUARIO AGREGADO");
           this.LimpiarIngresoUsuario();
           this.CargarUsuarios();
-
-        } else {
-          alert(data);
         }
+        
+
+        
       }
     )
   }

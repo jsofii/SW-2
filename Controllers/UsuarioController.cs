@@ -107,7 +107,7 @@ namespace SW_2.Controllers
 
         [HttpPost]
         [Route("addUsuario")]
-        public string AddUsuario([FromBody] Usuario temp)
+        public List<Usuario> AddUsuario([FromBody] Usuario temp)
         {
 
             List<Usuario> listaaux = ListaUsuarios();
@@ -129,12 +129,12 @@ namespace SW_2.Controllers
 
                 this.context.Usuario.Add(user);
                 this.context.SaveChanges();
-                return "TRUE";
+                return context.Usuario.ToList();
             }
 
-            return "FALSE";
+          
 
-
+            return null;
 
 
         }

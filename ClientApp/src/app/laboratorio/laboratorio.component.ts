@@ -98,6 +98,8 @@ export class LaboratorioComponent implements OnInit {
             data => {
               if (data == null) {
                 alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
+              }else{
+                alert('Laboratorio registrado.');
               }
               this.ObtenerTodosLaboratorios();
             }
@@ -122,6 +124,8 @@ export class LaboratorioComponent implements OnInit {
               data => {
                 if (data == null) {
                   alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
+                }else{
+                  alert('Información de laboratorio actualizada.');
                 }
                 this.ObtenerTodosLaboratorios();
               }

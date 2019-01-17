@@ -155,8 +155,6 @@ namespace SW_2.Controllers
             List<JoinPersona> lista = query.ToList();
             return lista;
         }
-        
-       
 
     }
 

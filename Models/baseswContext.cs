@@ -47,6 +47,11 @@ namespace SW_2.Models
                     .HasColumnName("IDCARRERA")
                     .HasColumnType("int(11)");
 
+                entity.Property(e => e.Estado)
+                    .HasColumnName("ESTADO")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Nombre)
                     .IsRequired()
                     .HasColumnName("NOMBRE")
@@ -63,6 +68,11 @@ namespace SW_2.Models
                 entity.Property(e => e.Idciclo)
                     .HasColumnName("IDCICLO")
                     .HasColumnType("int(11)");
+
+                entity.Property(e => e.Estado)
+                    .HasColumnName("ESTADO")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Fechafin)
                     .HasColumnName("FECHAFIN")
@@ -149,6 +159,11 @@ namespace SW_2.Models
                     .HasColumnName("IDLABORATORIO")
                     .HasColumnType("int(11)");
 
+                entity.Property(e => e.Estado)
+                    .HasColumnName("ESTADO")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Nombre)
                     .IsRequired()
                     .HasColumnName("NOMBRE")
@@ -183,6 +198,11 @@ namespace SW_2.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Estado)
+                    .HasColumnName("ESTADO")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Nombre)
                     .HasColumnName("NOMBRE")
                     .HasMaxLength(160)
@@ -210,6 +230,11 @@ namespace SW_2.Models
                 entity.Property(e => e.Correo)
                     .HasColumnName("CORREO")
                     .HasMaxLength(60)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Estado)
+                    .HasColumnName("ESTADO")
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Identificacionpersonal)

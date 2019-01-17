@@ -44,7 +44,8 @@ namespace SW_2.Controllers
                 {
                     Nombre = temp.Nombre,
                     Codigo = temp.Codigo,
-                    Carrera = temp.Carrera
+                    Carrera = temp.Carrera,
+                    Estado = temp.Estado
 
                 };
                 context.Materia.Add(materia);
@@ -61,25 +62,26 @@ namespace SW_2.Controllers
         [Route("Edit")]
         public List<Materia> EditMateria([FromBody] Materia temp)
         {
-           /*  List<Materia> listaaux = Lista();
+            /*  List<Materia> listaaux = Lista();
 
-            bool existe = listaaux.Any(item => item.Codigo == temp.Codigo);
+             bool existe = listaaux.Any(item => item.Codigo == temp.Codigo);
 
-            if (!existe)
-            {*/
-                Materia materia = new Materia
-                {
-                    Idmateria = temp.Idmateria,
-                    Nombre = temp.Nombre,
-                    Codigo = temp.Codigo,
-                    Carrera = temp.Carrera
+             if (!existe)
+             {*/
+            Materia materia = new Materia
+            {
+                Idmateria = temp.Idmateria,
+                Nombre = temp.Nombre,
+                Codigo = temp.Codigo,
+                Carrera = temp.Carrera,
+                Estado = temp.Estado
 
-                };
-                context.Update<Materia>(materia);
-                context.SaveChanges();
-                return context.Materia.ToList();
+            };
+            context.Update<Materia>(materia);
+            context.SaveChanges();
+            return context.Materia.ToList();
             //}
-          //  return null;
+            //  return null;
 
         }
 
@@ -96,6 +98,27 @@ namespace SW_2.Controllers
             context.SaveChanges();
             return context.Materia.ToList();
         }
+
+
+        [HttpPut]
+        [Route("EditarEstado")]
+        public List<Materia> CambiarEstadoMateria([FromBody] Materia temp)
+        {
+
+            Materia materia = new Materia
+            {
+                Idmateria = temp.Idmateria,
+                Estado = temp.Estado
+
+            };
+            context.Update<Materia>(materia);
+            context.SaveChanges();
+            return context.Materia.ToList();
+            //}
+            //  return null;
+
+        }
+
 
 
     }

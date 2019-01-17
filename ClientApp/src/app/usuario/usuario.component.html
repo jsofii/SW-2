@@ -163,11 +163,13 @@
                             <label style="margin-top: 20px" for="mo">Correo:</label>
                             <input [(ngModel)]="inputCorreo" type="text" class="form-control" id="mo">
           
-                            <label style="margin-top: 20px" for="usr" style="margin-top: 20px">Tipo personal:</label>
+                            <label style="margin-top: 20px" for="usr" style="margin-top: 20px">Tipo persona:<span style="margin-left: 5px"
+                              class="badge">{{inputTipoPersonaString}}</span></label>
                             <div class="dropdown">
-                              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Seleccione un
-                                tipo persona:
-          
+                                
+                              
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tipo
+                                persona:
                               </button>
                               <ul class="dropdown-menu">
                                 <li>

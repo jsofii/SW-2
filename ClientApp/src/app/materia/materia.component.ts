@@ -113,6 +113,8 @@ export class MateriaComponent implements OnInit {
 
           if (data == null) {
             alert("ATENCIÓN: Ya existe una materia con ese código.")
+          }else{
+            alert("Materia registrada.")
           }
           this.ObtenerTodasMaterias();
         }
@@ -129,6 +131,8 @@ export class MateriaComponent implements OnInit {
           data => {
             if (data == null) {
               //alert("ATENCIÓN: Ya existe una materia con ese código.");
+            }else{
+              alert("Materia actualizada.")
             }
             this.ObtenerTodasMaterias();
           }

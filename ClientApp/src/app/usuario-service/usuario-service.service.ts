@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { UsuarioComponent } from '../usuario/usuario.component';
 import { Observable } from 'rxjs/Observable';
+import { core } from '@angular/compiler';
 
 
 
@@ -41,6 +42,15 @@ export class usuarioServiceService {
       Estado:estado
     }
     return this.http.post('https://localhost:5001/api/Usuario/Editar/',user);
+  }
+  existeUsuario(correo:string){
+    return this.http.get('https://localhost:5001/api/Persona/existeUsuario/'+ correo);
+  }
+  temporalPass(corr:string){
+    var correo={
+      Correo:corr
+    }
+    return this.http.post('https://localhost:5001/api/Persona/temporalPass/',correo);
   }
   CargarUsuario(idusuario:number){
     return this.http.get('https://localhost:5001/api/Usuario/UsuarioEditar/'+idusuario);

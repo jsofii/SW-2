@@ -71,7 +71,7 @@ namespace SW_2.Controllers
                 {
                     Idpersona = idpersona,
                     Nombreusuario = nombreUsuario,
-                    Password = contrasenia,
+                    Password =BCrypt.Net.BCrypt.HashPassword(contrasenia), 
                     Estado = estado
                 };
                 this.context.Usuario.Add(s);

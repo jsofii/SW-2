@@ -9,24 +9,28 @@ using System.Web;
 
 
 
+
 namespace SW_2.Controllers
 {
     [Route("api/[controller]")]
-   
+
     public class PersonaController : Controller
     {
-        public ActionResult Index(){
+        public ActionResult Index()
+        {
             return View();
         }
         [HttpGet]
-        public ActionResult EnviarCorre(){
+        public ActionResult EnviarCorre()
+        {
             return View();
         }
         [HttpPost]
-        [Route("send")] 
-        public ActionResult EnviarCorreo(String para, String asunto, String mensaje){
-
-            try{
+        [Route("send")]
+        public ActionResult EnviarCorreo(String para, String asunto, String mensaje)
+        {
+            string x="";
+          try{
                 MailMessage correo= new MailMessage();
                 correo.From=new MailAddress("sofig.0106@hotmail.com");
                 correo.To.Add(para);
@@ -49,26 +53,75 @@ namespace SW_2.Controllers
 
             }
             return View();
-
         }
 
-        
-        baseswContext context=new baseswContext();
-        
+
+        baseswContext context = new baseswContext();
+
 
         [HttpPost]
-        [Route("Add")] 
-        public List<Persona> Lista([FromBody]Persona temp){
-            Persona persona= new Persona{
-                Nombrecompleto=temp.Nombrecompleto,
-                Identificacionpersonal=temp.Identificacionpersonal,
-                Idtipopersona=temp.Idtipopersona,
-                Correo=temp.Correo
-                
+        [Route("Add")]
+        public List<Persona> Lista([FromBody]Persona temp)
+        {
+            Persona persona = new Persona
+            {
+                Nombrecompleto = temp.Nombrecompleto,
+                Identificacionpersonal = temp.Identificacionpersonal,
+                Idtipopersona = temp.Idtipopersona,
+                Correo = temp.Correo
+
             };
             context.Persona.Add(persona);
             context.SaveChanges();
             return this.context.Persona.ToList();
+        }
+        [HttpGet]
+        [Route("existeUsuario/{correo}")]
+        public Boolean existeUsuario(string correo)
+        {
+            Persona pers = this.context.Persona.Where(x => x.Correo == correo).FirstOrDefault();
+            if (pers != null)
+            {
+                Usuario usr = this.context.Usuario.Where(x=>x.Idpersona==pers.Idpersona).FirstOrDefault();
+                if(usr!=null){
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+
+
+
+        }
+        [HttpPost]
+        [Route("temporalPass")]
+        public Boolean temporalPass ([FromBody]Persona correo)
+        {
+           
+            Persona pers = this.context.Persona.Where(x => x.Correo == correo.Correo).FirstOrDefault();
+            if (pers != null)
+            {
+                Usuario usr = this.context.Usuario.Where(x=>x.Idpersona==pers.Idpersona).FirstOrDefault();
+                Random r = new Random(DateTime.Now.Millisecond);
+               int pass=r.Next(10000,200000);
+
+                if(usr!=null){
+                   
+                    usr.Password=BCrypt.Net.BCrypt.HashPassword(pass.ToString());
+                    EnviarCorreo(pers.Correo,"Cambio de contraseña", pass.ToString());
+                    this.context.SaveChanges();
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+
+
+
         }
 
         public class JoinPersona
@@ -81,7 +134,7 @@ namespace SW_2.Controllers
             public string Nombre { get; set; }
         }
 
-        
+
         [HttpGet]
         [Route("InfoPersonas")]
         public List<JoinPersona> Lista()
@@ -102,9 +155,10 @@ namespace SW_2.Controllers
             List<JoinPersona> lista = query.ToList();
             return lista;
         }
-        
+
     }
 
-    
-        
+
+
+
 }

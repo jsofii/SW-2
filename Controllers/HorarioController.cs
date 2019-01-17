@@ -16,7 +16,7 @@ namespace SW_2.Controllers
         [Route("ListaHorarioMateria")]
         public List<Horario> Lista()
         {
-            return this.context.Horario.Where(s=>s.Idmateria==22).ToList();
+            return this.context.Horario.Where(s=>s.Idmateria==27).ToList();
         }
         [HttpGet]
         [Route("Get/{id}")]

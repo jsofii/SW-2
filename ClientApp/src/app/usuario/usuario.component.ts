@@ -33,32 +33,44 @@ export class UsuarioComponent implements OnInit {
   inputTipoPersona: any;
   inputTipoPersonaId: any;
   inputIdentificacion: any;
-  inputCorreo: any;
+
   ListaTipoPersona: any;
   inputTipoPersonaNombre = "Seleccione un estado";
+
+
+  //para ingresar una nueva persona:
+  inputNombrePersona: any;
+  inputIdentificacionPersonal: any;
+  inputTipoPersonaAoEID: number;
+  inputCorreo: any;
+
+
+
+
+
   select(estado: string) {
     this.inputEstado = estado;
   }
   seleccionarPersona(idpersona: number) {
     this.idpersonaSelected = idpersona;
-    this.inputNombreUsuario="";
-    this.inputPassword="";
-    this.inputEstado="";
+    this.inputNombreUsuario = "";
+    this.inputPassword = "";
+    this.inputEstado = "";
   }
   GuardarUsuario() {
     this.serviceUsuario.AddUser(this.idpersonaSelected, this.inputNombreUsuario, this.inputPassword, this.inputEstado).subscribe(
       data => {
 
-        if(data==null){
+        if (data == null) {
           alert("User Name ya existente.");
-        }else{
+        } else {
           alert("USUARIO AGREGADO");
           this.LimpiarIngresoUsuario();
           this.CargarUsuarios();
         }
-        
 
-        
+
+
       }
     )
   }
@@ -143,18 +155,24 @@ export class UsuarioComponent implements OnInit {
     this.inputTipoPersonaId = tipoPersonaId;
   }
 
-  // GuardarPersona(){
-
-
-  //   this.serviceUsuario.AddPersona(this.inputUsuario,this.inputIdentificacion, this.inputTipoPersonaId,this.inputCorreo).subscribe(
-  //     data=>{
-
-  //     }
-  //   )
-  // }
 
 
 
+  //guardar persona
+  GuardarPersona() {
+
+
+    this.serviceUsuario.AddPersona(this.inputNombrePersona, this.inputIdentificacionPersonal, this.inputTipoPersonaAoEID, this.inputCorreo).subscribe(
+      data => {
+        this.ObtenerTodoUsuario();
+      }
+    )
+  }
+
+
+  selectTipoPersona(id: number) {
+    this.inputTipoPersonaAoEID = id;
+  }
 
 
 

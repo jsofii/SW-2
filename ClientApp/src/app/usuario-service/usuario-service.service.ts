@@ -75,6 +75,6 @@ export class usuarioServiceService {
     return this.http.post('https://localhost:5001/api/Usuario/addUsuario/', user);
   }
 
-
+ 
 
 }

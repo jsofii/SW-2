@@ -126,7 +126,7 @@
                           
                           <div *ngIf="item.dia==dia && horaInit>=item.horadeinicio && horaInit<=item.horadefin; else templateName ">
 
-                            <input [checked]="true" type="checkbox">
+                            <input [checked]="true" [disabled]="true" type="checkbox">
                             <span class="slider"></span>
                           </div>
                           

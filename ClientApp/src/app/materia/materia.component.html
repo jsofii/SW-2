@@ -64,6 +64,7 @@
                 <tr>
                   <th class="col-lg-5">Nombre</th>
                   <th class="col-lg-5">Código</th>
+                  <th class="col-lg-5">Estado</th>
 
                 </tr>
               </thead>
@@ -73,11 +74,14 @@
                   <td class="col-lg-5">{{materia.nombre}}</td>
 
                   <td class="col-lg-5">{{materia.codigo}}</td>
+                  <td class="col-lg-5">{{materia.estado}}</td>
                   <td><button data-toggle="modal" data-target="#myModal" class="btn btn-success" (click)="CambiarValor(materia.idmateria)"><i
                         class="fa fa-edit"></i>
                       Editar</button></td>
-                  <td><button class="btn btn-danger" (click)="DeleteMateria(materia.idmateria)"><i class="fa fa-minus-circle"></i>
-                      Eliminar</button></td>
+                  <td><button class="btn btn-primary" (click)="ActualizarEstadoMateria(materia.idmateria,materia.nombre,materia.codigo,materia.carrera,'ACTIVO')"><i class="fa fa-plus-square-o"></i>
+                      Activar</button></td>
+                  <td><button class="btn btn-danger" (click)="ActualizarEstadoMateria(materia.idmateria,materia.nombre,materia.codigo,materia.carrera,'INACTIVO')"><i class="fa fa-minus-square-o"></i>
+                      Desactivar</button></td>
                 </tr>
 
               </tbody>
@@ -114,7 +118,8 @@
           <label style="margin-top: 20px" for="usr" style="margin-top: 20px">Carrera:<span style="margin-left: 5px"
               class="badge">{{inputCarrera}}</span></label>
           <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Seleccione una carrera:
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Seleccione una
+              carrera:
               <span class="caret"></span></button>
             <ul class="dropdown-menu">
               <li>
@@ -126,7 +131,7 @@
               <li>
                 <label (click)="select(3)" for="">Ingeniería en Software</label>
               </li>
-          
+
             </ul>
           </div>
 

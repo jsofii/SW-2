@@ -105,10 +105,22 @@ export class MateriaComponent implements OnInit {
   }
 
 
+  ActualizarEstadoMateria(idmateria:number,nombre:any,codigo:any,carrera:number,estado:any){
+    this.serviceMateria.EditMateria(idmateria,nombre,codigo,carrera,estado).subscribe(
+      data => {
+
+        this.ObtenerTodasMaterias();
+
+      }
+    )
+  }
+
+
   materiaaux:any;
+  estadoMAteria="ACTIVO";
   GuardarMateria() {
     if (this.idmateria == 0) {
-      this.serviceMateria.AddMateria(this.inputMateria, this.inputCodigo, this.carreraAux).subscribe(
+      this.serviceMateria.AddMateria(this.inputMateria, this.inputCodigo, this.carreraAux,this.estadoMAteria).subscribe(
         data => {
 
           if (data == null) {
@@ -127,7 +139,7 @@ export class MateriaComponent implements OnInit {
       const index2 = this.ListaTodasMaterias.map(x => x.codigo).indexOf(String(this.inputCodigo));
 
       if(index2==-1){
-        this.serviceMateria.EditMateria(this.idmateria, this.inputMateria, this.inputCodigo, this.carreraAux).subscribe(
+        this.serviceMateria.EditMateria(this.idmateria, this.inputMateria, this.inputCodigo, this.carreraAux,"ACTIVO").subscribe(
           data => {
             if (data == null) {
               //alert("ATENCIÓN: Ya existe una materia con ese código.");

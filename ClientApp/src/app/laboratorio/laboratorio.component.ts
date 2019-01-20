@@ -84,6 +84,16 @@ export class LaboratorioComponent implements OnInit {
     )
   }
 
+
+  ActualizarEstado(idlabo:number,numero:any,nombre:any,estado:any){
+    this.serviceLaboratorio.EditLaboratorio(idlabo,numero,nombre,estado).subscribe(
+      data => {
+        this.ObtenerTodosLaboratorios();
+      
+    }
+    )
+  }
+
   laboaux: any;
   GuardarLaboratorio() {
     if (this.idlaboratorio == 0) {
@@ -93,11 +103,13 @@ export class LaboratorioComponent implements OnInit {
         if (/^[a-zA-Z- ]*$/.test(this.inputNombre) == false) {
           alert('ATENCIÓN: "Nombre de laboratorio" no acepta caracteres especiales o numericos.');
         } else {
-          this.serviceLaboratorio.AddLaboratorio(this.inputNumero, this.inputNombre).subscribe(
+          this.serviceLaboratorio.AddLaboratorio(this.inputNumero, this.inputNombre,"ACTIVO").subscribe(
 
             data => {
               if (data == null) {
                 alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
+              }else{
+                alert('Laboratorio registrado.');
               }
               this.ObtenerTodosLaboratorios();
             }
@@ -118,10 +130,12 @@ export class LaboratorioComponent implements OnInit {
           const index2 = this.ListaTodosLaboratorios.map(x => x.numero).indexOf(Number(this.inputNumero));
 
           if (index2 == -1) {
-            this.serviceLaboratorio.EditLaboratorio(this.idlaboratorio, this.inputNumero, this.inputNombre).subscribe(
+            this.serviceLaboratorio.EditLaboratorio(this.idlaboratorio, this.inputNumero, this.inputNombre,"ACTIVO").subscribe(
               data => {
                 if (data == null) {
-                  alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
+                  alert('ATENCIÓN: Ya existe un laboratorio con ese número..');
+                }else{
+                  alert('Información de laboratorio actualizada.');
                 }
                 this.ObtenerTodosLaboratorios();
               }

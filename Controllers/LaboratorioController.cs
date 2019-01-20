@@ -43,7 +43,8 @@ namespace SW_2.Controllers
                 Laboratorio laboratorio = new Laboratorio
                 {
                     Numero = temp.Numero,
-                    Nombre = temp.Nombre
+                    Nombre = temp.Nombre,
+                    Estado = temp.Estado
 
                 };
                 context.Laboratorio.Add(laboratorio);
@@ -61,18 +62,19 @@ namespace SW_2.Controllers
         [Route("Edit")]
         public List<Laboratorio> Editlaboratorio([FromBody] Laboratorio temp)
         {
-       
-                Laboratorio laboratorio = new Laboratorio
-                {
-                    Idlaboratorio= temp.Idlaboratorio,
-                    Numero = temp.Numero,
-                    Nombre = temp.Nombre
 
-                };
-                context.Laboratorio.Update(laboratorio);
-                context.SaveChanges();
-                return this.context.Laboratorio.ToList();
-         
+            Laboratorio laboratorio = new Laboratorio
+            {
+                Idlaboratorio = temp.Idlaboratorio,
+                Numero = temp.Numero,
+                Nombre = temp.Nombre,
+                Estado = temp.Estado
+
+            };
+            context.Laboratorio.Update(laboratorio);
+            context.SaveChanges();
+            return this.context.Laboratorio.ToList();
+
 
         }
 

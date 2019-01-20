@@ -91,7 +91,7 @@ namespace SW_2.Controllers
                             where item.Nombreusuario == usuario
                             select item).FirstOrDefault<Usuario>();
 
-            if (BCrypt.Net.BCrypt.Verify(contrasenna, user.Password))
+             if (BCrypt.Net.BCrypt.Verify(contrasenna, user.Password))
             {
                 return true;
             }
@@ -99,6 +99,8 @@ namespace SW_2.Controllers
             {
                 return false;
             }
+
+           
 
 
         }

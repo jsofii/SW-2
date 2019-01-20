@@ -159,11 +159,19 @@ export class UsuarioComponent implements OnInit {
 
 
   //guardar persona
+  inputTipoPersonaString="";
   GuardarPersona() {
 
 
     this.serviceUsuario.AddPersona(this.inputNombrePersona, this.inputIdentificacionPersonal, this.inputTipoPersonaAoEID, this.inputCorreo).subscribe(
       data => {
+        if (data != null) {
+          alert('Nueva persona registrada.')
+          this.inputNombrePersona = "";
+          this.inputIdentificacionPersonal = "";
+          this.inputCorreo = "";
+          this.inputTipoPersonaString="";
+        }
         this.ObtenerTodoUsuario();
       }
     )
@@ -172,6 +180,11 @@ export class UsuarioComponent implements OnInit {
 
   selectTipoPersona(id: number) {
     this.inputTipoPersonaAoEID = id;
+    if (id == 1) {
+      this.inputTipoPersonaString = "Administrador";
+    } else {
+      this.inputTipoPersonaString = "Profesor";
+    }
   }
 
 

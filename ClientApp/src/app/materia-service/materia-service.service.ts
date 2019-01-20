@@ -26,12 +26,13 @@ export class materiaServiceService {
   GetMateriaId(id: number) {
     return this.http.get('https://localhost:5001/api/Materia/Get/' + id);
   }
-  EditMateria(idmateria: any, nombreMateria: any, codMateria: any, carrera: any) {
+  EditMateria(idmateria: any, nombreMateria: any, codMateria: any, carrera: any, estado: any) {
     var temp = {
       Idmateria: idmateria,
       Nombre: nombreMateria,
       Codigo: codMateria,
-      Carrera: carrera
+      Carrera: carrera,
+      Estado: estado
 
     }
 
@@ -40,11 +41,12 @@ export class materiaServiceService {
 
   }
 
-  AddMateria(nombreMateria: any, codMateria: any, carrera: any) {
+  AddMateria(nombreMateria: any, codMateria: any, carrera: any, estado: any) {
     var temp = {
       Nombre: nombreMateria,
       Codigo: codMateria,
-      Carrera: carrera
+      Carrera: carrera,
+      Estado: estado
 
     }
 

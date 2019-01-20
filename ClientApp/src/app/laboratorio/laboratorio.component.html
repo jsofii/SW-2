@@ -55,6 +55,7 @@
                 <tr>
                   <th class="col-lg-5">Número</th>
                   <th class="col-lg-5">Nombre</th>
+                  <th class="col-lg-5">Estado</th>
 
                 </tr>
               </thead>
@@ -64,11 +65,14 @@
                   <td class="col-lg-5">{{laboratorio.numero}}</td>
 
                   <td class="col-lg-5">{{laboratorio.nombre}}</td>
+                  <td class="col-lg-5">{{laboratorio.estado}}</td>
                   <td><button data-toggle="modal" data-target="#myModal" class="btn btn-success" (click)="CambiarValor(laboratorio.idlaboratorio)"><i
                         class="fa fa-edit"></i>
                       Editar</button></td>
-                  <td><button class="btn btn-danger" (click)="DeleteLaboratorio(laboratorio.idlaboratorio)"><i class="fa fa-minus-circle"></i>
-                      Eliminar</button></td>
+                      <td><button class="btn btn-primary" (click)="ActualizarEstado(laboratorio.idlaboratorio,laboratorio.numero,laboratorio.nombre,'ACTIVO')"><i class="fa fa-plus-square-o"></i>
+                        Activar</button></td>
+                    <td><button class="btn btn-danger" (click)="ActualizarEstado(laboratorio.idlaboratorio,laboratorio.numero,laboratorio.nombre,'INACTIVO')"><i class="fa fa-minus-square-o"></i>
+                        Desactivar</button></td>
                 </tr>
 
               </tbody>

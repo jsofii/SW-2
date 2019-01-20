@@ -28,6 +28,15 @@ import { FilterpipePipe } from './filterpipe.pipe';
 import { FiltrolaboPipe } from './laboratorio/filtrolabo.pipe';
 import { PipemateriaPipe } from './materia/pipemateria.pipe';
 import { FiltrousuarioPipe } from './usuario/filtrousuario.pipe';
+import { ScheduleAllModule, RecurrenceEditorAllModule } from '@syncfusion/ej2-ng-schedule';
+import { NumericTextBoxAllModule } from '@syncfusion/ej2-ng-inputs';
+import { DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule } from '@syncfusion/ej2-ng-calendars';
+import { CheckBoxAllModule } from '@syncfusion/ej2-ng-buttons';
+import { ToolbarAllModule } from '@syncfusion/ej2-ng-navigations';
+import { MaskedTextBoxModule } from '@syncfusion/ej2-ng-inputs';
+import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-ng-dropdowns';
+
+
 
 @NgModule({
   declarations: [
@@ -66,8 +75,12 @@ import { FiltrousuarioPipe } from './usuario/filtrousuario.pipe';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,
+    RouterModule,
+    
     HttpClientModule,
     FormsModule,
+    ScheduleAllModule,
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
       { path: 'counter', component: CounterComponent },

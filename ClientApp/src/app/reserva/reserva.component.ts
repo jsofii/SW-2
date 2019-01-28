@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
-import { extend } from '@syncfusion/ej2-base';
 import { EventSettingsModel, DayService, WeekService, WorkWeekService, MonthService, AgendaService } from '@syncfusion/ej2-ng-schedule';
+import { Schedule, Day, Week, WorkWeek, Month, Agenda, EventRenderedArgs, Resize, DragAndDrop } from '@syncfusion/ej2-schedule';
+import { applyCategoryColor } from './helper';
+import { extend } from '@syncfusion/ej2-base';
 
 
+Schedule.Inject(Week, Day, Agenda, WorkWeek, Month, Resize, DragAndDrop);
 
 @Component({
   selector: 'app-reserva',
@@ -12,37 +14,30 @@ import { EventSettingsModel, DayService, WeekService, WorkWeekService, MonthServ
     styleUrls: ['./reserva.component.css'],
     providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService]
 })
-export class ReservaComponent {
+export class ReservaComponent implements OnInit{
   public scheduleData: any;
   constructor() {
-      this.scheduleData = [{
-          Id: 100, Subject: "Bering Sea Gold", StartTime: new Date(2014, 4, 5, 10, 0),
-          EndTime: new Date(2014, 4, 5, 11, 0), Description: "", AllDay: false, Recurrence: false, Categorize: "1,3"
-      },
-      {
-          Id: 101, Subject: "Bering Sea Gold", StartTime: new Date(2014, 4, 2, 16, 0),
-          EndTime: new Date(2014, 4, 2, 17, 30), Description: "", AllDay: false, Recurrence: false, Categorize: "2,5"
-      },
-      {
-          Id: 102, Subject: "What Happened Next?", StartTime: new Date(2014, 4, 4, 1, 0),
-          EndTime: new Date(2014, 4, 4, 1, 30), Description: "", AllDay: false, Recurrence: false, Categorize: "3,6"
-      }];
+     
   }
-    // constructor(private data: DataService) {
-        
-    // }
-    // public products = [];
-    // public selectedDate: Date = new Date(2018, 1, 15);
-    // public eventSettings: EventSettingsModel ;
-    // ngOnInit(): void {
-    //     this.eventSettings = { dataSource: <Object[]>extend([], this.data.eventsData, null, true) };
-    //     //this.data.loadGroupsFollowed()
-    //     //    .subscribe(success => {
-    //     //        if (success) {
-    //     //            this.eventSettings = { dataSource: <Object[]>extend([], this.data.eventsData, null, true) };
-    //     //        }
-    //     //    });
-    // }
-  title = 'Ameesssst';
+  ngOnInit(){
+    let scheduleObj: Schedule = new Schedule({
+        width: '100%',
+        height: '650px',
+        workDays: [1, 2,3, 4,5,6],
+        currentView: 'WorkWeek',
+        startHour: '07:00',
+        endHour: '21:00',
+        workHours:  {
+            highlight: true
+        },
+        views: [ 'WorkWeek'],
+        eventRendered: (args: EventRenderedArgs) => applyCategoryColor(args, scheduleObj.currentView)
+    });
+    scheduleObj.timeScale.slotCount=1;
+    scheduleObj.appendTo('#Schedule');
+  }
+    
+  title = 'Reserva de Laboratorio';
   
 }
+

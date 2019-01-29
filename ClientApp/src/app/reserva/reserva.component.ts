@@ -4,6 +4,7 @@ import { EventSettingsModel, DayService, WeekService, WorkWeekService, MonthServ
 import { Schedule, Day, Week, WorkWeek, Month, Agenda, EventRenderedArgs, Resize, DragAndDrop } from '@syncfusion/ej2-schedule';
 import { applyCategoryColor } from './helper';
 import { extend } from '@syncfusion/ej2-base';
+import { laboratorioServiceService } from '../laboratorio-service/laboratorio-service.service';
 
 
 Schedule.Inject(WorkWeek);
@@ -16,10 +17,12 @@ Schedule.Inject(WorkWeek);
 })
 export class ReservaComponent implements OnInit{
   public scheduleData: any;
-  constructor() {
+  constructor(private serviceLaboratorio: laboratorioServiceService) {
      
   }
   ngOnInit(){
+    
+    this.CargarLaboratorios();
     let scheduleObj: Schedule = new Schedule({
         width:'auto',
         height:'auto',
@@ -42,5 +45,19 @@ export class ReservaComponent implements OnInit{
   inputLaboratorioNombre = "Seleccione el Laboratorio";
   inputLaboratorioID: any;
   
+  ListaLaboratorios: any;
+
+  CargarLaboratorios() {
+    this.serviceLaboratorio.ListaTodosLaboratorios().subscribe(
+      data => {
+        this.ListaLaboratorios = data;
+      }
+    )
+  }
+
+  CargarLaboratoriosID(idlaboratorio: any, nombre: any) {
+    this.inputLaboratorioNombre = nombre;
+    this.inputLaboratorioID = idlaboratorio;
+  }
 }
 

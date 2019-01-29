@@ -6,7 +6,7 @@ import { applyCategoryColor } from './helper';
 import { extend } from '@syncfusion/ej2-base';
 
 
-Schedule.Inject(Week, Day, Agenda, WorkWeek, Month, Resize, DragAndDrop);
+Schedule.Inject(WorkWeek);
 
 @Component({
   selector: 'app-reserva',
@@ -21,14 +21,13 @@ export class ReservaComponent implements OnInit{
   }
   ngOnInit(){
     let scheduleObj: Schedule = new Schedule({
-        width: '100%',
-        height: '650px',
+        
         workDays: [1, 2,3, 4,5,6],
         currentView: 'WorkWeek',
         startHour: '07:00',
         endHour: '21:00',
         workHours:  {
-            highlight: true
+            highlight: false
         },
         views: [ 'WorkWeek'],
         eventRendered: (args: EventRenderedArgs) => applyCategoryColor(args, scheduleObj.currentView)
@@ -37,7 +36,7 @@ export class ReservaComponent implements OnInit{
     scheduleObj.appendTo('#Schedule');
   }
     
-  title = 'Reserva de Laboratorio';
+  title = 'Reserva de Laboratorios';
   
 }
 

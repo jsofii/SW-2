@@ -21,7 +21,8 @@ export class ReservaComponent implements OnInit{
   }
   ngOnInit(){
     let scheduleObj: Schedule = new Schedule({
-        
+        width:'auto',
+        height:'auto',
         workDays: [1, 2,3, 4,5,6],
         currentView: 'WorkWeek',
         startHour: '07:00',
@@ -37,6 +38,9 @@ export class ReservaComponent implements OnInit{
   }
     
   title = 'Reserva de Laboratorios';
+  
+  inputLaboratorioNombre = "Seleccione el Laboratorio";
+  inputLaboratorioID: any;
   
 }
 

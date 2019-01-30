@@ -145,30 +145,56 @@
 
                     <div class="modal" id="myModal2" role="dialog">
                       <div class="modal-dialog">
-          
+
                         <div class="modal-content">
                           <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">GESTIÓN DE PERSONAL</h4>
                           </div>
                           <div class="modal-body">
-          
+
                             <label for="mo">Nombre:</label>
-                            <input [(ngModel)]="inputNombrePersona" type="text" class="form-control" id="mo">
-          
-          
+                            <input [(ngModel)]="inputNombrePersona" type="text" class="form-control" id="mo" pattern="[A-Za-z- ]+" #inputNom="ngModel">
+                            <div *ngIf="inputNom.errors && (inputNom.dirty || inputNom.touched)" class="alert alert-danger">
+                              <div [hidden]="!inputNom.errors.required">
+                                Necesita ingresar nombre de laboratorio.
+                              </div>
+                              <div [hidden]="!inputNom.errors.pattern">
+                                No se acepta caracteres especiales o numericos.
+                              </div>
+                            </div>
+
+                            
+
                             <label style="margin-top: 20px" for="mo">Identificación Personal:</label>
-                            <input [(ngModel)]="inputIdentificacionPersonal" type="text" class="form-control" id="mo">
-          
+                            <input [(ngModel)]="inputIdentificacionPersonal" type="text" class="form-control" id="mo" pattern="[0-9]+" #inputIde="ngModel">
+                            <div *ngIf="inputIde.errors && (inputIde.dirty || inputIde.touched)" class="alert alert-danger">
+                              <div [hidden]="!inputIde.errors.required">
+                                Necesita ingresar una idetnificación personal.
+                              </div>
+                              <div [hidden]="!inputIde.errors.pattern">
+                                Solo se permiten números.
+                              </div>
+                            </div>
+
                             <label style="margin-top: 20px" for="mo">Correo:</label>
-                            <input [(ngModel)]="inputCorreo" type="text" class="form-control" id="mo">
-          
+                            <input [(ngModel)]="inputCorreo" type="text" class="form-control" id="mo" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+" #inputCor="ngModel">
+                            <div *ngIf="inputCor.errors && (inputCor.dirty || inputCor.touched)" class="alert alert-danger">
+                              <div [hidden]="!inputCor.errors.required">
+                                Necesita ingresar un correo electrónico.
+                              </div>
+                              <div [hidden]="!inputCor.errors.pattern">
+                                Debe seguir el patrón de correo electrónico.
+                              </div>
+                            </div>
+
+
                             <label style="margin-top: 20px" for="usr" style="margin-top: 20px">Tipo persona:<span style="margin-left: 5px"
-                              class="badge">{{inputTipoPersonaString}}</span></label>
+                                class="badge">{{inputTipoPersonaString}}</span></label>
                             <div class="dropdown">
-                                
-                              
-                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tipo
+
+
+                              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tipo
                                 persona:
                               </button>
                               <ul class="dropdown-menu">
@@ -178,24 +204,38 @@
                                 <li>
                                   <label (click)="selectTipoPersona(2)" for="">Profesor</label>
                                 </li>
-          
-          
+
+
                               </ul>
                             </div>
-          
+
                           </div>
                           <div class="modal-footer">
-                            <button (click)="GuardarPersona()" class="btn btn-success glyphicon glyphicon-check"> GUARDAR</button>
+                            <button (click)="GuardarPersona()" class="btn btn-success glyphicon glyphicon-check">
+                              GUARDAR</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                           </div>
                         </div>
-          
+
                       </div>
-          
-          
-          
+
+
+
+                      <!--
+
+                        <input [(ngModel)]="inputNombre" type="text" class="form-control" id="mat" pattern="[A-Za-z- ]+" #inputNom="ngModel">
+          <div *ngIf="inputNom.errors && (inputNom.dirty || inputNom.touched)" class="alert alert-danger">
+            <div [hidden]="!inputNom.errors.required">
+              Necesita ingresar nombre de laboratorio.
+            </div>
+            <div [hidden]="!inputNom.errors.pattern">
+              No se acepta caracteres especiales o numericos.
+            </div>
+          </div>
+                      -->
+
                     </div>
-          
+
 
 
 
@@ -316,7 +356,7 @@
           </div>
 
 
-          
+
 
 
 

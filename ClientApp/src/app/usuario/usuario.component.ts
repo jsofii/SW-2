@@ -165,13 +165,20 @@ export class UsuarioComponent implements OnInit {
 
     this.serviceUsuario.AddPersona(this.inputNombrePersona, this.inputIdentificacionPersonal, this.inputTipoPersonaAoEID, this.inputCorreo).subscribe(
       data => {
-        if (data != null) {
-          alert('Nueva persona registrada.')
-          this.inputNombrePersona = "";
-          this.inputIdentificacionPersonal = "";
-          this.inputCorreo = "";
-          this.inputTipoPersonaString="";
+        if (/^[a-zA-Z- ]*$/.test(this.inputNombrePersona) == false) {
+          alert('ATENCIÓN: "Nombre de persona" no acepta caracteres especiales o numericos.');
+        } else {
+          if (data != null) {
+            alert('Nueva persona registrada.')
+            this.inputNombrePersona = "";
+            this.inputIdentificacionPersonal = "";
+            this.inputCorreo = "";
+            this.inputTipoPersonaString="";
+          }else{
+            alert('Ya existe una persona registrada con ese correo electrónico.');
+          }
         }
+       
         this.ObtenerTodoUsuario();
       }
     )

@@ -29,27 +29,30 @@ namespace SW_2.Controllers
         [Route("send")]
         public ActionResult EnviarCorreo(String para, String asunto, String mensaje)
         {
-            string x="";
-          try{
-                MailMessage correo= new MailMessage();
-                correo.From=new MailAddress("sofig.0106@hotmail.com");
+            string x = "";
+            try
+            {
+                MailMessage correo = new MailMessage();
+                correo.From = new MailAddress("sofig.0106@hotmail.com");
                 correo.To.Add(para);
-                correo.Subject=asunto;
-                correo.Body=mensaje;
-                correo.IsBodyHtml=true;
-                correo.Priority=MailPriority.Normal;
-                SmtpClient smtp= new SmtpClient();
-                smtp.Host="smtp.gmail.com";
-                smtp.Port=25;
-                smtp.EnableSsl=true;
-                smtp.UseDefaultCredentials=true;
-                string sCuentaCorreo="sofig.0106@gmail.com";
-                string sPasswordCorreo="5109899555678";
-                smtp.Credentials=new System.Net.NetworkCredential(sCuentaCorreo,sPasswordCorreo);
+                correo.Subject = asunto;
+                correo.Body = mensaje;
+                correo.IsBodyHtml = true;
+                correo.Priority = MailPriority.Normal;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 25;
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = true;
+                string sCuentaCorreo = "sofig.0106@gmail.com";
+                string sPasswordCorreo = "5109899555678";
+                smtp.Credentials = new System.Net.NetworkCredential(sCuentaCorreo, sPasswordCorreo);
                 smtp.Send(correo);
-                ViewBag.mensaje="mensaje enviador";
+                ViewBag.mensaje = "mensaje enviador";
 
-            }catch(Exception ex){
+            }
+            catch (Exception ex)
+            {
 
             }
             return View();
@@ -63,17 +66,25 @@ namespace SW_2.Controllers
         [Route("Add")]
         public List<Persona> Lista([FromBody]Persona temp)
         {
-            Persona persona = new Persona
-            {
-                Nombrecompleto = temp.Nombrecompleto,
-                Identificacionpersonal = temp.Identificacionpersonal,
-                Idtipopersona = temp.Idtipopersona,
-                Correo = temp.Correo
+            List<JoinPersona> listaaux = Lista();
 
-            };
-            context.Persona.Add(persona);
-            context.SaveChanges();
-            return this.context.Persona.ToList();
+            bool existe = listaaux.Any(item => item.Correo == temp.Correo);
+            if (!existe)
+            {
+                Persona persona = new Persona
+                {
+                    Nombrecompleto = temp.Nombrecompleto,
+                    Identificacionpersonal = temp.Identificacionpersonal,
+                    Idtipopersona = temp.Idtipopersona,
+                    Correo = temp.Correo
+
+                };
+                context.Persona.Add(persona);
+                context.SaveChanges();
+                return this.context.Persona.ToList();
+            }
+
+            return null;
         }
         [HttpGet]
         [Route("existeUsuario/{correo}")]
@@ -82,13 +93,18 @@ namespace SW_2.Controllers
             Persona pers = this.context.Persona.Where(x => x.Correo == correo).FirstOrDefault();
             if (pers != null)
             {
-                Usuario usr = this.context.Usuario.Where(x=>x.Idpersona==pers.Idpersona).FirstOrDefault();
-                if(usr!=null){
+                Usuario usr = this.context.Usuario.Where(x => x.Idpersona == pers.Idpersona).FirstOrDefault();
+                if (usr != null)
+                {
                     return true;
-                }else{
+                }
+                else
+                {
                     return false;
                 }
-            }else{
+            }
+            else
+            {
                 return false;
             }
 
@@ -97,26 +113,31 @@ namespace SW_2.Controllers
         }
         [HttpPost]
         [Route("temporalPass")]
-        public Boolean temporalPass ([FromBody]Persona correo)
+        public Boolean temporalPass([FromBody]Persona correo)
         {
-           
+
             Persona pers = this.context.Persona.Where(x => x.Correo == correo.Correo).FirstOrDefault();
             if (pers != null)
             {
-                Usuario usr = this.context.Usuario.Where(x=>x.Idpersona==pers.Idpersona).FirstOrDefault();
+                Usuario usr = this.context.Usuario.Where(x => x.Idpersona == pers.Idpersona).FirstOrDefault();
                 Random r = new Random(DateTime.Now.Millisecond);
-               int pass=r.Next(10000,200000);
+                int pass = r.Next(10000, 200000);
 
-                if(usr!=null){
-                   
-                    usr.Password=BCrypt.Net.BCrypt.HashPassword(pass.ToString());
-                    EnviarCorreo(pers.Correo,"Cambio de contraseña", pass.ToString());
+                if (usr != null)
+                {
+
+                    usr.Password = BCrypt.Net.BCrypt.HashPassword(pass.ToString());
+                    EnviarCorreo(pers.Correo, "Cambio de contraseña", pass.ToString());
                     this.context.SaveChanges();
                     return true;
-                }else{
+                }
+                else
+                {
                     return false;
                 }
-            }else{
+            }
+            else
+            {
                 return false;
             }
 

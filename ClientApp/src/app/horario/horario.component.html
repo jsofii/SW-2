@@ -30,9 +30,9 @@
               <br>
               <label for="">Hora de fin</label>
               <div class="btn-group">
-                  <select [(ngModel)]="nuevaHora"  (click)="seleccionarHoraFin(item)" class="form-control" id="sel1">
+                  <select (change)="selectHorafin($event)" class="form-control" id="sel1">
                       <option value="">Seleccion hora de fin</option>
-                      <option  *ngFor="let item of  listaHoras">{{item}}</option>
+                      <option *ngFor="let item of listaHoras" value="{{item}}">{{item}}</option>
                     
                     </select>
               
@@ -43,9 +43,9 @@
               <label for="">Seleccione un laboratorio</label>
               <div class="btn-group">
                  
-                  <select [(ngModel)]="nuevoLabo" class="form-control" id="sel1">
+                  <select (change)="selectIdLaboratorio($event)" class="form-control" id="sel1">
                     <option value="">Seleccion un laboratorio</option>
-                    <option *ngFor="let item of ListaLaboratorios">{{item.nombre}}</option>
+                    <option *ngFor="let item of ListaLaboratorios" value="{{item.idlaboratorio}}">{{item.nombre}}</option>
                   
                   </select>
                
@@ -53,9 +53,9 @@
               <br>
               <label for="">Seleecione un ciclo</label>
               <div class="btn-group">
-                  <select [(ngModel)]="nuevoCiclo" (click)="ciclo()" class="form-control" id="sel1">
+                  <select (change)="selectIdCiclo($event)"  class="form-control" id="sel1">
                       <option value="">Seleccion un ciclo</option>
-                      <option *ngFor="let item of ListaTodosCiclos">{{item.nombre}}</option>
+                      <option *ngFor="let item of ListaTodosCiclos" value="{{item.idciclo}}">{{item.nombre}}</option>
                     
                     </select>
                
@@ -64,9 +64,9 @@
               <label for="">Seleccione una materia</label>
             
               <div class="btn-group">
-                  <select [(ngModel)]="nuevaMateria" class="form-control" id="sel1">
+                  <select (change)="selectIdMateria($event)" class="form-control" id="sel1">
                       <option value="">Seleccion una materia</option>
-                      <option *ngFor="let item of ListaMaterias">{{item.nombre}}</option>
+                      <option *ngFor="let item of ListaMaterias" value="{{item.idmateria}}">{{item.nombre}}</option>
                     
                     </select>
                 
@@ -184,7 +184,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="active" *ngFor="let horaInit of listaHoras ">
+                  <tr class="active" *ngFor="let horaInit of listaHoras">
                     <td>{{horaInit}}:00</td>
                     <td (click)="setHora(horaInit, dia)" data-toggle="modal" data-target="#myModal" class="active"
                       *ngFor="let dia of listaDias ">

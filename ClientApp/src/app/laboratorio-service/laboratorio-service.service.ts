@@ -20,6 +20,9 @@ export class laboratorioServiceService {
     return this.http.get('https://localhost:5001/api/Laboratorio/ListaLaboratorios');
 
   }
+  GetReservas(){
+    return this.http.get('https://localhost:5001/api/Horario/reservas');
+  }
   GetLaboratorioId(id: number) {
     return this.http.get('https://localhost:5001/api/Laboratorio/Get/' + id);
   }

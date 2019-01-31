@@ -7,6 +7,12 @@ using SW_2.Models;
 
 namespace SW_2.Controllers
 {
+     public class prueba
+        {
+            public int Id{ get; set; }
+           
+        }
+
     [Route("api/[controller]")]
 
     public class HorarioController : Controller
@@ -26,6 +32,13 @@ namespace SW_2.Controllers
                                  where item.Idciclo == id
                                  select item).FirstOrDefault<Ciclo>();
             return comunidad;
+        }
+        [HttpGet]
+        [Route("reservas")]
+        public List<Reservas> reservas(int id)
+        {
+          
+            return this.context.Reservas.ToList();
         }
 
 

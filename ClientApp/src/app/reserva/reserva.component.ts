@@ -57,10 +57,9 @@ export class ReservaComponent implements OnInit {
   GuardarReserva(){
     this.tamaño=this.scheduleData.length;
     this.nuevas= this.scheduleData.length-this.cont;
-   // console.log(this.nuevas);
+ 
     for (let index = 0; index < this.nuevas; index++) {
-   //   console.log("ENTRE AL INDEX", this.nuevas)
-   //   console.log(this.scheduleData[this.tamaño-1])
+ 
       this.x= this.scheduleData[this.tamaño-1];
       this.fechaInicio= this.x.StartTime;
       this.fechaFin= this.x.EndTime;
@@ -70,9 +69,10 @@ export class ReservaComponent implements OnInit {
       this.fechaFin.getFullYear(), this.fechaFin.getMonth(), this.fechaFin.getDate(), this.fechaFin.getHours(),
       this.fechaFin.getMinutes(), this.x.Subject).subscribe(
         data=>{
-       //   console.log(this.fechaInicio.getDate());
+  
         }
       )
+      this.tamaño--;
     
       
     }

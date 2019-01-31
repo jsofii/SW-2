@@ -32,6 +32,8 @@ export class HorarioComponent implements OnInit {
   hola() {
     console.log("holar");
   }
+
+  
   cargar() {
     this.servicehorario.ListaHorarioMateria(this.inputLaboratorioID, this.inputCicloID).subscribe(
       data => {
@@ -174,15 +176,59 @@ export class HorarioComponent implements OnInit {
       return false;
     }
   }
-  GuardarHorario(){
+  /*GuardarHorario(){
     console.log(this.nuevaHora)
    // console.log(this.nuevodia, this.nuevaHora, this.nuevaMateria, this.nuevoLabo, this.nuevoCiclo,this.diaselected)
-  }
+  }*/
   seleccionarHoraFin(item){
     
   }
   ciclo(){
     console.log(this.nuevoCiclo);
   }
+
+
+  //variables para insertar el horario
+  idlaboratorio:any;
+  idmateria:any;
+  idciclo:any;
+ 
+  horafin:any;
+  dia:any;
+
+  selectIdMateria (event: any) {
+    //update the ui
+    this.idmateria = event.target.value;
+    console.log(this.idmateria)
+  }
+
+  selectIdCiclo (event: any) {
+    //update the ui
+    this.idciclo = event.target.value;
+    console.log(this.idciclo)
+  }
+
+  selectHorafin (event: any) {
+    //update the ui
+    this.horafin = event.target.value;
+    console.log(this.horafin)
+  }
+
+  selectIdLaboratorio (event: any) {
+    //update the ui
+    this.idlaboratorio = event.target.value;
+    console.log(this.idlaboratorio)
+  }
+
+  GuardarHorario(){
+    this.servicehorario.AgregarHorario(this.idlaboratorio,this.idmateria,this.idciclo,this.horainicio,this.horafin,this.nuevodia).subscribe(
+
+      data => {
+        alert('Horario agregado correctamente.')
+      }
+    )
+  }
+
+ 
 
 }

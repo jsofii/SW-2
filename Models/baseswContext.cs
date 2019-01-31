@@ -21,7 +21,6 @@ namespace SW_2.Models
         public virtual DbSet<Laboratorio> Laboratorio { get; set; }
         public virtual DbSet<Materia> Materia { get; set; }
         public virtual DbSet<Persona> Persona { get; set; }
-        public virtual DbSet<Prueba> Prueba { get; set; }
         public virtual DbSet<Reservalaboratorio> Reservalaboratorio { get; set; }
         public virtual DbSet<Reservas> Reservas { get; set; }
         public virtual DbSet<Semana> Semana { get; set; }
@@ -33,7 +32,7 @@ namespace SW_2.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=sofi;database=basesw");
+                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=cesar1996;database=basesw");
             }
         }
 
@@ -260,27 +259,6 @@ namespace SW_2.Models
                     .HasConstraintName("FK_PERSONA_TIPOPERSONA");
             });
 
-            modelBuilder.Entity<Prueba>(entity =>
-            {
-                entity.ToTable("prueba", "basesw");
-
-                entity.Property(e => e.Id).HasColumnType("int(11)");
-
-                entity.Property(e => e.Anio).HasColumnType("int(11)");
-
-                entity.Property(e => e.Dia).HasColumnType("int(11)");
-
-                entity.Property(e => e.Hora).HasColumnType("int(11)");
-
-                entity.Property(e => e.Mes).HasColumnType("int(11)");
-
-                entity.Property(e => e.Minutos).HasColumnType("int(11)");
-
-                entity.Property(e => e.Subject)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-            });
-
             modelBuilder.Entity<Reservalaboratorio>(entity =>
             {
                 entity.HasKey(e => e.Idreservalaboratorio);
@@ -449,7 +427,8 @@ namespace SW_2.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Password)
-                    .HasColumnName("password")
+                    .IsRequired()
+                    .HasColumnName("PASSWORD")
                     .HasMaxLength(4000)
                     .IsUnicode(false);
 

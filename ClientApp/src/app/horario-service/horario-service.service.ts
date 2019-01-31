@@ -20,6 +20,23 @@ export class horarioServiceService {
     return this.http.get('https://localhost:5001/api/Horario/ListaHorarioMateria/'+idlaboratio+'/'+ idciclo);
 
   }
+
+
+  AgregarHorario(idlaboratorio,idmateria,idciclo,horainicio,horafin,dia){
+    var temp = {
+      Idlaboratorio: idlaboratorio,
+      Idmateria: idmateria,
+      Idciclo: idciclo,
+      Horadeinicio:horainicio,
+      Horadefin:horafin,
+      Dia:dia
+
+    }
+
+
+    return this.http.post('https://localhost:5001/api/Horario/addHorario/', temp);
+
+  }
  
 
   

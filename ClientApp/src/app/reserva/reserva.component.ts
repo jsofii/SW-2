@@ -52,22 +52,25 @@ export class ReservaComponent implements OnInit {
   x:any;
   fechaInicio:Date;
   fechaFin:Date;
+  d:Date;
+  aux:any;
   GuardarReserva(){
     this.tamaño=this.scheduleData.length;
     this.nuevas= this.scheduleData.length-this.cont;
-    console.log(this.nuevas);
+   // console.log(this.nuevas);
     for (let index = 0; index < this.nuevas; index++) {
-      console.log(this.scheduleData[this.tamaño-1])
+   //   console.log("ENTRE AL INDEX", this.nuevas)
+   //   console.log(this.scheduleData[this.tamaño-1])
       this.x= this.scheduleData[this.tamaño-1];
       this.fechaInicio= this.x.StartTime;
       this.fechaFin= this.x.EndTime;
    
       this.serviceLaboratorio.AddReserva(this.fechaInicio.getFullYear(), this.fechaInicio.getMonth(),
-      this.fechaInicio.getDay(), this.fechaInicio.getHours(), this.fechaInicio.getMinutes(),
-      this.fechaFin.getFullYear(), this.fechaFin.getMonth(), this.fechaFin.getDay(), this.fechaFin.getHours(),
+      this.fechaInicio.getDate(), this.fechaInicio.getHours(), this.fechaInicio.getMinutes(),
+      this.fechaFin.getFullYear(), this.fechaFin.getMonth(), this.fechaFin.getDate(), this.fechaFin.getHours(),
       this.fechaFin.getMinutes(), this.x.Subject).subscribe(
         data=>{
-          console.log(this.x);
+       //   console.log(this.fechaInicio.getDate());
         }
       )
     
@@ -122,7 +125,7 @@ export class ReservaComponent implements OnInit {
   }
   print() {
     
-    console.log(this.scheduleData);
+   // console.log(this.scheduleData);
     this.GuardarReserva();
     // this.scheduleData.forEach(element => {
     //   console.log(element);

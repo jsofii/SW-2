@@ -16,8 +16,8 @@ export class horarioServiceService {
   host: string;
 
 
-  ListaHorarioMateria() {
-    return this.http.get('https://localhost:5001/api/Horario/ListaHorarioMateria');
+  ListaHorarioMateria(idlaboratio, idciclo) {
+    return this.http.get('https://localhost:5001/api/Horario/ListaHorarioMateria/'+idlaboratio+'/'+ idciclo);
 
   }
  

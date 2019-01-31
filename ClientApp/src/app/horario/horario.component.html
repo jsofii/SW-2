@@ -14,6 +14,74 @@
       <li><a href="#horario" data-toggle="tab">CICLO</a>
       </li>
     </ul>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+    
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Gestión Horarios</h4>
+            </div>
+            <div class="modal-body">
+              <label for="">Hora: {{horainicio}}</label>
+              <br>
+              <label for="">Día: {{diaselected}}</label>
+              <br>
+              <label for="">Hora de fin</label>
+              <div class="btn-group">
+                  <select [(ngModel)]="nuevaHora"  (click)="seleccionarHoraFin(item)" class="form-control" id="sel1">
+                      <option value="">Seleccion hora de fin</option>
+                      <option  *ngFor="let item of  listaHoras">{{item}}</option>
+                    
+                    </select>
+              
+              
+                
+              </div>
+              <br>
+              <label for="">Seleccione un laboratorio</label>
+              <div class="btn-group">
+                 
+                  <select [(ngModel)]="nuevoLabo" class="form-control" id="sel1">
+                    <option value="">Seleccion un laboratorio</option>
+                    <option *ngFor="let item of ListaLaboratorios">{{item.nombre}}</option>
+                  
+                  </select>
+               
+              </div>
+              <br>
+              <label for="">Seleecione un ciclo</label>
+              <div class="btn-group">
+                  <select [(ngModel)]="nuevoCiclo" (click)="ciclo()" class="form-control" id="sel1">
+                      <option value="">Seleccion un ciclo</option>
+                      <option *ngFor="let item of ListaTodosCiclos">{{item.nombre}}</option>
+                    
+                    </select>
+               
+              </div>
+              <br>
+              <label for="">Seleccione una materia</label>
+            
+              <div class="btn-group">
+                  <select [(ngModel)]="nuevaMateria" class="form-control" id="sel1">
+                      <option value="">Seleccion una materia</option>
+                      <option *ngFor="let item of ListaMaterias">{{item.nombre}}</option>
+                    
+                    </select>
+                
+                
+              </div>
+    
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-success" (click)="GuardarHorario()">Guardar</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+    
+        </div>
+      </div>
 
     <div class="tab-content">
       <div class="tab-pane active" id="ciclo" style="margin-top: 20px;">
@@ -57,7 +125,7 @@
             </div>
 
             <div class="panel-heading">
-              <button class="btn btn-primary center-block"><i class="fa fa-check-square"></i>
+              <button class="btn btn-primary center-block" (click)="cargar()"><i class="fa fa-check-square"></i>
                 Aceptar</button>
             </div>
 
@@ -102,7 +170,7 @@
 
 
             <div>
-              <table class="table table-bordered table-striped">
+              <table id="tabla" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th>HORA</th>
@@ -117,26 +185,28 @@
                 </thead>
                 <tbody>
                   <tr class="active" *ngFor="let horaInit of listaHoras ">
-                    <td>{{horaInit}}</td>
-                    <td class="active" *ngFor="let dia of listaDias ">
-                      
-                      <label class="switch">
-                      
-                        <label *ngFor="let item of listaHorarios">
-                          
-                          <div *ngIf="item.dia==dia && horaInit>=item.horadeinicio && horaInit<=item.horadefin; else templateName ">
-
-                            <input [checked]="true" [disabled]="true" type="checkbox">
-                            <span class="slider"></span>
-                          </div>
-                          
-                       
+                    <td>{{horaInit}}:00</td>
+                    <td (click)="setHora(horaInit, dia)" data-toggle="modal" data-target="#myModal" class="active"
+                      *ngFor="let dia of listaDias ">
 
 
-                        </label>
+
+                      <label *ngFor="let item of listaHorarios">
+
+                        <div *ngIf="item.dia==dia && horaInit>=item.horadeinicio && horaInit<=item.horadefin; else templateName "
+                          style="background-color: rgb(151, 187, 175); height: 24px; width: 125px;">
+
+                          <!-- <input [checked]="true" [disabled]="true" type="checkbox">
+                            <span class="slider"></span> -->
+                        </div>
+
+
 
 
                       </label>
+
+
+
                     </td>
                   </tr>
 
@@ -166,6 +236,7 @@
 
 
       </div>
+      
 
       <div class="tab-pane" id="horario" style="margin-top: 20px;">
 
@@ -189,7 +260,7 @@
               </div>
               <div class="dropdown col-lg-4">
                 <div class="form-group">
-                  <select class="form-control" id="sel1">
+                  <select  class="form-control" id="sel1">
                     <option>Seleccione una opción</option>
                     <option *ngFor="let item of ListaParametro">{{item}}</option>
 

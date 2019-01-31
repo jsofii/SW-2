@@ -15,7 +15,7 @@ import { runInThisContext } from 'vm';
 )
 
 export class HorarioComponent implements OnInit {
-
+  horainicio: any;
   constructor(private serviceLaboratorio: laboratorioServiceService,
     private serviceusuario: usuarioServiceService,
     private servicemateria: materiaServiceService, private serviceCiclo: cicloServiceService,
@@ -28,6 +28,44 @@ export class HorarioComponent implements OnInit {
     this.CargarMaterias();
     this.CargarHorarioMateria();
     this.CargarProfesores();
+  }
+  hola() {
+    console.log("holar");
+  }
+  cargar() {
+    this.servicehorario.ListaHorarioMateria(this.inputLaboratorioID, this.inputCicloID).subscribe(
+      data => {
+        this.listaHorarios = data;
+      }
+    )
+  }
+  diaselected: any;
+  setHora(item, dia) {
+    this.nuevodia=dia;
+    switch (dia) {
+      case 1:
+        this.diaselected = "Lunes";
+        break;
+      case 2:
+        this.diaselected = "Martes";
+        break;
+      case 3:
+        this.diaselected = "Miercoles"
+        break;
+      case 4:
+        this.diaselected = "Jueves";
+        break;
+      case 5:
+        this.diaselected = "Viernes";
+        break;
+      case 6:
+        this.diaselected = "Sabado";
+        break;
+
+
+    }
+    this.horainicio = item;
+   
   }
 
   ListaTodosCiclos: any;
@@ -97,6 +135,12 @@ export class HorarioComponent implements OnInit {
   inputMateriaNombre = "Seleccione la Materia";
   inputMateriaID: any;
   ListaMaterias: any;
+  nuevaHora:any;
+  nuevoCiclo:any;
+  nuevaMateria:any;
+  nuevoLabo:any;
+  nuevodia:any;
+
   CargarMaterias() {
     this.servicemateria.ListaTodasMaterias().subscribe(
       data => {
@@ -110,8 +154,8 @@ export class HorarioComponent implements OnInit {
     this.inputMateriaNombre = nombre;
   }
 
-  listaDias: any[] = [1,2,3,4,5,6];
-  listaHoras: any[] = [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22];
+  listaDias: any[] = [1, 2, 3, 4, 5, 6];
+  listaHoras: any[] = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
   listaHoras2: any[] = ['07:00 - 08:00', '08:00 - 09:00', '09:00 - 10:00', '10:00 - 11:00', '11:00 - 12:00', '12:00 - 13:00'
     , '13:00 - 14:00', '14:00 - 15:00', '15:00 - 16:00', '16:00 - 17:00', '17:00 - 18:00', '18:00 - 19:00', '19:00 - 20:00', '20:00 - 21:00', '21:00 - 22:00'];
   ListaParametro: any[] = ["Nombre", "Fecha Inicio", "Fecha Fin"];
@@ -121,18 +165,24 @@ export class HorarioComponent implements OnInit {
   }
   listaHorarios: any;
   CargarHorarioMateria() {
-    this.servicehorario.ListaHorarioMateria().subscribe(
-      data => {
-        this.listaHorarios = data;
-      }
-    )
+
   }
-  estaEnRango(horaInicio:number, horafin:number, horaInit:number, dia:number, dias:number){
-   if(horaInit>=horaInicio && horaInit<=horafin && dia==dias){
-    return true;
-   }else{
-     return false;
-   }
+  estaEnRango(horaInicio: number, horafin: number, horaInit: number, dia: number, dias: number) {
+    if (horaInit >= horaInicio && horaInit <= horafin && dia == dias) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  GuardarHorario(){
+    console.log(this.nuevaHora)
+   // console.log(this.nuevodia, this.nuevaHora, this.nuevaMateria, this.nuevoLabo, this.nuevoCiclo,this.diaselected)
+  }
+  seleccionarHoraFin(item){
+    
+  }
+  ciclo(){
+    console.log(this.nuevoCiclo);
   }
 
 }

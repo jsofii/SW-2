@@ -19,10 +19,10 @@ namespace SW_2.Controllers
     {
         baseswContext context = new baseswContext();
         [HttpGet]
-        [Route("ListaHorarioMateria")]
-        public List<Horario> Lista()
+        [Route("ListaHorarioMateria/{idlaboratorio}/{idciclo}")]
+        public List<Horario> Lista(int idlaboratorio, int idciclo)
         {
-            return this.context.Horario.Where(s=>s.Idmateria==27).ToList();
+            return this.context.Horario.Where(s=>s.Idciclo==idciclo).Where(x=>x.Idlaboratorio==idlaboratorio).ToList();
         }
         [HttpGet]
         [Route("Get/{id}")]
@@ -46,7 +46,7 @@ namespace SW_2.Controllers
             this.context.Add(reserva);
             this.context.SaveChanges();
             return this.context.Reservas.ToList();
-            
+
         }
 
 

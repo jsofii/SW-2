@@ -29,6 +29,13 @@ export class HorarioComponent implements OnInit {
     this.CargarHorarioMateria();
     this.CargarProfesores();
   }
+  cargar(){
+    this.servicehorario.ListaHorarioMateria(this.inputLaboratorioID, this.inputCicloID).subscribe(
+      data=>{
+        this.listaHorarios=data;
+      }
+    )
+  }
 
   ListaTodosCiclos: any;
 
@@ -121,11 +128,7 @@ export class HorarioComponent implements OnInit {
   }
   listaHorarios: any;
   CargarHorarioMateria() {
-    this.servicehorario.ListaHorarioMateria().subscribe(
-      data => {
-        this.listaHorarios = data;
-      }
-    )
+    
   }
   estaEnRango(horaInicio:number, horafin:number, horaInit:number, dia:number, dias:number){
    if(horaInit>=horaInicio && horaInit<=horafin && dia==dias){

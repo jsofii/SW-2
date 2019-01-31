@@ -3,6 +3,9 @@
   max-height: 200px;
   overflow-x: hidden;
 }
+#table tbody td label label #div{
+  background-color: blue;
+}
 
 /* The switch - the box around the slider */
 .switch {

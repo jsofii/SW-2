@@ -57,7 +57,7 @@
             </div>
 
             <div class="panel-heading">
-              <button class="btn btn-primary center-block"><i class="fa fa-check-square"></i>
+              <button class="btn btn-primary center-block" (click)="cargar()"><i class="fa fa-check-square"></i>
                 Aceptar</button>
             </div>
 
@@ -102,7 +102,7 @@
 
 
             <div>
-              <table class="table table-bordered table-striped">
+              <table id="tabla" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th>HORA</th>
@@ -124,7 +124,7 @@
                       
                         <label *ngFor="let item of listaHorarios">
                           
-                          <div *ngIf="item.dia==dia && horaInit>=item.horadeinicio && horaInit<=item.horadefin; else templateName ">
+                          <div id="div" *ngIf="item.dia==dia && horaInit>=item.horadeinicio && horaInit<=item.horadefin; else templateName " style="background-color: green">
 
                             <input [checked]="true" [disabled]="true" type="checkbox">
                             <span class="slider"></span>

@@ -5,6 +5,7 @@ import { Schedule, Day, Week, WorkWeek, Month, Agenda, EventRenderedArgs, Resize
 import { applyCategoryColor } from './helper';
 import { extend } from '@syncfusion/ej2-base';
 import { laboratorioServiceService } from '../laboratorio-service/laboratorio-service.service';
+import { elementEnd } from '@angular/core/src/render3/instructions';
 
 
 Schedule.Inject(WorkWeek);
@@ -18,20 +19,24 @@ Schedule.Inject(WorkWeek);
 export class ReservaComponent implements OnInit {
   public scheduleData:Array<any>;
   public scheduleData2: any;
-  public scheduleData3: any;
+  public scheduleData3: Array<any>;
+  cont:number=0;
   constructor(private serviceLaboratorio: laboratorioServiceService) {
     this.scheduleData= new Array<any>();
     this.serviceLaboratorio.GetReservas().subscribe(
       data => {
+        
         this.scheduleData2 = data;
         this.scheduleData3= this.scheduleData2;
+        this.cont=this.scheduleData3.length;
+        console.log(this.cont);
         this.scheduleData3.forEach(element => {
           let tem = {
             Id: element.id,
             Subject: element.subject,
             StartTime: new Date(element.anio, element.mes, element.dia, element.hora, element.minutos),
             EndTime: new Date(element.aniofin, element.mesfin, element.diafin, element.horafin, element.minutosfin)
-
+            
           }
           this.scheduleData.push(tem);
       
@@ -40,6 +45,35 @@ export class ReservaComponent implements OnInit {
     )
     
     
+  }
+  nuevas:number=0;
+  tamaño: number;
+  n:Date;
+  x:any;
+  fechaInicio:Date;
+  fechaFin:Date;
+  GuardarReserva(){
+    this.tamaño=this.scheduleData.length;
+    this.nuevas= this.scheduleData.length-this.cont;
+    console.log(this.nuevas);
+    for (let index = 0; index < this.nuevas; index++) {
+      console.log(this.scheduleData[this.tamaño-1])
+      this.x= this.scheduleData[this.tamaño-1];
+      this.fechaInicio= this.x.StartTime;
+      this.fechaFin= this.x.EndTime;
+   
+      this.serviceLaboratorio.AddReserva(this.fechaInicio.getFullYear(), this.fechaInicio.getMonth(),
+      this.fechaInicio.getDay(), this.fechaInicio.getHours(), this.fechaInicio.getMinutes(),
+      this.fechaFin.getFullYear(), this.fechaFin.getMonth(), this.fechaFin.getDay(), this.fechaFin.getHours(),
+      this.fechaFin.getMinutes(), this.x.Subject).subscribe(
+        data=>{
+          console.log(this.x);
+        }
+      )
+    
+      
+    }
+   
   }
   ngOnInit() {
 
@@ -57,7 +91,8 @@ export class ReservaComponent implements OnInit {
 
       views: ['WorkWeek'],
       eventSettings: {
-        dataSource: this.scheduleData
+        dataSource: this.scheduleData,
+        
       },
       eventRendered: (args: EventRenderedArgs) => applyCategoryColor(args, scheduleObj.currentView)
     });
@@ -77,9 +112,6 @@ export class ReservaComponent implements OnInit {
       data => {
         this.ListaLaboratorios = data;
 
-
-
-
       }
     )
   }
@@ -91,6 +123,7 @@ export class ReservaComponent implements OnInit {
   print() {
     
     console.log(this.scheduleData);
+    this.GuardarReserva();
     // this.scheduleData.forEach(element => {
     //   console.log(element);
     // });

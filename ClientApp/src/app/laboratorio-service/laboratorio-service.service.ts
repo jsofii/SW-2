@@ -52,6 +52,26 @@ export class laboratorioServiceService {
     return this.http.post('https://localhost:5001/api/Laboratorio/Addlab/', temp);
 
   }
+  AddReserva(Anio, Mes, Dia, Hora, Minutos, AnioFin, MesFin, Diafin, Horafin, Minutosfin, Subject) {
+    var temp = {
+      Anio: Anio,
+      Mes: Mes,
+      Dia: Dia,
+      Hora: Hora,
+      Minutos: Minutos,
+      Aniofin: AnioFin,
+      Mesfin: MesFin,
+      Diafin: Diafin,
+      Horafin: Horafin,
+      Minutosfin: Minutosfin,
+      Subject: Subject
+
+    }
+
+
+    return this.http.post('https://localhost:5001/api/Horario/addReserva', temp);
+
+  }
 
   DeleteLaboratorio(idlaboratorio: number) {
     return this.http.delete('https://localhost:5001/api/Laboratorio/Eliminar/' + idlaboratorio);

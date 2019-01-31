@@ -40,6 +40,14 @@ namespace SW_2.Controllers
           
             return this.context.Reservas.ToList();
         }
+        [HttpPost]
+        [Route("addReserva")]
+        public List<Reservas> addReserva ([FromBody]Reservas reserva){
+            this.context.Add(reserva);
+            this.context.SaveChanges();
+            return this.context.Reservas.ToList();
+            
+        }
 
 
       

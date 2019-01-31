@@ -32,7 +32,7 @@ namespace SW_2.Controllers
         {
             Usuario usr = this.context.Usuario.Find(temp.Idusuario);
             usr.Nombreusuario = temp.Nombreusuario;
-            usr.Password = temp.Password;
+            usr.Password =BCrypt.Net.BCrypt.HashPassword(temp.Password);
             usr.Estado = temp.Estado;
             this.context.SaveChanges();
 

@@ -15,73 +15,74 @@
       </li>
     </ul>
     <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-    
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Gestión Horarios</h4>
-            </div>
-            <div class="modal-body">
-              <label for="">Hora: {{horainicio}}</label>
-              <br>
-              <label for="">Día: {{diaselected}}</label>
-              <br>
-              <label for="">Hora de fin</label>
-              <div class="btn-group">
-                  <select (change)="selectHorafin($event)" class="form-control" id="sel1">
-                      <option value="">Seleccion hora de fin</option>
-                      <option *ngFor="let item of listaHoras" value="{{item}}">{{item}}</option>
-                    
-                    </select>
-              
-              
-                
-              </div>
-              <br>
-              <label for="">Seleccione un laboratorio</label>
-              <div class="btn-group">
-                 
-                  <select (change)="selectIdLaboratorio($event)" class="form-control" id="sel1">
-                    <option value="">Seleccion un laboratorio</option>
-                    <option *ngFor="let item of ListaLaboratorios" value="{{item.idlaboratorio}}">{{item.nombre}}</option>
-                  
-                  </select>
-               
-              </div>
-              <br>
-              <label for="">Seleecione un ciclo</label>
-              <div class="btn-group">
-                  <select (change)="selectIdCiclo($event)"  class="form-control" id="sel1">
-                      <option value="">Seleccion un ciclo</option>
-                      <option *ngFor="let item of ListaTodosCiclos" value="{{item.idciclo}}">{{item.nombre}}</option>
-                    
-                    </select>
-               
-              </div>
-              <br>
-              <label for="">Seleccione una materia</label>
-            
-              <div class="btn-group">
-                  <select (change)="selectIdMateria($event)" class="form-control" id="sel1">
-                      <option value="">Seleccion una materia</option>
-                      <option *ngFor="let item of ListaMaterias" value="{{item.idmateria}}">{{item.nombre}}</option>
-                    
-                    </select>
-                
-                
-              </div>
-    
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-success" (click)="GuardarHorario()">Guardar</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Gestión Horarios</h4>
           </div>
-    
+          <div class="modal-body">
+            <label for="">Hora: {{horainicio}}</label>
+            <br>
+            <label for="">Día: {{diaselected}}</label>
+            <br>
+            <label for="">Hora de fin</label>
+            <div class="btn-group">
+              <select (change)="selectHorafin($event)" class="form-control" id="sel1">
+                <option value="">Seleccion hora de fin</option>
+
+
+                <option *ngFor="let item of listaHoras" value="{{item}}">{{item}}</option>
+              </select>
+
+
+
+            </div>
+            <br>
+            <label for="">Seleccione un laboratorio</label>
+            <div class="btn-group">
+
+              <select (change)="selectIdLaboratorio($event)" class="form-control" id="sel1">
+                <option value="">Seleccion un laboratorio</option>
+                <option *ngFor="let item of ListaLaboratorios" value="{{item.idlaboratorio}}">{{item.nombre}}</option>
+
+              </select>
+
+            </div>
+            <br>
+            <label for="">Seleecione un ciclo</label>
+            <div class="btn-group">
+              <select (change)="selectIdCiclo($event)" class="form-control" id="sel1">
+                <option value="">Seleccion un ciclo</option>
+                <option *ngFor="let item of ListaTodosCiclos" value="{{item.idciclo}}">{{item.nombre}}</option>
+
+              </select>
+
+            </div>
+            <br>
+            <label for="">Seleccione una materia</label>
+
+            <div class="btn-group">
+              <select (change)="selectIdMateria($event)" class="form-control" id="sel1">
+                <option value="">Seleccion una materia</option>
+                <option *ngFor="let item of ListaMaterias" value="{{item.idmateria}}">{{item.nombre}}</option>
+
+              </select>
+
+
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-success" (click)="GuardarHorario()">Guardar</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
         </div>
+
       </div>
+    </div>
 
     <div class="tab-content">
       <div class="tab-pane active" id="ciclo" style="margin-top: 20px;">
@@ -130,7 +131,7 @@
             </div>
 
             <div class="col-lg-6">
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <legend for="sel1">Seleccione un Profesor:</legend>
                 <div class="btn-group">
                   <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{inputProfesorNombre}}
@@ -143,11 +144,11 @@
                     </li>
                   </ul>
                 </div>
-              </div>
+              </div> -->
             </div>
 
             <div class="col-lg-6">
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <legend for="sel1">Seleccione una Materia:</legend>
                 <div class="btn-group">
                   <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{inputMateriaNombre}}
@@ -160,7 +161,7 @@
                     </li>
                   </ul>
                 </div>
-              </div>
+              </div> -->
             </div>
 
             <div class="panel-heading">
@@ -194,8 +195,8 @@
                       <label *ngFor="let item of listaHorarios">
 
                         <div *ngIf="item.dia==dia && horaInit>=item.horadeinicio && horaInit<=item.horadefin; else templateName "
-                          style="background-color: rgb(151, 187, 175); height: 24px; width: 125px;">
-
+                          style="background-color: rgb(151, 187, 175); ">
+                          <p>{{item.nombre}}</p>
                           <!-- <input [checked]="true" [disabled]="true" type="checkbox">
                             <span class="slider"></span> -->
                         </div>
@@ -236,7 +237,7 @@
 
 
       </div>
-      
+
 
       <div class="tab-pane" id="horario" style="margin-top: 20px;">
 
@@ -260,7 +261,7 @@
               </div>
               <div class="dropdown col-lg-4">
                 <div class="form-group">
-                  <select  class="form-control" id="sel1">
+                  <select class="form-control" id="sel1">
                     <option>Seleccione una opción</option>
                     <option *ngFor="let item of ListaParametro">{{item}}</option>
 

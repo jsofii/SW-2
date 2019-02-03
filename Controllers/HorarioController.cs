@@ -17,12 +17,39 @@ namespace SW_2.Controllers
 
     public class HorarioController : Controller
     {
+        public class JoinHorario
+        {
+            public int Idhorario { get; set; }
+            public int Idlaboratorio { get; set; }
+            public int Idmateria { get; set; }
+            public int Idciclo { get; set; }
+            public int Horadeinicio { get; set; }
+            public int Horadefin { get; set; }
+            public int Dia { get; set; }
+          
+            public string Nombre { get; set; }
+
+        }
         baseswContext context = new baseswContext();
         [HttpGet]
         [Route("ListaHorarioMateria/{idlaboratorio}/{idciclo}")]
-        public List<Horario> Lista(int idlaboratorio, int idciclo,int idmateria)
+        public List<JoinHorario> Lista(int idlaboratorio, int idciclo, int idmateria)
         {
-            return this.context.Horario.Where(s => s.Idciclo == idciclo).Where(x => x.Idlaboratorio == idlaboratorio).ToList();
+              var query = from Horario in context.Horario
+                        join
+            materia in context.Materia on Horario.Idmateria equals materia.Idmateria
+                        select new JoinHorario
+                        {
+                            Idhorario=Horario.Idhorario,
+                            Idlaboratorio= Horario.Idlaboratorio,
+                            Idmateria= Horario.Idmateria,
+                            Idciclo= Horario.Idciclo,
+                            Horadeinicio= Horario.Horadeinicio,
+                            Horadefin= Horario.Horadefin,
+                            Dia= Horario.Dia,
+                            Nombre= materia.Nombre
+                        };
+            return query.Where(s => s.Idciclo == idciclo).Where(x => x.Idlaboratorio == idlaboratorio).ToList();
         }
         [HttpGet]
         [Route("Get/{id}")]

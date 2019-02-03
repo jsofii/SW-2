@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
           nombre: this.usuario,
           password: this.password,
         }
-        this.router.navigateByUrl("/laboratorio/" + user.nombre + '/' + 0);
+        this.router.navigateByUrl("/laboratorio");
 
         // this.nombre.emit(user);
       },

@@ -29,31 +29,28 @@ namespace SW_2.Controllers
         [Route("send")]
         public ActionResult EnviarCorreo(String para, String asunto, String mensaje)
         {
-            string x = "";
-            try
-            {
-                MailMessage correo = new MailMessage();
-                correo.From = new MailAddress("sofig.0106@hotmail.com");
+            string x="";
+          try{
+                MailMessage correo= new MailMessage();
+                correo.From=new MailAddress("sofig.0106@hotmail.com");
                 correo.To.Add(para);
-                correo.Subject = asunto;
-                correo.Body = mensaje;
-                correo.IsBodyHtml = true;
-                correo.Priority = MailPriority.Normal;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 25;
-                smtp.EnableSsl = true;
-                smtp.UseDefaultCredentials = true;
-                string sCuentaCorreo = "sofig.0106@gmail.com";
-                string sPasswordCorreo = "5109899555678";
-                smtp.Credentials = new System.Net.NetworkCredential(sCuentaCorreo, sPasswordCorreo);
+                correo.Subject=asunto;
+                correo.Body=mensaje;
+                correo.IsBodyHtml=true;
+                correo.Priority=MailPriority.Normal;
+                SmtpClient smtp= new SmtpClient();
+                smtp.Host="smtp.gmail.com";
+                smtp.Port=25;
+                smtp.EnableSsl=false;
+                smtp.UseDefaultCredentials=true;
+                string sCuentaCorreo="sofig.0106@gmail.com";
+                string sPasswordCorreo="5109899555678";
+                smtp.Credentials=new System.Net.NetworkCredential(sCuentaCorreo,sPasswordCorreo);
                 smtp.Send(correo);
-                ViewBag.mensaje = "mensaje enviador";
+                ViewBag.mensaje="mensaje enviador";
 
-            }
-            catch (Exception ex)
-            {
-
+            }catch(Exception ex){
+                Console.WriteLine(ex);
             }
             return View();
         }

@@ -211,6 +211,7 @@ export class HorarioComponent implements OnInit {
   selectHorafin (event: any) {
     //update the ui
     this.horafin = event.target.value;
+    
     console.log(this.horafin)
   }
 
@@ -221,7 +222,7 @@ export class HorarioComponent implements OnInit {
   }
 
   GuardarHorario(){
-    this.servicehorario.AgregarHorario(this.idlaboratorio,this.idmateria,this.idciclo,this.horainicio,this.horafin,this.nuevodia).subscribe(
+    this.servicehorario.AgregarHorario(this.idlaboratorio,this.idmateria,this.idciclo,this.horainicio,this.horafin-1,this.nuevodia).subscribe(
 
       data => {
         alert('Horario agregado correctamente.')

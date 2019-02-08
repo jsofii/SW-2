@@ -25,7 +25,7 @@ namespace SW_2.Controllers
         {
             return View();
         }
-        [HttpPost]
+        /* [HttpPost]
         [Route("send")]
         public ActionResult EnviarCorreo(String para, String asunto, String mensaje)
         {
@@ -53,6 +53,52 @@ namespace SW_2.Controllers
                 Console.WriteLine(ex);
             }
             return View();
+        }*/
+
+
+        [HttpPost]
+        [Route("send")]
+        public void EnviarCorreo(String correoDestinatario, String asunto,String cuerpoMensaje)
+        {
+            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+            //a quien va dirigido
+           
+            msg.To.Add(correoDestinatario);
+           
+            msg.Subject = asunto;
+            msg.SubjectEncoding = System.Text.Encoding.UTF8;
+            
+            //una copia a alguien adicional que deba recibir el correo
+            //msg.Bcc.Add("aqui el correo");
+
+            msg.Body = cuerpoMensaje;
+            msg.BodyEncoding = System.Text.Encoding.UTF8;
+            msg.IsBodyHtml = true;
+
+            //quien está enviando el correo
+            //msg.From = new System.Net.Mail.MailAddress("transporteepn@gmail.com");
+            msg.From = new System.Net.Mail.MailAddress("sofig.0106@gmail.com");
+
+            System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+
+            //las credenciales de quien envia y se coloca el password
+            
+            //cliente.Credentials = new System.Net.NetworkCredential("transporteepn@gmail.com", "EPN123456");
+            cliente.Credentials = new System.Net.NetworkCredential("sofig.0106@gmail.com", "5109899555678");
+            //a gmail
+
+            cliente.Port = 587;
+            cliente.EnableSsl = true;
+            cliente.Host = "smtp.gmail.com"; //mail.dominio.com
+            try
+            {
+                cliente.Send(msg);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                //Console.ReadKey();
+            }
         }
 
 

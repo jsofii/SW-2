@@ -23,6 +23,12 @@ export class materiaServiceService {
     return this.http.get('https://localhost:5001/api/Materia/ListaMaterias');
 
   }
+
+  ListaTodasMateriasActivas() {
+    return this.http.get('https://localhost:5001/api/Materia/ListaMateriasActivas');
+
+  }
+
   GetMateriaId(id: number) {
     return this.http.get('https://localhost:5001/api/Materia/Get/' + id);
   }

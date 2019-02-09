@@ -157,7 +157,7 @@ export class HorarioComponent implements OnInit {
   nuevodia:any;
 
   CargarMaterias() {
-    this.servicemateria.ListaTodasMaterias().subscribe(
+    this.servicemateria.ListaTodasMateriasActivas().subscribe(
       data => {
         this.ListaMaterias = data;
       }
@@ -197,7 +197,7 @@ export class HorarioComponent implements OnInit {
     
   }
   ciclo(){
-    console.log(this.nuevoCiclo);
+    //console.log(this.nuevoCiclo);
   }
 
 
@@ -212,26 +212,26 @@ export class HorarioComponent implements OnInit {
   selectIdMateria (event: any) {
     //update the ui
     this.idmateria = event.target.value;
-    console.log(this.idmateria)
+   // console.log(this.idmateria)
   }
 
   selectIdCiclo (event: any) {
     //update the ui
     this.idciclo = event.target.value;
-    console.log(this.idciclo)
+   // console.log(this.idciclo)
   }
 
   selectHorafin (event: any) {
     //update the ui
     this.horafin = event.target.value;
     
-    console.log(this.horafin)
+   // console.log(this.horafin)
   }
 
   selectIdLaboratorio (event: any) {
     //update the ui
     this.idlaboratorio = event.target.value;
-    console.log(this.idlaboratorio)
+    //console.log(this.idlaboratorio)
   }
 
   GuardarHorario(){

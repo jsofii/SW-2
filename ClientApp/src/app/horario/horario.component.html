@@ -286,16 +286,18 @@
                     <th class="col-lg-5">Nombre</th>
                     <th class="col-lg-5">Fecha Incio</th>
                     <th class="col-lg-5">Fecha Fin</th>
+                    <th class="col-lg-5">Estado</th>
                   </tr>
                 </thead>
                 <tbody id="myTable">
-                  <tr class="active" *ngFor="let ciclo of ListaTodosCiclos">
+                  <tr class="active" *ngFor="let ciclo of ListaTodosCiclosDisponibles">
 
                     <td class="col-lg-5">{{ciclo.nombre}}</td>
 
                     <td class="col-lg-5">{{ciclo.fechainicio}}</td>
 
                     <td class="col-lg-5">{{ciclo.fechafin}}</td>
+                    <td class="col-lg-5">{{ciclo.estado}}</td>
 
                     <td><button [routerLink]='["/ciclo-gestion",ciclo.idciclo]' class="btn btn-success "><i class="fa fa-edit"></i>
                         Editar</button></td>

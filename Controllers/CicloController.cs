@@ -18,6 +18,18 @@ namespace SW_2.Controllers
         {
             return this.context.Ciclo.ToList();
         }
+
+
+        [HttpGet]
+        [Route("ListaCiclosActivos")]
+        public List<Ciclo> ListaCiclosActivos()
+        {
+            String estado="ACTIVO";
+            return this.context.Ciclo.Where(x=>x.Estado==estado).ToList();
+        }
+
+
+
         [HttpGet]
         [Route("Get/{id}")]
         public Ciclo Ciclo(int id)
@@ -45,7 +57,8 @@ namespace SW_2.Controllers
                 {
                     Nombre = temp.Nombre,
                     Fechainicio = temp.Fechainicio,
-                    Fechafin= new DateTime(fechaAux.Year,fechaAux.Month,fechaAux.Day,23,59,59)
+                    Fechafin= new DateTime(fechaAux.Year,fechaAux.Month,fechaAux.Day,23,59,59),
+                    Estado=temp.Estado
 
                 };
 
@@ -66,6 +79,7 @@ namespace SW_2.Controllers
             ciclo.Nombre=temp.Nombre;
             ciclo.Fechainicio=temp.Fechainicio;
             ciclo.Fechafin=temp.Fechafin;
+            ciclo.Estado=temp.Estado;
             context.SaveChanges();
             return this.context.Ciclo.ToList();
             

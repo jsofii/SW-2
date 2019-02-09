@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
           if(data){
             this.usuarioService.temporalPass(this.correo).subscribe(
                 data=>{
-
+                    alert('Nueva contraseña enviada. Revise su correo electrónico.');
                 }
             )
           }else{

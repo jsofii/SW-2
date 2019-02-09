@@ -19,6 +19,16 @@ namespace SW_2.Controllers
             return this.context.Materia.ToList();
         }
 
+
+         [HttpGet]
+        [Route("ListaMateriasActivas")]
+        public List<Materia> ListaMateriasActivas()
+        {
+            String estado="ACTIVO";
+            return this.context.Materia.Where(x=>x.Estado==estado).ToList();
+        }
+
+
         [HttpGet]
         [Route("Get/{id}")]
         public Materia Materia(int id)

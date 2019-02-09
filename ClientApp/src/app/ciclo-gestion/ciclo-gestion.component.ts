@@ -9,11 +9,11 @@ import { Alert } from 'selenium-webdriver';
   styleUrls: ['./ciclo-gestion.component.css']
 })
 export class CicloGestionComponent implements OnInit {
-  idciclo:any;
+  idciclo: any;
   constructor(private serviceCiclo: cicloServiceService, private activeRoute: ActivatedRoute) {
-    
-    
-    
+
+
+
   }
   ngOnInit() {
     this.idciclo = this.activeRoute.snapshot.params.idciclo;
@@ -24,9 +24,9 @@ export class CicloGestionComponent implements OnInit {
 
   inputCiclo: any;
   inputFechaInicio: any;
-  inputFechaFin: any; 
+  inputFechaFin: any;
   cicloAux: any;
-  inputEstado:any="Seleccione un estado";
+  inputEstado: any = "Seleccione un estado";
 
   cargarCiclo() {
     this.serviceCiclo.GetCicloId(this.idciclo).subscribe(
@@ -35,53 +35,55 @@ export class CicloGestionComponent implements OnInit {
         this.inputCiclo = this.cicloAux.nombre;
         this.inputFechaInicio = this.cicloAux.fechainicio;
         this.inputFechaFin = this.cicloAux.fechafin;
-        this.inputEstado=this.cicloAux.estado;
+        this.inputEstado = this.cicloAux.estado;
       }
     )
   }
 
-  
+
   CambiarValor(idcicl: number) {
     this.idciclo = idcicl;
-    alert(this.idciclo);
+    //alert(this.idciclo);
     this.cargarCiclo();
-    
+
   }
 
-  select(estado:any){
-      this.inputEstado=estado;
+  select(estado: any) {
+    this.inputEstado = estado;
   }
 
   GuardarCiclo() {
-    
+
     if (this.idciclo == 0) {
-      
-    
-      this.serviceCiclo.AddCiclo(this.inputCiclo, this.inputFechaInicio,this.inputFechaFin,this.inputEstado).subscribe(
+
+      if (this.inputEstado == "Seleccione un estado") {
+        this.inputEstado = "ACTIVO";
+      }
+      this.serviceCiclo.AddCiclo(this.inputCiclo, this.inputFechaInicio, this.inputFechaFin, this.inputEstado).subscribe(
         data => {
           if (data == null) {
             alert("ATENCIÓN: Ya existe un ciclo con ese nombre.")
-          }else{
-            this.inputCiclo="";
-            this.inputFechaFin="";
-            this.inputFechaInicio="";
-            this.inputEstado="";
+          } else {
+            this.inputCiclo = "";
+            this.inputFechaFin = "";
+            this.inputFechaInicio = "";
+            this.inputEstado = "Seleccione un estado";
             alert("Ciclo registrado exitosamente!");
           }
-          
+
 
         }
       )
-    }else{
-      
+    } else {
+
       alert(this.idciclo);
-      this.serviceCiclo.EditCiclo(this.idciclo, this.inputCiclo, this.inputFechaInicio,this.inputFechaFin,this.inputEstado).subscribe(
-        data=>{
+      this.serviceCiclo.EditCiclo(this.idciclo, this.inputCiclo, this.inputFechaInicio, this.inputFechaFin, this.inputEstado).subscribe(
+        data => {
           if (data == null) {
             alert("ATENCIÓN: Ya existe un ciclo con ese nombre.")
-          }else{
-            
-          alert("Ciclo modificado exitosamente!");
+          } else {
+
+            alert("Ciclo modificado exitosamente!");
           }
         }
       )

@@ -26,6 +26,7 @@ export class CicloGestionComponent implements OnInit {
   inputFechaInicio: any;
   inputFechaFin: any; 
   cicloAux: any;
+  inputEstado:any="Seleccione un estado";
 
   cargarCiclo() {
     this.serviceCiclo.GetCicloId(this.idciclo).subscribe(
@@ -34,6 +35,7 @@ export class CicloGestionComponent implements OnInit {
         this.inputCiclo = this.cicloAux.nombre;
         this.inputFechaInicio = this.cicloAux.fechainicio;
         this.inputFechaFin = this.cicloAux.fechafin;
+        this.inputEstado=this.cicloAux.estado;
       }
     )
   }
@@ -46,17 +48,24 @@ export class CicloGestionComponent implements OnInit {
     
   }
 
+  select(estado:any){
+      this.inputEstado=estado;
+  }
+
   GuardarCiclo() {
     
     if (this.idciclo == 0) {
       
     
-      this.serviceCiclo.AddCiclo(this.inputCiclo, this.inputFechaInicio,this.inputFechaFin).subscribe(
+      this.serviceCiclo.AddCiclo(this.inputCiclo, this.inputFechaInicio,this.inputFechaFin,this.inputEstado).subscribe(
         data => {
           if (data == null) {
             alert("ATENCIÓN: Ya existe un ciclo con ese nombre.")
           }else{
-            
+            this.inputCiclo="";
+            this.inputFechaFin="";
+            this.inputFechaInicio="";
+            this.inputEstado="";
             alert("Ciclo registrado exitosamente!");
           }
           
@@ -66,7 +75,7 @@ export class CicloGestionComponent implements OnInit {
     }else{
       
       alert(this.idciclo);
-      this.serviceCiclo.EditCiclo(this.idciclo, this.inputCiclo, this.inputFechaInicio,this.inputFechaFin).subscribe(
+      this.serviceCiclo.EditCiclo(this.idciclo, this.inputCiclo, this.inputFechaInicio,this.inputFechaFin,this.inputEstado).subscribe(
         data=>{
           if (data == null) {
             alert("ATENCIÓN: Ya existe un ciclo con ese nombre.")

@@ -18,6 +18,14 @@ namespace SW_2.Controllers
         {
             return this.context.Laboratorio.ToList();
         }
+        
+        [HttpGet]
+        [Route("ListaLaboratoriosActivos")]
+        public List<Laboratorio> ListaActvos()
+        {
+            String estado="ACTIVO";
+            return this.context.Laboratorio.Where(x=>x.Estado==estado).ToList();
+        }
 
         [HttpGet]
         [Route("Get/{id}")]

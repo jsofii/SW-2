@@ -18,43 +18,52 @@ export class cicloServiceService {
     return this.http.get('https://localhost:5001/api/Ciclo/ListaCiclos');
 
   }
-  GetCicloId(id:number)
-  {
-    return this.http.get('https://localhost:5001/api/Ciclo/Get/'+ id);
+
+  ListaTodosCiclosActivos() {
+    return this.http.get('https://localhost:5001/api/Ciclo/ListaCiclosActivos');
+
   }
-  EditCiclo(idciclo: any,nombreCiclo: any, fechainicio: any,fechaifin: any){
+
+
+  GetCicloId(id: number) {
+    return this.http.get('https://localhost:5001/api/Ciclo/Get/' + id);
+  }
+  EditCiclo(idciclo: any, nombreCiclo: any, fechainicio: any, fechaifin: any, estado: any) {
     var temp = {
       Idciclo: idciclo,
       Nombre: nombreCiclo,
       Fechainicio: fechainicio,
-      Fechafin: fechaifin
-      
+      Fechafin: fechaifin,
+      Estado: estado
+
+
     }
 
-    
+
     return this.http.put('https://localhost:5001/api/Ciclo/Edit/', temp);
 
   }
-  
-  AddCiclo(nombreCiclo: any, fechainicio: any,fechaifin: any) {
+
+  AddCiclo(nombreCiclo: any, fechainicio: any, fechaifin: any, estado: any) {
     var temp = {
       Nombre: nombreCiclo,
       Fechainicio: fechainicio,
-      Fechafin: fechaifin
+      Fechafin: fechaifin,
+      Estado: estado
     }
 
-    
+
     return this.http.post('https://localhost:5001/api/Ciclo/Addciclo/', temp);
 
   }
 
-  DeleteCiclo(idciclo: number){
+  DeleteCiclo(idciclo: number) {
     return this.http.delete('https://localhost:5001/api/Ciclo/Eliminar/' + idciclo);
-  
+
   }
 
-  
 
 
-  
+
+
 }

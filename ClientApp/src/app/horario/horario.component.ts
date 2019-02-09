@@ -72,14 +72,27 @@ export class HorarioComponent implements OnInit {
 
   ListaTodosCiclos: any;
 
-  ObtenerTodosCiclos() {
-    this.serviceCiclo.ListaTodosCiclos().subscribe(
+  ObtenerTodosCiclosActivos() {
+    this.serviceCiclo.ListaTodosCiclosActivos().subscribe(
 
       data => {
         this.ListaTodosCiclos = data;
       }
     )
   }
+
+
+  ListaTodosCiclosDisponibles:any;
+  ObtenerTodosCiclos() {
+    this.serviceCiclo.ListaTodosCiclos().subscribe(
+
+      data => {
+        this.ListaTodosCiclosDisponibles = data;
+      }
+    )
+  }
+
+  
 
   DeleteCiclo(idciclo: number) {
 
@@ -100,7 +113,7 @@ export class HorarioComponent implements OnInit {
   inputLaboratorioID: any;
   ListaLaboratorios: any;
   CargarLaboratorios() {
-    this.serviceLaboratorio.ListaTodosLaboratorios().subscribe(
+    this.serviceLaboratorio.ListaLaboratoriosActivos().subscribe(
       data => {
         this.ListaLaboratorios = data;
       }

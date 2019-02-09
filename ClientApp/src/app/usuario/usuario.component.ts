@@ -123,7 +123,9 @@ export class UsuarioComponent implements OnInit {
     if (index2 == -1) {
       this.serviceUsuario.EditarUsuario(this.idUsuario, this.inputNombreUsuario, this.inputPassword, this.inputEstado).subscribe(
         data => {
+          
           this.CargarUsuarios();
+          alert('Usuario actualizado.');
         },
         error => {
           alert("Error al editar usuario");

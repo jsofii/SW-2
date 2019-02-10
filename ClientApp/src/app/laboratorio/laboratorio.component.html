@@ -40,8 +40,8 @@
 
             </div>
             <div class="col-lg-4">
-              <input style="margin-left: 40px" class="form-control" id="idBusqueda" [(ngModel)]="busquedalabo" type="text"
-                placeholder="Buscar..">
+              <input style="margin-left: 40px" class="form-control" id="idBusqueda" [(ngModel)]="busquedalabo"
+                type="text" placeholder="Buscar..">
             </div>
           </div>
         </div>
@@ -66,13 +66,33 @@
 
                   <td class="col-lg-5">{{laboratorio.nombre}}</td>
                   <td class="col-lg-5">{{laboratorio.estado}}</td>
-                  <td><button data-toggle="modal" data-target="#myModal" class="btn btn-success" (click)="CambiarValor(laboratorio.idlaboratorio)"><i
-                        class="fa fa-edit"></i>
+                  <td><button data-toggle="modal" data-target="#myModal" class="btn btn-success"
+                      (click)="CambiarValor(laboratorio.idlaboratorio)"><i class="fa fa-edit"></i>
                       Editar</button></td>
-                      <td><button class="btn btn-primary" (click)="ActualizarEstado(laboratorio.idlaboratorio,laboratorio.numero,laboratorio.nombre,'ACTIVO')"><i class="fa fa-plus-square-o"></i>
-                        Activar</button></td>
-                    <td><button class="btn btn-danger" (click)="ActualizarEstado(laboratorio.idlaboratorio,laboratorio.numero,laboratorio.nombre,'INACTIVO')"><i class="fa fa-minus-square-o"></i>
-                        Desactivar</button></td>
+                  <!-- <td><button class="btn btn-primary"
+                      (click)="ActualizarEstado(laboratorio.idlaboratorio,laboratorio.numero,laboratorio.nombre,'ACTIVO')"><i
+                        class="fa fa-plus-square-o"></i>
+                      Activar</button></td>
+                  <td><button class="btn btn-danger"
+                      (click)="ActualizarEstado(laboratorio.idlaboratorio,laboratorio.numero,laboratorio.nombre,'INACTIVO')"><i
+                        class="fa fa-minus-square-o"></i>
+                      Desactivar</button></td> -->
+
+
+
+                  <td *ngIf="laboratorio.estado=='ACTIVO'">
+                  <button class="btn btn-info"
+                      (click)="ActualizarEstado(laboratorio.idlaboratorio,laboratorio.numero,laboratorio.nombre,'INACTIVO')"><i
+                        class="fa fa-minus-square-o"></i>
+                      Desactivar</button>
+                  </td>
+                  <td *ngIf="laboratorio.estado=='INACTIVO'">
+                    <button class="btn btn-info"
+                      (click)="ActualizarEstado(laboratorio.idlaboratorio,laboratorio.numero,laboratorio.nombre,'ACTIVO')"><i
+                        class="fa fa-plus-square-o"></i>
+                      Activar</button>
+                  </td>
+
                 </tr>
 
               </tbody>
@@ -99,19 +119,21 @@
         <div class="modal-body">
 
           <label for="mat">Número de laboratorio:</label>
-          <input [(ngModel)]="inputNumero" type="text" class="form-control" id="mat" pattern="[0-9]+" #inputNum="ngModel">
+          <input [(ngModel)]="inputNumero" type="text" class="form-control" id="mat" pattern="[0-9]+"
+            #inputNum="ngModel">
           <div *ngIf="inputNum.errors && (inputNum.dirty || inputNum.touched)" class="alert alert-danger">
-              <div [hidden]="!inputNum.errors.required">
-                Necesita ingresar número de laboratorio.
-              </div>
-              <div [hidden]="!inputNum.errors.pattern">
-                Necesita ingresar un número entero.
-              </div>
+            <div [hidden]="!inputNum.errors.required">
+              Necesita ingresar número de laboratorio.
             </div>
+            <div [hidden]="!inputNum.errors.pattern">
+              Necesita ingresar un número entero.
+            </div>
+          </div>
 
 
           <label style="margin-top: 20px" for="mat">Nombre de laboratorio:</label>
-          <input [(ngModel)]="inputNombre" type="text" class="form-control" id="mat" pattern="[A-Za-z- ]+" #inputNom="ngModel">
+          <input [(ngModel)]="inputNombre" type="text" class="form-control" id="mat" pattern="[A-Za-z- ]+"
+            #inputNom="ngModel">
           <div *ngIf="inputNom.errors && (inputNom.dirty || inputNom.touched)" class="alert alert-danger">
             <div [hidden]="!inputNom.errors.required">
               Necesita ingresar nombre de laboratorio.

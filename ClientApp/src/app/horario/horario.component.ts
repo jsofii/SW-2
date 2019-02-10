@@ -24,6 +24,7 @@ export class HorarioComponent implements OnInit {
   }
   ngOnInit() {
     this.ObtenerTodosCiclos();
+    this.ObtenerTodosCiclosActivos();
     this.CargarLaboratorios();
     this.CargarMaterias();
     this.CargarHorarioMateria();

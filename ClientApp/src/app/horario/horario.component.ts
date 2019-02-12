@@ -244,6 +244,13 @@ export class HorarioComponent implements OnInit {
     )
   }
 
+
+  parametroBusqueda:any=0;
+
+  selectParametro(event:any){
+    this.parametroBusqueda=event.target.value;
+    console.log(this.parametroBusqueda)
+  }
  
 
 }

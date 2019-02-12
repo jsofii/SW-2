@@ -31,11 +31,15 @@ export class PipemateriaPipe implements PipeTransform {
 
     if (this.bandera == 0) {
       return items.filter(it => {
-        return it.nombre.toLowerCase().includes(searchText);
+        return it.nombreM.toLowerCase().includes(searchText);
       });
-    } else {
+    } else if(this.bandera == 1) {
       return items.filter(it => {
         return it.codigo.toLowerCase().includes(searchText);
+      });
+    }else if(this.bandera == 2) {
+      return items.filter(it => {
+        return it.nombreC.toLowerCase().includes(searchText);
       });
     }
 

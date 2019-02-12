@@ -73,24 +73,25 @@ export class LaboratorioComponent implements OnInit {
   inputNumero: number;
   inputNombre: any;
   laboratorioAux: any;
-
+  estadoAntesActualizar:any;
   cargarLaboratorio() {
     this.serviceLaboratorio.GetLaboratorioId(this.idlaboratorio).subscribe(
       data => {
         this.laboratorioAux = data;
         this.inputNumero = this.laboratorioAux.numero;
         this.inputNombre = this.laboratorioAux.nombre;
+        this.estadoAntesActualizar=this.laboratorioAux.estado;
       }
     )
   }
 
 
-  ActualizarEstado(idlabo:number,numero:any,nombre:any,estado:any){
-    this.serviceLaboratorio.EditLaboratorio(idlabo,numero,nombre,estado).subscribe(
+  ActualizarEstado(idlabo: number, numero: any, nombre: any, estado: any) {
+    this.serviceLaboratorio.EditLaboratorio(idlabo, numero, nombre, estado).subscribe(
       data => {
         this.ObtenerTodosLaboratorios();
-      
-    }
+
+      }
     )
   }
 
@@ -103,12 +104,12 @@ export class LaboratorioComponent implements OnInit {
         if (/^[a-zA-Z- ]*$/.test(this.inputNombre) == false) {
           alert('ATENCIÓN: "Nombre de laboratorio" no acepta caracteres especiales o numericos.');
         } else {
-          this.serviceLaboratorio.AddLaboratorio(this.inputNumero, this.inputNombre,"ACTIVO").subscribe(
+          this.serviceLaboratorio.AddLaboratorio(this.inputNumero, this.inputNombre, "ACTIVO").subscribe(
 
             data => {
               if (data == null) {
                 alert('ATENCIÓN: Ya existe un laboratorio con ese número.');
-              }else{
+              } else {
                 alert('Laboratorio registrado.');
               }
               this.ObtenerTodosLaboratorios();
@@ -130,11 +131,11 @@ export class LaboratorioComponent implements OnInit {
           const index2 = this.ListaTodosLaboratorios.map(x => x.numero).indexOf(Number(this.inputNumero));
 
           if (index2 == -1) {
-            this.serviceLaboratorio.EditLaboratorio(this.idlaboratorio, this.inputNumero, this.inputNombre,"ACTIVO").subscribe(
+            this.serviceLaboratorio.EditLaboratorio(this.idlaboratorio, this.inputNumero, this.inputNombre, this.estadoAntesActualizar).subscribe(
               data => {
                 if (data == null) {
                   alert('ATENCIÓN: Ya existe un laboratorio con ese número..');
-                }else{
+                } else {
                   alert('Información de laboratorio actualizada.');
                 }
                 this.ObtenerTodosLaboratorios();
@@ -157,11 +158,13 @@ export class LaboratorioComponent implements OnInit {
 
   }
 
+  
 
 
-  parametroBusqueda:any;
 
-  selectParametro(event:any){
-this.parametroBusqueda=event.target.value;
+  parametroBusqueda: any;
+
+  selectParametro(event: any) {
+    this.parametroBusqueda = event.target.value;
   }
 }

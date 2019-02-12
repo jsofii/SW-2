@@ -14,7 +14,7 @@ export class MateriaComponent implements OnInit {
   ListaTodasMaterias: any;
 
   ObtenerTodasMaterias() {
-    this.serviceMateria.ListaTodasMaterias().subscribe(
+    this.serviceMateria.ListaMateriasPorCarrera().subscribe(
 
       data => {
         this.ListaTodasMaterias = data;
@@ -76,6 +76,7 @@ export class MateriaComponent implements OnInit {
 
 
   materiaAux: any;
+  estadoAntesActualizar:any;
   cargarMateria() {
     this.serviceMateria.GetMateriaId(this.idmateria).subscribe(
       data => {
@@ -83,13 +84,14 @@ export class MateriaComponent implements OnInit {
         this.inputMateria = this.materiaAux.nombre;
         this.inputCodigo = this.materiaAux.codigo;
         this.carreraAux = this.materiaAux.carrera;
+        this.estadoAntesActualizar=this.materiaAux.estado;
       }
     )
   }
 
   DeleteMateria(idmateria: number) {
 
-    if (confirm("SE ELIMINARA?")) {
+    if (confirm("¿SE ELIMINARÁ?")) {
 
 
       this.serviceMateria.DeleteMateria(idmateria).subscribe(
@@ -139,7 +141,7 @@ export class MateriaComponent implements OnInit {
       const index2 = this.ListaTodasMaterias.map(x => x.codigo).indexOf(String(this.inputCodigo));
 
       if(index2==-1){
-        this.serviceMateria.EditMateria(this.idmateria, this.inputMateria, this.inputCodigo, this.carreraAux,"ACTIVO").subscribe(
+        this.serviceMateria.EditMateria(this.idmateria, this.inputMateria, this.inputCodigo, this.carreraAux,this.estadoAntesActualizar).subscribe(
           data => {
             if (data == null) {
               //alert("ATENCIÓN: Ya existe una materia con ese código.");

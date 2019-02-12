@@ -43,9 +43,13 @@
 
                     <div class="dropdown col-lg-4">
                       <div class="form-group">
-                        <select class="form-control" id="sel1">
+                        <select (change)="selectParametro($event)" class="form-control" id="sel1">
                           <option>Seleccione una opción</option>
-                          <option *ngFor="let item of ListaParametro">{{item}}</option>
+                          <option value="0">Nombre</option>
+                          <option value="1">identificación</option>
+                          <option value="2">Rol</option>
+                          <option value="3">Correo</option>
+                          <!-- <option *ngFor="let item of ListaParametro">{{item}}</option> -->
 
                         </select>
                       </div>

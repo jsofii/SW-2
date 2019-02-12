@@ -43,6 +43,7 @@
                   <option >Seleccione una opción</option>
                   <option value="0">Nombre</option>
                   <option value="1">Código</option>
+                  <option value="2">Carrera</option>
                   <!-- <option *ngFor="let item of ListaParametro">{{item}}</option> -->
 
                 </select>
@@ -66,6 +67,7 @@
                 <tr>
                   <th class="col-lg-5">Nombre</th>
                   <th class="col-lg-5">Código</th>
+                  <th class="col-lg-5">Carrera</th>
                   <th class="col-lg-5">Estado</th>
 
                 </tr>
@@ -73,10 +75,11 @@
               <tbody id="myTable">
                 <tr class="active" *ngFor="let materia of ListaTodasMaterias | pipemateria:busquedamateria">
 
-                  <td class="col-lg-5">{{materia.nombre}}</td>
+                  <td class="col-lg-5">{{materia.nombreM}}</td>
 
                   <td class="col-lg-5">{{materia.codigo}}</td>
-                  <td class="col-lg-5">{{materia.estado}}</td>
+                  <td class="col-lg-5">{{materia.nombreC}}</td>
+                  <td class="col-lg-5">{{materia.estadoM}}</td>
                   <td><button data-toggle="modal" data-target="#myModal" class="btn btn-success"
                       (click)="CambiarValor(materia.idmateria)"><i class="fa fa-edit"></i>
                       Editar</button></td>
@@ -90,15 +93,15 @@
                       Desactivar</button></td> -->
 
 
-                  <td *ngIf="materia.estado=='ACTIVO'">
+                  <td *ngIf="materia.estadoM=='ACTIVO'">
                     <button class="btn btn-info"
-                      (click)="ActualizarEstadoMateria(materia.idmateria,materia.nombre,materia.codigo,materia.carrera,'INACTIVO')"><i
+                      (click)="ActualizarEstadoMateria(materia.idmateria,materia.nombreM,materia.codigo,materia.carrera,'INACTIVO')"><i
                         class="fa fa-minus-square-o"></i>
                       Desactivar</button>
                   </td>
-                  <td *ngIf="materia.estado=='INACTIVO'">
+                  <td *ngIf="materia.estadoM=='INACTIVO'">
                     <button class="btn btn-info"
-                      (click)="ActualizarEstadoMateria(materia.idmateria,materia.nombre,materia.codigo,materia.carrera,'ACTIVO')"><i
+                      (click)="ActualizarEstadoMateria(materia.idmateria,materia.nombreM,materia.codigo,materia.carrera,'ACTIVO')"><i
                         class="fa fa-plus-square-o"></i>
                       Activar</button>
                   </td>

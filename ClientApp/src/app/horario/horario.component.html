@@ -261,9 +261,12 @@
               </div>
               <div class="dropdown col-lg-4">
                 <div class="form-group">
-                  <select class="form-control" id="sel1">
+                  <select (change)="selectParametro($event)"  class="form-control" id="sel1">
                     <option>Seleccione una opción</option>
-                    <option *ngFor="let item of ListaParametro">{{item}}</option>
+                    <option value="0">Nombre</option>
+                    <option value="1">Fecha Inicio</option>
+                    <option value="2">Fecha Fin</option>
+                    <!-- <option *ngFor="let item of ListaParametro">{{item}}</option> -->
 
                   </select>
                 </div>
@@ -271,7 +274,8 @@
 
               </div>
               <div class="col-lg-4">
-                <input style="margin-left: 40px" class="form-control" id="idBusqueda" type="text" placeholder="Buscar..">
+                <input style="margin-left: 40px" class="form-control" id="idBusqueda"
+                  type="text" placeholder="Buscar...">
               </div>
             </div>
           </div>
@@ -294,9 +298,9 @@
 
                     <td class="col-lg-5">{{ciclo.nombre}}</td>
 
-                    <td class="col-lg-5">{{ciclo.fechainicio}}</td>
+                    <td class="col-lg-5">{{ciclo.fechainicio | date}}</td>
 
-                    <td class="col-lg-5">{{ciclo.fechafin}}</td>
+                    <td class="col-lg-5">{{ciclo.fechafin | date}}</td>
                     <td class="col-lg-5">{{ciclo.estado}}</td>
 
                     <td><button [routerLink]='["/ciclo-gestion",ciclo.idciclo]' class="btn btn-success "><i class="fa fa-edit"></i>

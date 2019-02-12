@@ -45,13 +45,17 @@ export class LaboratorioAux2 {
 
 
 export class MateriaAux {
-    nombre: string;
+    nombreM: string;
     codigo: string;
+    nombreC: string;
 
-    constructor(nombre: any, codigo: any) {
-        this.nombre = nombre;
+    constructor(nombreM: any, codigo: any, nombreC: any) {
+        this.nombreM = nombreM;
 
         this.codigo = codigo;
+
+        this.nombreC = nombreC;
+
 
     }
 
@@ -63,6 +67,23 @@ export class UsuarioAux {
 
     constructor(nombre: any) {
         this.nombreusuario = nombre;
+
+
+
+    }
+
+}
+
+
+export class CicloAux {
+    nombre: string;
+    fechainicio:string;
+    fechafin:string;
+
+    constructor(nombre: any,fechainicio:any,fechafin:any) {
+        this.nombre = nombre;
+        this.fechainicio=fechainicio;
+        this.fechafin=fechafin;
 
 
 

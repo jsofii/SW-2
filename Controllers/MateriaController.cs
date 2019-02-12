@@ -11,6 +11,32 @@ namespace SW_2.Controllers
 
     public class MateriaController : Controller
     {
+
+
+        public class JoinMateriaCarrera{
+            public int Idmateria;
+            public string NombreM;
+
+            public string Codigo;
+
+            public int Carrera;
+            public string EstadoM;
+
+            public int Idcarrera;
+
+            public string NombreC;
+
+            public string EstadoC;
+
+
+
+
+        }
+
+
+
+
+
         baseswContext context = new baseswContext();
         [HttpGet]
         [Route("ListaMaterias")]
@@ -18,6 +44,34 @@ namespace SW_2.Controllers
         {
             return this.context.Materia.ToList();
         }
+
+
+
+        [HttpGet]
+        [Route("ListaMateriasCarrera")]
+        public List<JoinMateriaCarrera> ListaMateriaPorCarrera()
+        {
+            var query = from Materia in context.Materia
+                        join
+            Carrera in context.Carrera on Materia.Carrera equals Carrera.Idcarrera
+                        select new JoinMateriaCarrera
+                        {
+                            Idmateria=Materia.Idmateria,
+                            NombreM=Materia.Nombre,
+                            Codigo=Materia.Codigo,
+                            Carrera=(int)Materia.Carrera,
+                            EstadoM=Materia.Estado,
+                            Idcarrera=Carrera.Idcarrera,
+                            NombreC=Carrera.Nombre,
+                            EstadoC=Carrera.Estado
+
+                            
+                        };
+            return query.ToList();
+
+        }
+            
+            
 
 
          [HttpGet]

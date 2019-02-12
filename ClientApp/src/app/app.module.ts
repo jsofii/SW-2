@@ -38,6 +38,7 @@ import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-ng-
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +71,8 @@ import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-ng-
     PipemateriaPipe,
 
     FiltrousuarioPipe
+
+    
 
 
   ],

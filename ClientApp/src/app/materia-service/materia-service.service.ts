@@ -29,6 +29,10 @@ export class materiaServiceService {
 
   }
 
+  ListaMateriasPorCarrera(){
+    return this.http.get('https://localhost:5001/api/Materia/ListaMateriasCarrera');
+  }
+
   GetMateriaId(id: number) {
     return this.http.get('https://localhost:5001/api/Materia/Get/' + id);
   }

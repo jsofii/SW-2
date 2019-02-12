@@ -123,7 +123,7 @@ export class UsuarioComponent implements OnInit {
     if (index2 == -1) {
       this.serviceUsuario.EditarUsuario(this.idUsuario, this.inputNombreUsuario, this.inputPassword, this.inputEstado).subscribe(
         data => {
-          
+
           this.CargarUsuarios();
           alert('Usuario actualizado.');
         },
@@ -161,7 +161,7 @@ export class UsuarioComponent implements OnInit {
 
 
   //guardar persona
-  inputTipoPersonaString="";
+  inputTipoPersonaString = "";
   GuardarPersona() {
 
 
@@ -175,12 +175,12 @@ export class UsuarioComponent implements OnInit {
             this.inputNombrePersona = "";
             this.inputIdentificacionPersonal = "";
             this.inputCorreo = "";
-            this.inputTipoPersonaString="";
-          }else{
+            this.inputTipoPersonaString = "";
+          } else {
             alert('Ya existe una persona registrada con ese correo electrónico.');
           }
         }
-       
+
         this.ObtenerTodoUsuario();
       }
     )
@@ -211,4 +211,10 @@ export class UsuarioComponent implements OnInit {
 
   }
 
+
+
+  parametroBusqueda: any;
+  selectParametro(event: any) {
+    this.parametroBusqueda = event.target.value;
+  }
 }

@@ -1,18 +1,47 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {LaboratorioAux} from '../pipe.data'
+import { LaboratorioAux2 } from '../pipe.data'
+import { LaboratorioComponent } from './laboratorio.component'
 
 @Pipe({
   name: 'filtrolabo'
 })
 export class FiltrolaboPipe implements PipeTransform {
+  bandera: any;
+  laboC: LaboratorioComponent;
+  constructor(laboC: LaboratorioComponent) {
+    this.laboC = laboC;
+    this.bandera = this.laboC.parametroBusqueda;
+  }
 
-  transform(items: LaboratorioAux[], searchText: string): any[] {
+
+  actualizarParametro() {
+    this.bandera = this.laboC.parametroBusqueda;
+    //console.log(this.bandera);
+  }
+
+
+
+  transform(items: LaboratorioAux2[], searchText: string): any[] {
+    this.actualizarParametro();
     if (!items) return [];
-  if (!searchText) return items;
-  searchText = searchText.toLowerCase();
-  return items.filter(it => {
-    return it.nombre.toLowerCase().includes(searchText);
-  });
+    if (!searchText) return items;
+
+    if(this.bandera == 0){
+      searchText = searchText.toLowerCase();
+    }
+    
+
+    if (this.bandera == 0) {
+      return items.filter(it => {
+        return it.nombre.toLowerCase().includes(searchText);
+      });
+    } else if (this.bandera == 1) {
+      return items.filter(it => {
+        return it.numero.toString().includes(searchText);
+      });
+    }
+
+
   }
 
 }

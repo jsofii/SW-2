@@ -160,6 +160,13 @@ export class MateriaComponent implements OnInit {
   }
 
 
+  parametroBusqueda:any;
+
+  selectParametro(event:any){
+    this.parametroBusqueda=event.target.value;
+  }
+
+
 }
 
 

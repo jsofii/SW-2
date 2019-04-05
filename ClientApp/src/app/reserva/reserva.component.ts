@@ -22,8 +22,8 @@ export class ReservaComponent implements OnInit {
   public scheduleData3: Array<any>;
   cont: number = 0;
   constructor(private serviceLaboratorio: laboratorioServiceService) {
-    
-    this.CargarReserva();
+
+
   }
   nuevas: number = 0;
   tamaño: number;
@@ -34,14 +34,14 @@ export class ReservaComponent implements OnInit {
   d: Date;
   aux: any;
   inputLaboratorioID: any;
-  scheduleObj:Schedule;
+  scheduleObj: any=null;
   CargarReserva() {
     this.scheduleData = new Array<any>();
     this.CargarLaboratorios();
-   
-    
 
-    this.serviceLaboratorio.GetReservas(3).subscribe(
+
+
+    this.serviceLaboratorio.GetReservas(this.inputLaboratorioID).subscribe(
       data => {
 
         this.scheduleData2 = data;
@@ -59,8 +59,12 @@ export class ReservaComponent implements OnInit {
           this.scheduleData.push(tem);
 
         });
-       // this.scheduleObj.data
-        this.scheduleObj= new Schedule({
+        // this.scheduleObj.data
+       // this.scheduleObj.destroy();
+       if(this.scheduleObj!=null){
+          this.scheduleObj.destroy();
+       }
+        this.scheduleObj = new Schedule({
           width: 'auto',
           height: 'auto',
           workDays: [1, 2, 3, 4, 5, 6],
@@ -70,23 +74,23 @@ export class ReservaComponent implements OnInit {
           workHours: {
             highlight: false
           },
-    
+
           views: ['WorkWeek'],
           eventSettings: {
             dataSource: this.scheduleData,
-    
+
           },
           eventRendered: (args: EventRenderedArgs) => applyCategoryColor(args, this.scheduleObj.currentView)
         });
         this.scheduleObj.timeScale.slotCount = 1;
-         this.scheduleObj.appendTo('#Schedule');
-        
-         
+        this.scheduleObj.appendTo('#Schedule');
+
+
       }
     )
 
   }
-  delete(){
+  delete() {
     this.scheduleObj.destroy();
   }
 
@@ -116,27 +120,27 @@ export class ReservaComponent implements OnInit {
   }
   ngOnInit() {
 
-     this.CargarLaboratorios();
-     this.scheduleObj= new Schedule({
-      width: 'auto',
-      height: 'auto',
-      workDays: [1, 2, 3, 4, 5, 6],
-      currentView: 'WorkWeek',
-      startHour: '07:00',
-      endHour: '21:00',
-      workHours: {
-        highlight: false
-      },
+    this.CargarLaboratorios();
+    //  this.scheduleObj= new Schedule({
+    //   width: 'auto',
+    //   height: 'auto',
+    //   workDays: [1, 2, 3, 4, 5, 6],
+    //   currentView: 'WorkWeek',
+    //   startHour: '07:00',
+    //   endHour: '21:00',
+    //   workHours: {
+    //     highlight: false
+    //   },
 
-      views: ['WorkWeek'],
-      eventSettings: {
-        dataSource: this.scheduleData,
+    //   views: ['WorkWeek'],
+    //   eventSettings: {
+    //     dataSource: this.scheduleData,
 
-      },
-      eventRendered: (args: EventRenderedArgs) => applyCategoryColor(args, this.scheduleObj.currentView)
-    });
-    this.scheduleObj.timeScale.slotCount = 1;
-    this.scheduleObj.appendTo('#Schedule');
+    //   },
+    //   eventRendered: (args: EventRenderedArgs) => applyCategoryColor(args, this.scheduleObj.currentView)
+    // });
+    // this.scheduleObj.timeScale.slotCount = 1;
+    // this.scheduleObj.appendTo('#Schedule');
   }
 
   title = 'Reserva de Laboratorios';
@@ -159,7 +163,7 @@ export class ReservaComponent implements OnInit {
     this.inputLaboratorioNombre = nombre;
     this.inputLaboratorioID = idlaboratorio;
     this.CargarReserva();
-    
+
   }
   print() {
 

@@ -32,7 +32,7 @@ namespace SW_2.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=cesar1996;database=basesw");
+                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=;database=basesw");
             }
         }
 
@@ -75,13 +75,9 @@ namespace SW_2.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Fechafin)
-                    .HasColumnName("FECHAFIN")
-                    .HasColumnType("date");
+                entity.Property(e => e.Fechafin).HasColumnName("FECHAFIN");
 
-                entity.Property(e => e.Fechainicio)
-                    .HasColumnName("FECHAINICIO")
-                    .HasColumnType("date");
+                entity.Property(e => e.Fechainicio).HasColumnName("FECHAINICIO");
 
                 entity.Property(e => e.Nombre)
                     .IsRequired()
@@ -268,8 +264,8 @@ namespace SW_2.Models
                 entity.HasIndex(e => e.Idlaboratorio)
                     .HasName("FK_RESERVALABORATORIO_LABORATORIO");
 
-                entity.HasIndex(e => e.Idusuario)
-                    .HasName("FK_RESERVALABORATORIO_USUARIO");
+                entity.HasIndex(e => e.Idpersona)
+                    .HasName("FK_RESERVALABORATORIO_PERSONA_idx");
 
                 entity.Property(e => e.Idreservalaboratorio)
                     .HasColumnName("IDRESERVALABORATORIO")
@@ -297,8 +293,8 @@ namespace SW_2.Models
                     .HasColumnName("IDLABORATORIO")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.Idusuario)
-                    .HasColumnName("IDUSUARIO")
+                entity.Property(e => e.Idpersona)
+                    .HasColumnName("IDPERSONA")
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Motivoreserva)
@@ -312,11 +308,11 @@ namespace SW_2.Models
                     .HasForeignKey(d => d.Idlaboratorio)
                     .HasConstraintName("FK_RESERVALABORATORIO_LABORATORIO");
 
-                entity.HasOne(d => d.IdusuarioNavigation)
+                entity.HasOne(d => d.IdpersonaNavigation)
                     .WithMany(p => p.Reservalaboratorio)
-                    .HasForeignKey(d => d.Idusuario)
+                    .HasForeignKey(d => d.Idpersona)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_RESERVALABORATORIO_USUARIO");
+                    .HasConstraintName("FK_RESERVALABORATORIO_PERSONA");
             });
 
             modelBuilder.Entity<Reservas>(entity =>
@@ -337,6 +333,8 @@ namespace SW_2.Models
 
                 entity.Property(e => e.Horafin).HasColumnType("int(11)");
 
+                entity.Property(e => e.Idlaboratorio).HasColumnType("int(11)");
+
                 entity.Property(e => e.Mes).HasColumnType("int(11)");
 
                 entity.Property(e => e.Mesfin).HasColumnType("int(11)");
@@ -347,6 +345,10 @@ namespace SW_2.Models
 
                 entity.Property(e => e.Subject)
                     .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Tipo)
+                    .HasMaxLength(1)
                     .IsUnicode(false);
             });
 
@@ -429,7 +431,7 @@ namespace SW_2.Models
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasColumnName("PASSWORD")
-                    .HasMaxLength(4000)
+                    .HasMaxLength(60)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.IdpersonaNavigation)

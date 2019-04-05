@@ -17,18 +17,36 @@ Schedule.Inject(WorkWeek);
   providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService]
 })
 export class ReservaComponent implements OnInit {
-  public scheduleData:Array<any>;
+  public scheduleData: Array<any>;
   public scheduleData2: any;
   public scheduleData3: Array<any>;
-  cont:number=0;
+  cont: number = 0;
   constructor(private serviceLaboratorio: laboratorioServiceService) {
-    this.scheduleData= new Array<any>();
-    this.serviceLaboratorio.GetReservas().subscribe(
+
+
+  }
+  nuevas: number = 0;
+  tamaño: number;
+  n: Date;
+  x: any;
+  fechaInicio: Date;
+  fechaFin: Date;
+  d: Date;
+  aux: any;
+  inputLaboratorioID: any;
+  scheduleObj: any=null;
+  CargarReserva() {
+    this.scheduleData = new Array<any>();
+    this.CargarLaboratorios();
+
+
+
+    this.serviceLaboratorio.GetReservas(this.inputLaboratorioID).subscribe(
       data => {
-        
+
         this.scheduleData2 = data;
-        this.scheduleData3= this.scheduleData2;
-        this.cont=this.scheduleData3.length;
+        this.scheduleData3 = this.scheduleData2;
+        this.cont = this.scheduleData3.length;
         console.log(this.cont);
         this.scheduleData3.forEach(element => {
           let tem = {
@@ -36,77 +54,99 @@ export class ReservaComponent implements OnInit {
             Subject: element.subject,
             StartTime: new Date(element.anio, element.mes, element.dia, element.hora, element.minutos),
             EndTime: new Date(element.aniofin, element.mesfin, element.diafin, element.horafin, element.minutosfin)
-            
+
           }
           this.scheduleData.push(tem);
-      
+
         });
+        // this.scheduleObj.data
+       // this.scheduleObj.destroy();
+       if(this.scheduleObj!=null){
+          this.scheduleObj.destroy();
+       }
+        this.scheduleObj = new Schedule({
+          width: 'auto',
+          height: 'auto',
+          workDays: [1, 2, 3, 4, 5, 6],
+          currentView: 'WorkWeek',
+          startHour: '07:00',
+          endHour: '21:00',
+          workHours: {
+            highlight: false
+          },
+
+          views: ['WorkWeek'],
+          eventSettings: {
+            dataSource: this.scheduleData,
+
+          },
+          eventRendered: (args: EventRenderedArgs) => applyCategoryColor(args, this.scheduleObj.currentView)
+        });
+        this.scheduleObj.timeScale.slotCount = 1;
+        this.scheduleObj.appendTo('#Schedule');
+
+
       }
     )
-    
-    
+
   }
-  nuevas:number=0;
-  tamaño: number;
-  n:Date;
-  x:any;
-  fechaInicio:Date;
-  fechaFin:Date;
-  d:Date;
-  aux:any;
-  GuardarReserva(){
-    this.tamaño=this.scheduleData.length;
-    this.nuevas= this.scheduleData.length-this.cont;
- 
+  delete() {
+    this.scheduleObj.destroy();
+  }
+
+  GuardarReserva() {
+    this.tamaño = this.scheduleData.length;
+    this.nuevas = this.scheduleData.length - this.cont;
+
     for (let index = 0; index < this.nuevas; index++) {
- 
-      this.x= this.scheduleData[this.tamaño-1];
-      this.fechaInicio= this.x.StartTime;
-      this.fechaFin= this.x.EndTime;
-   
+
+      this.x = this.scheduleData[this.tamaño - 1];
+      this.fechaInicio = this.x.StartTime;
+      this.fechaFin = this.x.EndTime;
+
       this.serviceLaboratorio.AddReserva(this.fechaInicio.getFullYear(), this.fechaInicio.getMonth(),
-      this.fechaInicio.getDate(), this.fechaInicio.getHours(), this.fechaInicio.getMinutes(),
-      this.fechaFin.getFullYear(), this.fechaFin.getMonth(), this.fechaFin.getDate(), this.fechaFin.getHours(),
-      this.fechaFin.getMinutes(), this.x.Subject).subscribe(
-        data=>{
-  
-        }
-      )
+        this.fechaInicio.getDate(), this.fechaInicio.getHours(), this.fechaInicio.getMinutes(),
+        this.fechaFin.getFullYear(), this.fechaFin.getMonth(), this.fechaFin.getDate(), this.fechaFin.getHours(),
+        this.fechaFin.getMinutes(), this.x.Subject, this.inputLaboratorioID).subscribe(
+          data => {
+
+          }
+        )
       this.tamaño--;
-    
-      
+
+
     }
-   
+
   }
   ngOnInit() {
 
     this.CargarLaboratorios();
-    let scheduleObj: Schedule = new Schedule({
-      width: 'auto',
-      height: 'auto',
-      workDays: [1, 2, 3, 4, 5, 6],
-      currentView: 'WorkWeek',
-      startHour: '07:00',
-      endHour: '21:00',
-      workHours: {
-        highlight: false
-      },
+    //  this.scheduleObj= new Schedule({
+    //   width: 'auto',
+    //   height: 'auto',
+    //   workDays: [1, 2, 3, 4, 5, 6],
+    //   currentView: 'WorkWeek',
+    //   startHour: '07:00',
+    //   endHour: '21:00',
+    //   workHours: {
+    //     highlight: false
+    //   },
 
-      views: ['WorkWeek'],
-      eventSettings: {
-        dataSource: this.scheduleData,
-        
-      },
-      eventRendered: (args: EventRenderedArgs) => applyCategoryColor(args, scheduleObj.currentView)
-    });
-    scheduleObj.timeScale.slotCount = 1;
-    scheduleObj.appendTo('#Schedule');
+    //   views: ['WorkWeek'],
+    //   eventSettings: {
+    //     dataSource: this.scheduleData,
+
+    //   },
+    //   eventRendered: (args: EventRenderedArgs) => applyCategoryColor(args, this.scheduleObj.currentView)
+    // });
+    // this.scheduleObj.timeScale.slotCount = 1;
+    // this.scheduleObj.appendTo('#Schedule');
   }
 
   title = 'Reserva de Laboratorios';
 
   inputLaboratorioNombre = "Seleccione el Laboratorio";
-  inputLaboratorioID: any;
+
 
   ListaLaboratorios: any;
 
@@ -122,10 +162,12 @@ export class ReservaComponent implements OnInit {
   CargarLaboratoriosID(idlaboratorio: any, nombre: any) {
     this.inputLaboratorioNombre = nombre;
     this.inputLaboratorioID = idlaboratorio;
+    this.CargarReserva();
+
   }
   print() {
-    
-   // console.log(this.scheduleData);
+
+    // console.log(this.scheduleData);
     this.GuardarReserva();
     // this.scheduleData.forEach(element => {
     //   console.log(element);

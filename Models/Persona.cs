@@ -7,6 +7,7 @@ namespace SW_2.Models
     {
         public Persona()
         {
+            Reservalaboratorio = new HashSet<Reservalaboratorio>();
             Usuario = new HashSet<Usuario>();
         }
 
@@ -18,6 +19,7 @@ namespace SW_2.Models
         public string Estado { get; set; }
 
         public Tipopersona IdtipopersonaNavigation { get; set; }
+        public ICollection<Reservalaboratorio> Reservalaboratorio { get; set; }
         public ICollection<Usuario> Usuario { get; set; }
     }
 }

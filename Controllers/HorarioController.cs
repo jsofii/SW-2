@@ -61,11 +61,11 @@ namespace SW_2.Controllers
             return comunidad;
         }
         [HttpGet]
-        [Route("reservas")]
+        [Route("reservas/{id}")]
         public List<Reservas> reservas(int id)
         {
 
-            return this.context.Reservas.ToList();
+            return this.context.Reservas.Where(x=>x.Idlaboratorio==id).ToList();
         }
         [HttpPost]
         [Route("addReserva")]

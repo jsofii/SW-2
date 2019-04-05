@@ -26,8 +26,8 @@ export class laboratorioServiceService {
     return this.http.get('https://localhost:5001/api/Laboratorio/ListaLaboratoriosActivos');
   }
 
-  GetReservas(){
-    return this.http.get('https://localhost:5001/api/Horario/reservas');
+  GetReservas(idlaboratorio){
+    return this.http.get('https://localhost:5001/api/Horario/reservas/'+idlaboratorio);
   }
   GetLaboratorioId(id: number) {
     return this.http.get('https://localhost:5001/api/Laboratorio/Get/' + id);
@@ -58,7 +58,7 @@ export class laboratorioServiceService {
     return this.http.post('https://localhost:5001/api/Laboratorio/Addlab/', temp);
 
   }
-  AddReserva(Anio, Mes, Dia, Hora, Minutos, AnioFin, MesFin, Diafin, Horafin, Minutosfin, Subject) {
+  AddReserva(Anio, Mes, Dia, Hora, Minutos, AnioFin, MesFin, Diafin, Horafin, Minutosfin, Subject, InputLaboratorioID) {
     var temp = {
       Anio: Anio,
       Mes: Mes,
@@ -70,7 +70,10 @@ export class laboratorioServiceService {
       Diafin: Diafin,
       Horafin: Horafin,
       Minutosfin: Minutosfin,
-      Subject: Subject
+      Subject: Subject,
+      Tipo:"R",
+      Idlaboratorio:InputLaboratorioID
+
 
     }
 

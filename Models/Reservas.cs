@@ -17,5 +17,7 @@ namespace SW_2.Models
         public int? Horafin { get; set; }
         public int? Minutosfin { get; set; }
         public string Subject { get; set; }
+        public string Tipo { get; set; }
+        public int? Idlaboratorio { get; set; }
     }
 }

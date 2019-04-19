@@ -93,7 +93,8 @@
               <div class="form-group">
                 <legend for="sel1">Seleccione un laboratorio:</legend>
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{inputLaboratorioNombre}}
+                  <button type="button" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown">{{inputLaboratorioNombre}}
                     <span class="caret"></span></button>
                   <ul class="dropdown-menu scrollable-menu" role="menu">
                     <li *ngFor="let item of ListaLaboratorios">
@@ -112,7 +113,8 @@
               <div class="form-group">
                 <legend for="sel1">Seleccione un Ciclo:</legend>
                 <div class="btn-group">
-                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{inputCicloNombre}}
+                  <button class="btn btn-default dropdown-toggle" type="button"
+                    data-toggle="dropdown">{{inputCicloNombre}}
                     <span class="caret"></span></button>
                   <ul class="dropdown-menu scrollable-menu" role="menu">
                     <li *ngFor="let item of ListaTodosCiclos">
@@ -172,7 +174,7 @@
 
             <div>
               <table id="tabla" class="table table-bordered table-striped">
-                <thead>
+                <thead style="background-color: rgb(36, 56, 82); color: rgb(200, 202, 207)">
                   <tr>
                     <th>HORA</th>
                     <th>LUNES</th>
@@ -186,16 +188,16 @@
                 </thead>
                 <tbody>
                   <tr class="active" *ngFor="let horaInit of listaHoras">
-                    <td>{{horaInit}}:00</td>
-                    <td (click)="setHora(horaInit, dia)" data-toggle="modal" data-target="#myModal" class="active"
+                    <td style="background-color: rgb(187, 194, 218) ">{{horaInit}}:00</td>
+                    <td (click)="setHora(horaInit, dia)" data-toggle="modal" data-target="#myModal" class="active" 
                       *ngFor="let dia of listaDias ">
 
 
 
                       <label *ngFor="let item of listaHorarios">
 
-                        <div *ngIf="item.dia==dia && horaInit>=item.horadeinicio && horaInit<=item.horadefin; else templateName "
-                          style="background-color: rgb(151, 187, 175); ">
+                        <div
+                          *ngIf="item.dia==dia && horaInit>=item.horadeinicio && horaInit<=item.horadefin; else templateName ">
                           <p>{{item.nombre}}</p>
                           <!-- <input [checked]="true" [disabled]="true" type="checkbox">
                             <span class="slider"></span> -->
@@ -245,7 +247,8 @@
         <div class="panel panel-info">
 
           <div class="panel-heading">
-            <button [routerLink]='["/ciclo-gestion",0]' class="btn btn-success center-block"><i class="fa fa-plus-circle"></i>
+            <button [routerLink]='["/ciclo-gestion",0]' class="btn btn-success center-block"><i
+                class="fa fa-plus-circle"></i>
               Nuevo Ciclo</button>
           </div>
 
@@ -261,7 +264,7 @@
               </div>
               <div class="dropdown col-lg-4">
                 <div class="form-group">
-                  <select (change)="selectParametro($event)"  class="form-control" id="sel1">
+                  <select (change)="selectParametro($event)" class="form-control" id="sel1">
                     <option>Seleccione una opción</option>
                     <option value="0">Nombre</option>
                     <option value="1">Fecha Inicio</option>
@@ -274,8 +277,8 @@
 
               </div>
               <div class="col-lg-4">
-                <input style="margin-left: 40px" class="form-control" id="idBusqueda"
-                  type="text" placeholder="Buscar...">
+                <input style="margin-left: 40px" class="form-control" id="idBusqueda" type="text"
+                  placeholder="Buscar...">
               </div>
             </div>
           </div>
@@ -303,9 +306,11 @@
                     <td class="col-lg-5">{{ciclo.fechafin | date}}</td>
                     <td class="col-lg-5">{{ciclo.estado}}</td>
 
-                    <td><button [routerLink]='["/ciclo-gestion",ciclo.idciclo]' class="btn btn-success "><i class="fa fa-edit"></i>
+                    <td><button [routerLink]='["/ciclo-gestion",ciclo.idciclo]' class="btn btn-success "><i
+                          class="fa fa-edit"></i>
                         Editar</button></td>
-                    <td><button class="btn btn-danger" (click)="DeleteCiclo(ciclo.idciclo)"><i class="fa fa-minus-circle"></i>
+                    <td><button class="btn btn-danger" (click)="DeleteCiclo(ciclo.idciclo)"><i
+                          class="fa fa-minus-circle"></i>
                         Eliminar</button></td>
                   </tr>
 

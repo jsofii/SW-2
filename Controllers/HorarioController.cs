@@ -76,6 +76,16 @@ namespace SW_2.Controllers
             return this.context.Reservas.ToList();
 
         }
+        [HttpDelete]
+        [Route("deleteReserva/{idreserva}")]
+        public dynamic deleteReserva(int idreserva){
+            
+            Reservas r=this.context.Reservas.Find(idreserva);
+            this.context.Reservas.Remove(r);
+            this.context.SaveChanges();
+            return this.context.Reservas.ToList();
+            
+        }
 
 
 
@@ -92,7 +102,8 @@ namespace SW_2.Controllers
         [Route("addHorario")]
         public List<Horario> addHorario([FromBody]Horario temp)
         {
-
+            DateTime d= new DateTime();
+            dynamic s=d.Year;
             Horario horario = new Horario
             {
                 Idlaboratorio = temp.Idlaboratorio,
@@ -103,6 +114,27 @@ namespace SW_2.Controllers
                 Dia = temp.Dia
 
             };
+             Materia m=this.context.Materia.Find(temp.Idmateria);
+            Reservas r= new Reservas{
+            
+
+                Anio= s,
+                Aniofin=s,
+                Dia= temp.Dia,
+                Diafin= temp.Dia,
+                Hora= temp.Horadeinicio,
+                Horafin=temp.Horadefin,
+                Idlaboratorio= temp.Idlaboratorio,
+                Mes=d.Month,
+                Mesfin= d.Month,
+                Minutos=(Int32)0,
+                Minutosfin=(Int32)0,
+                Subject= m.Nombre,
+                Tipo= "H"
+
+                
+            };
+            context.Reservas.Add(r);
 
             context.Horario.Add(horario);
             context.SaveChanges();

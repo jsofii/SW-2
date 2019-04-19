@@ -20,6 +20,7 @@ export class laboratorioServiceService {
     return this.http.get('https://localhost:5001/api/Laboratorio/ListaLaboratorios');
 
   }
+  
 
 
   ListaLaboratoriosActivos(){
@@ -85,6 +86,9 @@ export class laboratorioServiceService {
   DeleteLaboratorio(idlaboratorio: number) {
     return this.http.delete('https://localhost:5001/api/Laboratorio/Eliminar/' + idlaboratorio);
 
+  }
+  DeleteReserva(idReserva){
+    return this.http.delete('https://localhost:5001/api/Horario/deleteReserva/'+ idReserva );
   }
 
 

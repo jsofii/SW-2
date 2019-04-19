@@ -6,6 +6,7 @@ import { applyCategoryColor } from './helper';
 import { extend } from '@syncfusion/ej2-base';
 import { laboratorioServiceService } from '../laboratorio-service/laboratorio-service.service';
 import { elementEnd } from '@angular/core/src/render3/instructions';
+import{horarioServiceService} from '../horario-service/horario-service.service'
 
 
 Schedule.Inject(WorkWeek);
@@ -20,8 +21,9 @@ export class ReservaComponent implements OnInit {
   public scheduleData: Array<any>;
   public scheduleData2: any;
   public scheduleData3: Array<any>;
+  public ListaReservasOriginal: Array<any>;
   cont: number = 0;
-  constructor(private serviceLaboratorio: laboratorioServiceService) {
+  constructor(private serviceLaboratorio: laboratorioServiceService, private serviceHorario: horarioServiceService) {
 
 
   }
@@ -45,7 +47,9 @@ export class ReservaComponent implements OnInit {
       data => {
 
         this.scheduleData2 = data;
+        
         this.scheduleData3 = this.scheduleData2;
+        this.ListaReservasOriginal=this.scheduleData3;
         this.cont = this.scheduleData3.length;
         console.log(this.cont);
         this.scheduleData3.forEach(element => {
@@ -165,13 +169,29 @@ export class ReservaComponent implements OnInit {
     this.CargarReserva();
 
   }
-  print() {
+  GuardarCambios() {
 
-    // console.log(this.scheduleData);
+    
     this.GuardarReserva();
-    // this.scheduleData.forEach(element => {
-    //   console.log(element);
-    // });
+    this.EliminarReserva();
+    
+  }
+  EliminarReserva(){
+    this.ListaReservasOriginal;
+    this.scheduleData;
+    console.log(this.scheduleData)
+    console.log(this.ListaReservasOriginal.length+"---"+this.scheduleData.length);
+    this.ListaReservasOriginal.forEach(element => {
+      const index = this.scheduleData.map(e => e.Id).indexOf(element.id)
+      if(index==-1){
+        this.serviceLaboratorio.DeleteReserva(element.id).subscribe(
+          )
+          data=>{
+            
+          }
+      }
+      
+    });
   }
 }
 

@@ -23,8 +23,9 @@
           <div class="col-lg-12">
             <div class="panel panel-success">
               <div class="panel-heading">
-                <h5 style="margin-left: 15px">Lista personal Facultad de Ingeniería de Sistemas <button data-toggle="modal"
-                    data-target="#myModal2" class="btn btn-success pull-right"><i class="fa fa-plus-circle"></i>
+                <h5 style="margin-left: 15px">Lista personal Facultad de Ingeniería de Sistemas <button
+                    data-toggle="modal" data-target="#myModal2" class="btn btn-success pull-right"><i
+                      class="fa fa-plus-circle"></i>
                     Nueva persona</button></h5>
                 <!-- <button data-toggle="modal" data-target="#myModal" class="btn btn-success center-block"><i class="fa fa-plus-circle"></i>
                   Nuevo Usuario</button> -->
@@ -58,7 +59,8 @@
 
                     </div>
                     <div class="col-lg-4">
-                      <input [(ngModel)]="busqueda" class="form-control" id="idBusqueda" type="text" placeholder="Buscar..">
+                      <input [(ngModel)]="busqueda" class="form-control" id="idBusqueda" type="text"
+                        placeholder="Buscar..">
                     </div>
                   </div>
                 </div>
@@ -85,8 +87,13 @@
                           <td class="col-lg-5">{{usr.identificacionpersonal}}</td>
                           <td class="col-lg-5">{{usr.nombre}}</td>
                           <td class="col-lg-5">{{usr.correo}}</td>
-                          <td><button (click)="seleccionarPersona(usr.idpersona)" data-toggle="modal" data-target="#myModal"
-                              class="btn btn-success"><i class="fa fa-edit"></i> REGISTRAR</button></td>
+                          <td><button (click)="seleccionarPersona(usr.idpersona)" data-toggle="modal"
+                              data-target="#myModal" class="btn btn-success"><i class="fa fa-edit"></i> Registrar como
+                              usuario</button></td>
+                          <td>
+                            <button (click)="cambiaridpersona(usr.idpersona)" data-toggle="modal"
+                              data-target="#myModal2" class="btn btn-success"><i class="fa fa-edit"></i>Editar</button>
+                          </td>
 
                         </tr>
 
@@ -105,10 +112,11 @@
                             <input [(ngModel)]="inputNombreUsuario" type="text" class="form-control" id="usr">
                             <label for="usr">Contraseña</label>
                             <input [(ngModel)]="inputPassword" type="password" class="form-control" id="usr">
-                            <label style="margin-top: 20px" for="usr" style="margin-top: 20px">ESTADO:<span style="margin-left: 5px"
-                                class="badge">{{inputEstado}}</span></label>
+                            <label style="margin-top: 20px" for="usr" style="margin-top: 20px">ESTADO:<span
+                                style="margin-left: 5px" class="badge">{{inputEstado}}</span></label>
                             <div class="dropdown">
-                              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{inputTipoPersonaNombre}}
+                              <button class="btn btn-default dropdown-toggle" type="button"
+                                data-toggle="dropdown">{{inputTipoPersonaNombre}}
                                 <span class="caret"></span></button>
                               <ul class="dropdown-menu">
                                 <li>
@@ -158,21 +166,25 @@
                           <div class="modal-body">
 
                             <label for="mo">Nombre:</label>
-                            <input [(ngModel)]="inputNombrePersona" type="text" class="form-control" id="mo" pattern="[A-Za-z- ]+" #inputNom="ngModel">
-                            <div *ngIf="inputNom.errors && (inputNom.dirty || inputNom.touched)" class="alert alert-danger">
+                            <input [(ngModel)]="inputNombrePersona" type="text" class="form-control" id="mo"
+                              pattern="[A-Za-z- ]+" #inputNom="ngModel">
+                            <div *ngIf="inputNom.errors && (inputNom.dirty || inputNom.touched)"
+                              class="alert alert-danger">
                               <div [hidden]="!inputNom.errors.required">
-                                Necesita ingresar nombre de laboratorio.
+                                Necesita ingresar nombre de persona.
                               </div>
                               <div [hidden]="!inputNom.errors.pattern">
                                 No se acepta caracteres especiales o numericos.
                               </div>
                             </div>
 
-                            
+
 
                             <label style="margin-top: 20px" for="mo">Identificación Personal:</label>
-                            <input [(ngModel)]="inputIdentificacionPersonal" type="text" class="form-control" id="mo" pattern="[0-9]+" #inputIde="ngModel">
-                            <div *ngIf="inputIde.errors && (inputIde.dirty || inputIde.touched)" class="alert alert-danger">
+                            <input [(ngModel)]="inputIdentificacionPersonal" type="text" class="form-control" id="mo"
+                              pattern="[0-9]+" #inputIde="ngModel">
+                            <div *ngIf="inputIde.errors && (inputIde.dirty || inputIde.touched)"
+                              class="alert alert-danger">
                               <div [hidden]="!inputIde.errors.required">
                                 Necesita ingresar una idetnificación personal.
                               </div>
@@ -182,8 +194,10 @@
                             </div>
 
                             <label style="margin-top: 20px" for="mo">Correo:</label>
-                            <input [(ngModel)]="inputCorreo" type="text" class="form-control" id="mo" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+" #inputCor="ngModel">
-                            <div *ngIf="inputCor.errors && (inputCor.dirty || inputCor.touched)" class="alert alert-danger">
+                            <input [(ngModel)]="inputCorreo" type="text" class="form-control" id="mo"
+                              pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+" #inputCor="ngModel">
+                            <div *ngIf="inputCor.errors && (inputCor.dirty || inputCor.touched)"
+                              class="alert alert-danger">
                               <div [hidden]="!inputCor.errors.required">
                                 Necesita ingresar un correo electrónico.
                               </div>
@@ -193,8 +207,8 @@
                             </div>
 
 
-                            <label style="margin-top: 20px" for="usr" style="margin-top: 20px">Tipo persona:<span style="margin-left: 5px"
-                                class="badge">{{inputTipoPersonaString}}</span></label>
+                            <label style="margin-top: 20px" for="usr" style="margin-top: 20px">Tipo persona:<span
+                                style="margin-left: 5px" class="badge">{{inputTipoPersonaString}}</span></label>
                             <div class="dropdown">
 
 
@@ -270,14 +284,14 @@
           </div>
           <div class="panel-body">
             <div class="col-lg-6">
-              <label for="">BUSCAR POR</label>
-              <div class="form-group">
+              <label for="">BUSCAR USUARIO:</label>
+              <!-- <div class="form-group">
 
                 <select class="form-control" id="sel1">
                   <option>Elegir un parámetro</option>
                   <option>Nombre</option>
                 </select>
-              </div>
+              </div> -->
 
             </div>
             <div class="col-lg-6">
@@ -329,10 +343,11 @@
                   <input [(ngModel)]="inputNombreUsuario" type="text" class="form-control" id="usr">
                   <label for="usr">Contraseña</label>
                   <input [(ngModel)]="inputPassword" type="password" class="form-control" id="usr">
-                  <label style="margin-top: 20px" for="usr" style="margin-top: 20px">ESTADO:<span style="margin-left: 5px"
-                      class="badge">{{inputEstado}}</span></label>
+                  <label style="margin-top: 20px" for="usr" style="margin-top: 20px">ESTADO:<span
+                      style="margin-left: 5px" class="badge">{{inputEstado}}</span></label>
                   <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{inputTipoPersonaNombre}}
+                    <button class="btn btn-default dropdown-toggle" type="button"
+                      data-toggle="dropdown">{{inputTipoPersonaNombre}}
                       <span class="caret"></span></button>
                     <ul class="dropdown-menu">
                       <li>

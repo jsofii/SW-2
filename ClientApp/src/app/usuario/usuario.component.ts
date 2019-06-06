@@ -44,6 +44,8 @@ export class UsuarioComponent implements OnInit {
   inputTipoPersonaAoEID: number;
   inputCorreo: any;
 
+  //para ver si va editar o crear persona
+  idpersonaaux: any;
 
 
 
@@ -101,15 +103,18 @@ export class UsuarioComponent implements OnInit {
   }
 
   EliminarUsuario(idusuario: number) {
-    this.serviceUsuario.RemoveUsuario(idusuario).subscribe(
-      data => {
-        alert("Usuario Eliminado");
-        this.CargarUsuarios();
-      },
-      error => {
-        alert("No es posible eliminar usuario");
-      }
-    )
+    if (confirm("¿SE ELIMINARÁ?")) {
+      this.serviceUsuario.RemoveUsuario(idusuario).subscribe(
+        data => {
+          alert("Usuario Eliminado");
+          this.CargarUsuarios();
+        },
+        error => {
+          alert("No es posible eliminar usuario");
+        }
+      )
+    }
+
   }
 
   useraux: any;
@@ -158,32 +163,94 @@ export class UsuarioComponent implements OnInit {
   }
 
 
+  cambiaridpersona(idperson: number) {
+    this.idpersonaaux = idperson;
+    this.cargarPersona()
+  }
+
+
+  personaAux: any;
+  cargarPersona() {
+    this.serviceUsuario.GetPersonaId(this.idpersonaaux).subscribe(
+      data => {
+
+        this.personaAux = data;
+        this.inputNombrePersona = this.personaAux.nombrecompleto
+        this.inputIdentificacionPersonal = this.personaAux.identificacionpersonal;
+        this.inputCorreo = this.personaAux.correo;
+
+      }
+
+    )
+    this.selectTipoPersona(this.idpersonaaux);
+  }
+
+
 
 
   //guardar persona
   inputTipoPersonaString = "";
+  personaauxguardar: any;
+
   GuardarPersona() {
 
-
-    this.serviceUsuario.AddPersona(this.inputNombrePersona, this.inputIdentificacionPersonal, this.inputTipoPersonaAoEID, this.inputCorreo).subscribe(
-      data => {
-        if (/^[a-zA-Z- ]*$/.test(this.inputNombrePersona) == false) {
-          alert('ATENCIÓN: "Nombre de persona" no acepta caracteres especiales o numericos.');
-        } else {
-          if (data != null) {
-            alert('Nueva persona registrada.')
-            this.inputNombrePersona = "";
-            this.inputIdentificacionPersonal = "";
-            this.inputCorreo = "";
-            this.inputTipoPersonaString = "";
+    if (this.idpersonaaux == 0) {
+      this.serviceUsuario.AddPersona(this.inputNombrePersona, this.inputIdentificacionPersonal, this.inputTipoPersonaAoEID, this.inputCorreo).subscribe(
+        data => {
+          if (/^[a-zA-Z- ]*$/.test(this.inputNombrePersona) == false) {
+            alert('ATENCIÓN: "Nombre de persona" no acepta caracteres especiales o numericos.');
           } else {
-            alert('Ya existe una persona registrada con ese correo electrónico.');
+            if (data != null) {
+              alert('Nueva persona registrada.')
+              this.inputNombrePersona = "";
+              this.inputIdentificacionPersonal = "";
+              this.inputCorreo = "";
+              this.inputTipoPersonaString = "";
+            } else {
+              alert('Ya existe una persona registrada con ese correo electrónico.');
+            }
           }
-        }
 
+          this.ObtenerTodoUsuario();
+        }
+      )
+    } else {
+
+      const index = this.ListaTodoUsuario.map(e => e.idpersona).indexOf(this.idpersonaaux);
+      this.personaauxguardar = this.ListaTodoUsuario[index];
+      this.ListaTodoUsuario.splice(index, 1);
+      const index2 = this.ListaTodoUsuario.map(x => x.correo).indexOf(String(this.inputCorreo));
+
+      if (index2 == -1) {
+        this.serviceUsuario.EditPersona(this.idpersonaaux, this.inputNombrePersona, this.inputIdentificacionPersonal, this.inputTipoPersonaAoEID, this.inputCorreo).subscribe(
+          data => {
+            if (/^[a-zA-Z- ]*$/.test(this.inputNombrePersona) == false) {
+              alert('ATENCIÓN: "Nombre de persona" no acepta caracteres especiales o numericos.');
+            } else {
+              if (data != null) {
+                alert('Información editada correctamente.')
+                this.inputNombrePersona = "";
+                this.inputIdentificacionPersonal = "";
+                this.inputCorreo = "";
+                this.inputTipoPersonaString = "";
+              } else {
+                alert('Error al editar.');
+              }
+            }
+
+            this.ObtenerTodoUsuario();
+          }
+        )
+      } else {
+        alert('Ya existe una persona registrada con ese correo electrónico.');
         this.ObtenerTodoUsuario();
       }
-    )
+
+
+
+    }
+
+
   }
 
 

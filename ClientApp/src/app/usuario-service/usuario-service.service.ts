@@ -28,32 +28,32 @@ export class usuarioServiceService {
   ListaTipoPersona() {
     return this.http.get('https://localhost:5001/api/TipoPersona/Lista');
   }
-  ListaUsuario(){
-     return this.http.get('https://localhost:5001/api/Usuario/ListaUsuario');
+  ListaUsuario() {
+    return this.http.get('https://localhost:5001/api/Usuario/ListaUsuario');
   }
-  RemoveUsuario(idusuario:number){
-    return this.http.delete('https://localhost:5001/api/Usuario/DeleteUsuario/'+idusuario);
+  RemoveUsuario(idusuario: number) {
+    return this.http.delete('https://localhost:5001/api/Usuario/DeleteUsuario/' + idusuario);
   }
-  EditarUsuario(idusuario:number, nombreusuario:string, password:string, estado:string){
-    var user={
-      Idusuario:idusuario,
-      Nombreusuario:nombreusuario,
-      Password:password,
-      Estado:estado
+  EditarUsuario(idusuario: number, nombreusuario: string, password: string, estado: string) {
+    var user = {
+      Idusuario: idusuario,
+      Nombreusuario: nombreusuario,
+      Password: password,
+      Estado: estado
     }
-    return this.http.post('https://localhost:5001/api/Usuario/Editar/',user);
+    return this.http.post('https://localhost:5001/api/Usuario/Editar/', user);
   }
-  existeUsuario(correo:string){
-    return this.http.get('https://localhost:5001/api/Persona/existeUsuario/'+ correo);
+  existeUsuario(correo: string) {
+    return this.http.get('https://localhost:5001/api/Persona/existeUsuario/' + correo);
   }
-  temporalPass(corr:string){
-    var correo={
-      Correo:corr
+  temporalPass(corr: string) {
+    var correo = {
+      Correo: corr
     }
-    return this.http.post('https://localhost:5001/api/Persona/temporalPass/',correo);
+    return this.http.post('https://localhost:5001/api/Persona/temporalPass/', correo);
   }
-  CargarUsuario(idusuario:number){
-    return this.http.get('https://localhost:5001/api/Usuario/UsuarioEditar/'+idusuario);
+  CargarUsuario(idusuario: number) {
+    return this.http.get('https://localhost:5001/api/Usuario/UsuarioEditar/' + idusuario);
   }
   AddPersona(nombreCompleto: any, idPersonal: any, idTipoPersona: any, correoE: any) {
     var temp = {
@@ -65,16 +65,34 @@ export class usuarioServiceService {
     return this.http.post('https://localhost:5001/api/Persona/Add/', temp);
 
   }
-  AddUser(idpersona:number, nombreUsuario:string, password:string, estado:string){
-    var user={
+
+  GetPersonaId(idperson: number) {
+    return this.http.get('https://localhost:5001/api/Persona/Get/' + idperson);
+  }
+
+  EditPersona(idperson: number, nombrecompleto: any, idpersonal: any, idTipoPersona: any, correoE: any) {
+    var temp = {
+      Idpersona: idperson,
+      Nombrecompleto: nombrecompleto,
+      Identificacionpersonal: idpersonal,
+      Idtipopersona: idTipoPersona,
+      Correo: correoE
+    }
+    return this.http.put('https://localhost:5001/api/Persona/Editpersona/', temp);
+
+  }
+
+
+  AddUser(idpersona: number, nombreUsuario: string, password: string, estado: string) {
+    var user = {
       Idpersona: idpersona,
       Nombreusuario: nombreUsuario,
       Password: password,
-      Estado:estado
+      Estado: estado
     }
     return this.http.post('https://localhost:5001/api/Usuario/addUsuario/', user);
   }
 
- 
+
 
 }

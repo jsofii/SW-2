@@ -58,16 +58,16 @@ namespace SW_2.Controllers
 
         [HttpPost]
         [Route("send")]
-        public void EnviarCorreo(String correoDestinatario, String asunto,String cuerpoMensaje)
+        public void EnviarCorreo(String correoDestinatario, String asunto, String cuerpoMensaje)
         {
             System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
             //a quien va dirigido
-           
+
             msg.To.Add(correoDestinatario);
-           
+
             msg.Subject = asunto;
             msg.SubjectEncoding = System.Text.Encoding.UTF8;
-            
+
             //una copia a alguien adicional que deba recibir el correo
             //msg.Bcc.Add("aqui el correo");
 
@@ -82,7 +82,7 @@ namespace SW_2.Controllers
             System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
 
             //las credenciales de quien envia y se coloca el password
-            
+
             //cliente.Credentials = new System.Net.NetworkCredential("transporteepn@gmail.com", "EPN123456");
             cliente.Credentials = new System.Net.NetworkCredential("sofig.0106@gmail.com", "5109899555678");
             //a gmail
@@ -129,6 +129,42 @@ namespace SW_2.Controllers
 
             return null;
         }
+
+
+        [HttpPut]
+        [Route("Editpersona")]
+        public List<Persona> EditPersona([FromBody] Persona temp)
+        {
+
+            Persona persona = new Persona
+            {
+                Idpersona = temp.Idpersona,
+                Nombrecompleto = temp.Nombrecompleto,
+                Identificacionpersonal = temp.Identificacionpersonal,
+                Idtipopersona = temp.Idtipopersona,
+                Correo = temp.Correo
+
+            };
+            context.Update<Persona>(persona);
+            context.SaveChanges();
+            return this.context.Persona.ToList();
+
+
+        }
+
+
+        [HttpGet]
+        [Route("Get/{id}")]
+        public Persona PersonaporId(int id)
+        {
+            Persona persona = (from item in context.Persona
+                               where item.Idpersona == id
+                               select item).FirstOrDefault<Persona>();
+            return persona;
+        }
+
+
+
         [HttpGet]
         [Route("existeUsuario/{correo}")]
         public Boolean existeUsuario(string correo)

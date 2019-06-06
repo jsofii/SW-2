@@ -40,7 +40,7 @@ export class ReservaComponent implements OnInit {
   CargarReserva() {
     this.scheduleData = new Array<any>();
     this.CargarLaboratorios();
-
+  
 
 
     this.serviceLaboratorio.GetReservas(this.inputLaboratorioID).subscribe(
@@ -57,8 +57,12 @@ export class ReservaComponent implements OnInit {
             Id: element.id,
             Subject: element.subject,
             StartTime: new Date(element.anio, element.mes, element.dia, element.hora, element.minutos),
-            EndTime: new Date(element.aniofin, element.mesfin, element.diafin, element.horafin, element.minutosfin)
+            EndTime: new Date(element.aniofin, element.mesfin, element.diafin, element.horafin, element.minutosfin),
+            
 
+          }
+          if(element.tipo=="H"){
+            tem['RecurrenceRule']=element.until;
           }
           this.scheduleData.push(tem);
 
@@ -78,6 +82,7 @@ export class ReservaComponent implements OnInit {
           workHours: {
             highlight: false
           },
+          
 
           views: ['WorkWeek'],
           eventSettings: {
@@ -86,9 +91,10 @@ export class ReservaComponent implements OnInit {
           },
           eventRendered: (args: EventRenderedArgs) => applyCategoryColor(args, this.scheduleObj.currentView)
         });
+        
         this.scheduleObj.timeScale.slotCount = 1;
         this.scheduleObj.appendTo('#Schedule');
-
+        
 
       }
     )
@@ -107,11 +113,12 @@ export class ReservaComponent implements OnInit {
       this.x = this.scheduleData[this.tamaño - 1];
       this.fechaInicio = this.x.StartTime;
       this.fechaFin = this.x.EndTime;
+      const fechaUntil=this.x.RecurrenceRule;
 
       this.serviceLaboratorio.AddReserva(this.fechaInicio.getFullYear(), this.fechaInicio.getMonth(),
         this.fechaInicio.getDate(), this.fechaInicio.getHours(), this.fechaInicio.getMinutes(),
         this.fechaFin.getFullYear(), this.fechaFin.getMonth(), this.fechaFin.getDate(), this.fechaFin.getHours(),
-        this.fechaFin.getMinutes(), this.x.Subject, this.inputLaboratorioID).subscribe(
+        this.fechaFin.getMinutes(), this.x.Subject, this.inputLaboratorioID,"R",fechaUntil).subscribe(
           data => {
 
           }

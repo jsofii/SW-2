@@ -5,6 +5,8 @@ import { usuarioServiceService } from '../usuario-service/usuario-service.servic
 import { materiaServiceService } from '../materia-service/materia-service.service';
 import { horarioServiceService } from '../horario-service/horario-service.service';
 import { runInThisContext } from 'vm';
+import { Schedule, EventRenderedArgs } from '@syncfusion/ej2-schedule';
+import { applyCategoryColor } from '../reserva/helper';
 
 
 @Component({
@@ -16,6 +18,31 @@ import { runInThisContext } from 'vm';
 
 export class HorarioComponent implements OnInit {
   horainicio: any;
+  
+  title = 'Horarios de Laboratorios';
+
+  public scheduleData: Array<any>;
+  public scheduleData2: any;
+  public scheduleData3: Array<any>;
+  public ListaReservasOriginal: Array<any>;
+  cont: number = 0;
+  
+  nuevas: number = 0;
+  tamaño: number;
+  n: Date;
+  x: any;
+  fechaInicio: Date;
+  fechaFin: Date;
+  d: Date;
+  aux: any;
+  inputLaboratorioID: any;
+  scheduleObj: any=null;
+
+  
+
+  inputLaboratorioNombre = "Seleccione el Laboratorio";
+  ListaLaboratorios: any;
+
   constructor(private serviceLaboratorio: laboratorioServiceService,
     private serviceusuario: usuarioServiceService,
     private servicemateria: materiaServiceService, private serviceCiclo: cicloServiceService,
@@ -23,96 +50,15 @@ export class HorarioComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.ObtenerTodosCiclos();
-    this.ObtenerTodosCiclosActivos();
     this.CargarLaboratorios();
-    this.CargarMaterias();
-    this.CargarHorarioMateria();
-    this.CargarProfesores();
+    
   }
-  hola() {
-    console.log("holar");
-  }
-
   
-  cargar() {
-    this.servicehorario.ListaHorarioMateria(this.inputLaboratorioID, this.inputCicloID).subscribe(
-      data => {
-        this.listaHorarios = data;
-      }
-    )
-  }
-  diaselected: any;
-  setHora(item, dia) {
-    this.nuevodia=dia;
-    switch (dia) {
-      case 1:
-        this.diaselected = "Lunes";
-        break;
-      case 2:
-        this.diaselected = "Martes";
-        break;
-      case 3:
-        this.diaselected = "Miercoles"
-        break;
-      case 4:
-        this.diaselected = "Jueves";
-        break;
-      case 5:
-        this.diaselected = "Viernes";
-        break;
-      case 6:
-        this.diaselected = "Sabado";
-        break;
-
-
-    }
-    this.horainicio = item;
-   
-  }
-
-  ListaTodosCiclos: any;
-
-  ObtenerTodosCiclosActivos() {
-    this.serviceCiclo.ListaTodosCiclosActivos().subscribe(
-
-      data => {
-        this.ListaTodosCiclos = data;
-      }
-    )
-  }
-
-
-  ListaTodosCiclosDisponibles:any;
-  ObtenerTodosCiclos() {
-    this.serviceCiclo.ListaTodosCiclos().subscribe(
-
-      data => {
-        this.ListaTodosCiclosDisponibles = data;
-      }
-    )
-  }
-
+  
   
 
-  DeleteCiclo(idciclo: number) {
 
-    if (confirm("SE ELIMINARA?")) {
-
-      this.serviceCiclo.DeleteCiclo(idciclo).subscribe(
-        data => {
-
-          this.ObtenerTodosCiclos();
-
-        }
-      )
-    } else {
-    }
-  }
-
-  inputLaboratorioNombre = "Seleccione el Laboratorio";
-  inputLaboratorioID: any;
-  ListaLaboratorios: any;
+  
   CargarLaboratorios() {
     this.serviceLaboratorio.ListaLaboratoriosActivos().subscribe(
       data => {
@@ -120,137 +66,129 @@ export class HorarioComponent implements OnInit {
       }
     )
   }
-
   CargarLaboratoriosID(idlaboratorio: any, nombre: any) {
     this.inputLaboratorioNombre = nombre;
     this.inputLaboratorioID = idlaboratorio;
+    this.CargarHorario();
+
   }
 
-  inputCicloNombre = "Seleccione el Ciclo";
-  inputCicloID: any;
-  CargarCicloID(idciclo: any, nombre: any) {
-    this.inputCicloNombre = nombre;
-    this.inputCicloID = idciclo;
-  }
+  CargarHorario() {
+    this.scheduleData = new Array<any>();
+    this.CargarLaboratorios();
+  
 
-  inputProfesorNombre = "Seleccione el Profesor";
-  inputProfesorID: any;
-  ListaProfesores: any;
-  CargarProfesores() {
-    this.serviceusuario.ListaTodosUsuarios().subscribe(
+
+    this.serviceLaboratorio.GetHorarios(this.inputLaboratorioID).subscribe(
       data => {
-        this.ListaProfesores = data;
+
+        this.scheduleData2 = data;
+        
+        this.scheduleData3 = this.scheduleData2;
+        this.ListaReservasOriginal=this.scheduleData3;
+        this.cont = this.scheduleData3.length;
+        console.log(this.cont);
+        this.scheduleData3.forEach(element => {
+          let tem = {
+            Id: element.id,
+            Subject: element.subject,
+            StartTime: new Date(element.anio, element.mes, element.dia, element.hora, element.minutos),
+            EndTime: new Date(element.aniofin, element.mesfin, element.diafin, element.horafin, element.minutosfin),
+            
+
+          }
+          if(element.tipo=="H"){
+            tem['RecurrenceRule']=element.until;
+          }
+          this.scheduleData.push(tem);
+
+        });
+        // this.scheduleObj.data
+       // this.scheduleObj.destroy();
+       if(this.scheduleObj!=null){
+          this.scheduleObj.destroy();
+       }
+        this.scheduleObj = new Schedule({
+          width: 'auto',
+          height: 'auto',
+          workDays: [1, 2, 3, 4, 5, 6],
+          currentView: 'WorkWeek',
+          startHour: '07:00',
+          endHour: '21:00',
+          workHours: {
+            highlight: false
+          },
+
+          views: ['WorkWeek'],
+          eventSettings: {
+            dataSource: this.scheduleData,
+
+          },
+          eventRendered: (args: EventRenderedArgs) => applyCategoryColor(args, this.scheduleObj.currentView)
+        });
+        
+        this.scheduleObj.timeScale.slotCount = 1;
+        this.scheduleObj.appendTo('#Schedule');
+        
+
       }
     )
-  }
-  CargarProfesorID(idpersona: any, nombrecompleto: any) {
-    this.inputProfesorNombre = nombrecompleto;
-    this.inputProfesorID = idpersona;
-  }
-
-  inputMateriaNombre = "Seleccione la Materia";
-  inputMateriaID: any;
-  ListaMaterias: any;
-  nuevaHora:any;
-  nuevoCiclo:any;
-  nuevaMateria:any;
-  nuevoLabo:any;
-  nuevodia:any;
-
-  CargarMaterias() {
-    this.servicemateria.ListaTodasMateriasActivas().subscribe(
-      data => {
-        this.ListaMaterias = data;
-      }
-    )
-  }
-
-  CargarMateriaID(idmateria: any, nombre: any) {
-    this.inputMateriaID = idmateria;
-    this.inputMateriaNombre = nombre;
-  }
-
-  listaDias: any[] = [1, 2, 3, 4, 5, 6];
-  listaHoras: any[] = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
-  listaHoras2: any[] = ['07:00 - 08:00', '08:00 - 09:00', '09:00 - 10:00', '10:00 - 11:00', '11:00 - 12:00', '12:00 - 13:00'
-    , '13:00 - 14:00', '14:00 - 15:00', '15:00 - 16:00', '16:00 - 17:00', '17:00 - 18:00', '18:00 - 19:00', '19:00 - 20:00', '20:00 - 21:00', '21:00 - 22:00'];
-  ListaParametro: any[] = ["Nombre", "Fecha Inicio", "Fecha Fin"];
-  inputParametro = "Elegir parámetro"
-  CargarTipoParametro(parametro: any) {
-    this.inputParametro = parametro;
-  }
-  listaHorarios: any;
-  CargarHorarioMateria() {
 
   }
-  estaEnRango(horaInicio: number, horafin: number, horaInit: number, dia: number, dias: number) {
-    if (horaInit >= horaInicio && horaInit <= horafin && dia == dias) {
-      return true;
-    } else {
-      return false;
+
+
+  GuardarCambios() {
+
+    
+    this.GuardarHorario();
+    this.EliminarReserva();
+    
+  }
+  
+
+  GuardarHorario() {
+    this.tamaño = this.scheduleData.length;
+    this.nuevas = this.scheduleData.length - this.cont;
+
+    for (let index = 0; index < this.nuevas; index++) {
+
+      this.x = this.scheduleData[this.tamaño - 1];
+      this.fechaInicio = this.x.StartTime;
+      this.fechaFin = this.x.EndTime;
+      const fechaUntil=this.x.RecurrenceRule;
+
+      this.serviceLaboratorio.AddReserva(this.fechaInicio.getFullYear(), this.fechaInicio.getMonth(),
+        this.fechaInicio.getDate(), this.fechaInicio.getHours(), this.fechaInicio.getMinutes(),
+        this.fechaFin.getFullYear(), this.fechaFin.getMonth(), this.fechaFin.getDate(), this.fechaFin.getHours(),
+        this.fechaFin.getMinutes(), this.x.Subject, this.inputLaboratorioID,"H",fechaUntil).subscribe(
+          data => {
+
+          }
+        )
+      this.tamaño--;
+
+
     }
-  }
-  /*GuardarHorario(){
-    console.log(this.nuevaHora)
-   // console.log(this.nuevodia, this.nuevaHora, this.nuevaMateria, this.nuevoLabo, this.nuevoCiclo,this.diaselected)
-  }*/
-  seleccionarHoraFin(item){
-    
-  }
-  ciclo(){
-    //console.log(this.nuevoCiclo);
+
   }
 
-
-  //variables para insertar el horario
-  idlaboratorio:any;
-  idmateria:any;
-  idciclo:any;
- 
-  horafin:any;
-  dia:any;
-
-  selectIdMateria (event: any) {
-    //update the ui
-    this.idmateria = event.target.value;
-   // console.log(this.idmateria)
-  }
-
-  selectIdCiclo (event: any) {
-    //update the ui
-    this.idciclo = event.target.value;
-   // console.log(this.idciclo)
-  }
-
-  selectHorafin (event: any) {
-    //update the ui
-    this.horafin = event.target.value;
-    
-   // console.log(this.horafin)
-  }
-
-  selectIdLaboratorio (event: any) {
-    //update the ui
-    this.idlaboratorio = event.target.value;
-    //console.log(this.idlaboratorio)
-  }
-
-  GuardarHorario(){
-    this.servicehorario.AgregarHorario(this.idlaboratorio,this.idmateria,this.idciclo,this.horainicio,this.horafin-1,this.nuevodia).subscribe(
-
-      data => {
-        alert('Horario agregado correctamente.')
+  EliminarReserva(){
+    this.ListaReservasOriginal;
+    this.scheduleData;
+    this.ListaReservasOriginal.forEach(element => {
+      const index = this.scheduleData.map(e => e.Id).indexOf(element.id)
+      if(index==-1){
+        this.serviceLaboratorio.DeleteReserva(element.id).subscribe(
+          )
+          data=>{
+            
+          }
       }
-    )
+      
+    });
   }
 
 
-  parametroBusqueda:any=0;
-
-  selectParametro(event:any){
-    this.parametroBusqueda=event.target.value;
-    console.log(this.parametroBusqueda)
-  }
  
 
 }

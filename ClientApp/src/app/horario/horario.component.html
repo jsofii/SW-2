@@ -1,333 +1,88 @@
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
 
 <body>
-
-
   <div class="col-lg-2"></div>
-
   <div class="col-lg-8">
-    <ul class="nav nav-tabs">
 
 
-      <li class="active"><a href="#ciclo" data-toggle="tab">HORARIO</a>
-      </li>
-      <li><a href="#horario" data-toggle="tab">CICLO</a>
-      </li>
-    </ul>
-    <div id="myModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
+      
 
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Gestión Horarios</h4>
-          </div>
-          <div class="modal-body">
-            <label for="">Hora: {{horainicio}}</label>
-            <br>
-            <label for="">Día: {{diaselected}}</label>
-            <br>
-            <label for="">Hora de fin</label>
-            <div class="btn-group">
-              <select (change)="selectHorafin($event)" class="form-control" id="sel1">
-                <option value="">Seleccion hora de fin</option>
-
-
-                <option *ngFor="let item of listaHoras" value="{{item}}">{{item}}</option>
-              </select>
-
-
-
-            </div>
-            <br>
-            <label for="">Seleccione un laboratorio</label>
-            <div class="btn-group">
-
-              <select (change)="selectIdLaboratorio($event)" class="form-control" id="sel1">
-                <option value="">Seleccion un laboratorio</option>
-                <option *ngFor="let item of ListaLaboratorios" value="{{item.idlaboratorio}}">{{item.nombre}}</option>
-
-              </select>
-
-            </div>
-            <br>
-            <label for="">Seleecione un ciclo</label>
-            <div class="btn-group">
-              <select (change)="selectIdCiclo($event)" class="form-control" id="sel1">
-                <option value="">Seleccion un ciclo</option>
-                <option *ngFor="let item of ListaTodosCiclos" value="{{item.idciclo}}">{{item.nombre}}</option>
-
-              </select>
-
-            </div>
-            <br>
-            <label for="">Seleccione una materia</label>
-
-            <div class="btn-group">
-              <select (change)="selectIdMateria($event)" class="form-control" id="sel1">
-                <option value="">Seleccion una materia</option>
-                <option *ngFor="let item of ListaMaterias" value="{{item.idmateria}}">{{item.nombre}}</option>
-
-              </select>
-
-
-            </div>
-
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-success" (click)="GuardarHorario()">Guardar</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="tab-content">
-      <div class="tab-pane active" id="ciclo" style="margin-top: 20px;">
-
-        <div class="panel panel-info">
-          <div class="panel-body">
-            <div class="col-lg-6">
-              <div class="form-group">
-                <legend for="sel1">Seleccione un laboratorio:</legend>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default dropdown-toggle"
-                    data-toggle="dropdown">{{inputLaboratorioNombre}}
-                    <span class="caret"></span></button>
-                  <ul class="dropdown-menu scrollable-menu" role="menu">
-                    <li *ngFor="let item of ListaLaboratorios">
-                      <a (click)="CargarLaboratoriosID(item.idlaboratorio, item.nombre)">
-                        {{item.nombre}}
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-
-
-            <div class="col-lg-6">
-              <div class="form-group">
-                <legend for="sel1">Seleccione un Ciclo:</legend>
-                <div class="btn-group">
-                  <button class="btn btn-default dropdown-toggle" type="button"
-                    data-toggle="dropdown">{{inputCicloNombre}}
-                    <span class="caret"></span></button>
-                  <ul class="dropdown-menu scrollable-menu" role="menu">
-                    <li *ngFor="let item of ListaTodosCiclos">
-                      <a (click)="CargarCicloID(item.idciclo, item.nombre)">
-                        {{item.nombre}}
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel-heading">
-              <button class="btn btn-primary center-block" (click)="cargar()"><i class="fa fa-check-square"></i>
-                Aceptar</button>
-            </div>
-
-            <div class="col-lg-6">
-              <!-- <div class="form-group">
-                <legend for="sel1">Seleccione un Profesor:</legend>
-                <div class="btn-group">
-                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{inputProfesorNombre}}
-                    <span class="caret"></span></button>
-                  <ul class="dropdown-menu scrollable-menu" role="menu">
-                    <li *ngFor="let prof of ListaProfesores">
-                      <a (click)="CargarProfesorID(prof.idpersona, prof.nombrecompleto)">
-                        {{prof.nombrecompleto}}
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div> -->
-            </div>
-
-            <div class="col-lg-6">
-              <!-- <div class="form-group">
-                <legend for="sel1">Seleccione una Materia:</legend>
-                <div class="btn-group">
-                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{inputMateriaNombre}}
-                    <span class="caret"></span></button>
-                  <ul class="dropdown-menu scrollable-menu" role="menu">
-                    <li *ngFor="let item of ListaMaterias">
-                      <a (click)="CargarMateriaID(item.idmateria, item.nombre)">
-                        {{item.nombre}}
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div> -->
-            </div>
-
-            <div class="panel-heading">
-              <legend align="center"> {{'Horario del laboratorio "' + inputLaboratorioNombre + '" para el ciclo "'+
-                inputCicloNombre+'"'}} </legend>
-            </div>
-
-
-            <div>
-              <table id="tabla" class="table table-bordered table-striped">
-                <thead style="background-color: rgb(36, 56, 82); color: rgb(200, 202, 207)">
-                  <tr>
-                    <th>HORA</th>
-                    <th>LUNES</th>
-                    <th>MARTES</th>
-                    <th>MIÉRCOLES</th>
-                    <th>JUEVES</th>
-                    <th>VIERNES</th>
-                    <th>SÁBADO</th>
-
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="active" *ngFor="let horaInit of listaHoras">
-                    <td style="background-color: rgb(187, 194, 218) ">{{horaInit}}:00</td>
-                    <td (click)="setHora(horaInit, dia)" data-toggle="modal" data-target="#myModal" class="active" 
-                      *ngFor="let dia of listaDias ">
-
-
-
-                      <label *ngFor="let item of listaHorarios">
-
-                        <div
-                          *ngIf="item.dia==dia && horaInit>=item.horadeinicio && horaInit<=item.horadefin; else templateName ">
-                          <p>{{item.nombre}}</p>
-                          <!-- <input [checked]="true" [disabled]="true" type="checkbox">
-                            <span class="slider"></span> -->
-                        </div>
-
-
-
-
-                      </label>
-
-
-
-                    </td>
-                  </tr>
-
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td><button [(ngModel)]="boton" class="btn tn-success btn-lg"><i class="fa fa-plus-circle"></i>
-                        Guardar</button></td>
-                    <td><button class="btn btn-primary  btn-lg"><i class="fa fa-pencil"></i>
-                        Editar</button></td>
-                    <td> <button class="btn btn-danger  btn-lg"><i class="fa fa-minus-circle"></i>
-                        Eliminar</button></td>
-                    <td></td>
-                    <td></td>
-
-
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-
-
-          </div>
-        </div>
-
-
-      </div>
-
-
-      <div class="tab-pane" id="horario" style="margin-top: 20px;">
-
-
-        <div class="panel panel-info">
-
+    <div class="panel panel-success">
           <div class="panel-heading">
-            <button [routerLink]='["/ciclo-gestion",0]' class="btn btn-success center-block"><i
-                class="fa fa-plus-circle"></i>
-              Nuevo Ciclo</button>
+                  <div style="text-align:center">
+                          <h1>
+                            {{ title }}
+                          </h1>
+                         
+                          
+                        
+                
+                    </div>
           </div>
+    
+          <div class="panel-body">
+                  <div class="panel panel-info">
+                          <div class="panel-body">
+                                  <div class="col-lg-12">
+                                          <div class="form-group">
+                                                  <div class="col-lg-4">
+                                                          Seleccione un Laboratorio:
+                                                        </div>
+                                            <div class="btn-group">
+                                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{inputLaboratorioNombre}}
+                                                <span class="caret"></span></button>
+                                              <ul class="dropdown-menu scrollable-menu" role="menu">
+                                                <li *ngFor="let item of ListaLaboratorios">
+                                                  <a (click)="CargarLaboratoriosID(item.idlaboratorio, item.nombre)">
+                                                    {{item.nombre}}
+                                                  </a>
+                                                </li>
+                                              </ul>
+                                            </div>
+                                          </div>
+                                        </div>
 
 
-        </div>
-        <div class="panel-body">
-          <h2 style="margin-left: 15px">Lista de ciclos</h2>
-          <div>
-            <br>
-            <div style="margin-left: 15px">
-              <div class="col-lg-2">
-                Buscar por:
+                              
+
+                                            
+                                        
+
+                              </div>
+                              
+                          </div>
+                      
+                          <div class="panel-heading">
+                                  <legend align="center"> {{'Horario del laboratorio "' + inputLaboratorioNombre + '"'}} </legend>
+                                </div>
+            <div>
+                  <div class="row">
+                          <div class="col-md-12">
+                                <div id="Schedule"  >
+                                </div>
+
+                            </div>
+                        </div>
               </div>
-              <div class="dropdown col-lg-4">
-                <div class="form-group">
-                  <select (change)="selectParametro($event)" class="form-control" id="sel1">
-                    <option>Seleccione una opción</option>
-                    <option value="0">Nombre</option>
-                    <option value="1">Fecha Inicio</option>
-                    <option value="2">Fecha Fin</option>
-                    <!-- <option *ngFor="let item of ListaParametro">{{item}}</option> -->
-
-                  </select>
-                </div>
-
-
-              </div>
-              <div class="col-lg-4">
-                <input style="margin-left: 40px" class="form-control" id="idBusqueda" type="text"
-                  placeholder="Buscar...">
-              </div>
-            </div>
+              <button (click)="GuardarCambios()">asignar</button>
+    
           </div>
-
-          <div class="col-lg-12">
-
-            <div class="panel-body">
-
-              <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th class="col-lg-5">Nombre</th>
-                    <th class="col-lg-5">Fecha Incio</th>
-                    <th class="col-lg-5">Fecha Fin</th>
-                    <th class="col-lg-5">Estado</th>
-                  </tr>
-                </thead>
-                <tbody id="myTable">
-                  <tr class="active" *ngFor="let ciclo of ListaTodosCiclosDisponibles">
-
-                    <td class="col-lg-5">{{ciclo.nombre}}</td>
-
-                    <td class="col-lg-5">{{ciclo.fechainicio | date}}</td>
-
-                    <td class="col-lg-5">{{ciclo.fechafin | date}}</td>
-                    <td class="col-lg-5">{{ciclo.estado}}</td>
-
-                    <td><button [routerLink]='["/ciclo-gestion",ciclo.idciclo]' class="btn btn-success "><i
-                          class="fa fa-edit"></i>
-                        Editar</button></td>
-                    <td><button class="btn btn-danger" (click)="DeleteCiclo(ciclo.idciclo)"><i
-                          class="fa fa-minus-circle"></i>
-                        Eliminar</button></td>
-                  </tr>
-
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-
+    
+    
         </div>
 
-
-
-      </div>
-    </div>
   </div>
-
-
   <div class="col-lg-2"></div>
+  <div>
+    <div class="row" >
+        
+            <div class="col-md-8" >
+                  <div id="Schedule" >
+                  </div>
+              </div>
+              
+          </div>
+</div>
+
 </body>
+

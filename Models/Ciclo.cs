@@ -16,6 +16,6 @@ namespace SW_2.Models
         public DateTime Fechafin { get; set; }
         public string Estado { get; set; }
 
-        public ICollection<Horario> Horario { get; set; }
+        public virtual ICollection<Horario> Horario { get; set; }
     }
 }

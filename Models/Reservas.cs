@@ -19,5 +19,6 @@ namespace SW_2.Models
         public string Subject { get; set; }
         public string Tipo { get; set; }
         public int? Idlaboratorio { get; set; }
+        public string Until { get; set; }
     }
 }

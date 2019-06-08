@@ -14,6 +14,6 @@ namespace SW_2.Models
         public string Nombre { get; set; }
         public string Estado { get; set; }
 
-        public ICollection<Materia> Materia { get; set; }
+        public virtual ICollection<Materia> Materia { get; set; }
     }
 }

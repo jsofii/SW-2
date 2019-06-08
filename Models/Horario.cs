@@ -13,8 +13,8 @@ namespace SW_2.Models
         public int Horadefin { get; set; }
         public int Dia { get; set; }
 
-        public Ciclo IdcicloNavigation { get; set; }
-        public Laboratorio IdlaboratorioNavigation { get; set; }
-        public Materia IdmateriaNavigation { get; set; }
+        public virtual Ciclo IdcicloNavigation { get; set; }
+        public virtual Laboratorio IdlaboratorioNavigation { get; set; }
+        public virtual Materia IdmateriaNavigation { get; set; }
     }
 }

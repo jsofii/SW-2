@@ -130,7 +130,7 @@ export class ReservaComponent implements OnInit {
           }
         )
       this.tamaño--;
-
+      this.cont+=this.nuevas;
 
     }
 
@@ -166,8 +166,8 @@ export class ReservaComponent implements OnInit {
   GuardarCambios() {
 
     
-    this.GuardarReserva();
     this.EliminarReserva();
+    this.GuardarReserva();
     alert("Cambios guardados exitosamente");
     
   }
@@ -179,6 +179,8 @@ export class ReservaComponent implements OnInit {
     this.ListaReservasOriginal.forEach(element => {
       const index = this.scheduleData.map(e => e.Id).indexOf(element.id)
       if(index==-1){
+        
+      this.cont-=1;
         this.serviceLaboratorio.DeleteReserva(element.id).subscribe(
           )
           data=>{

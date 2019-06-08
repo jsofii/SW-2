@@ -32,12 +32,14 @@ namespace SW_2.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=cesar1996;database=basesw");
+                optionsBuilder.UseMySQL("Server=localhost;port=3306;user=root;password=;database=basesw");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
+
             modelBuilder.Entity<Carrera>(entity =>
             {
                 entity.HasKey(e => e.Idcarrera);
@@ -349,6 +351,10 @@ namespace SW_2.Models
 
                 entity.Property(e => e.Tipo)
                     .HasMaxLength(1)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Until)
+                    .HasMaxLength(80)
                     .IsUnicode(false);
             });
 

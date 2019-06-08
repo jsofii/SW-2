@@ -94,6 +94,7 @@ export class HorarioComponent implements OnInit {
             Subject: element.subject,
             StartTime: new Date(element.anio, element.mes, element.dia, element.hora, element.minutos),
             EndTime: new Date(element.aniofin, element.mesfin, element.diafin, element.horafin, element.minutosfin),
+            CategoryColor:"#1aaa55"
             
 
           }

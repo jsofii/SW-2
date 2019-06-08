@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { EventSettingsModel, DayService, WeekService, WorkWeekService, MonthService, AgendaService } from '@syncfusion/ej2-ng-schedule';
-import { Schedule, Day, Week, WorkWeek, Month, Agenda, EventRenderedArgs, Resize, DragAndDrop } from '@syncfusion/ej2-schedule';
+import { Schedule, Day, Week, WorkWeek, Month, Agenda, EventRenderedArgs, Resize, DragAndDrop, View } from '@syncfusion/ej2-schedule';
 import { applyCategoryColor } from './helper';
 import { extend } from '@syncfusion/ej2-base';
 import { laboratorioServiceService } from '../laboratorio-service/laboratorio-service.service';
@@ -58,11 +58,17 @@ export class ReservaComponent implements OnInit {
             Subject: element.subject,
             StartTime: new Date(element.anio, element.mes, element.dia, element.hora, element.minutos),
             EndTime: new Date(element.aniofin, element.mesfin, element.diafin, element.horafin, element.minutosfin),
+            CategoryColor:"#1aaa55"
+            
             
 
           }
           if(element.until!=null){
             tem['RecurrenceRule']=element.until;
+          }
+          if(element.tipo=='H'){
+            tem['IsReadonly']=true;
+            tem['CategoryColor']="#d12144"
           }
           this.scheduleData.push(tem);
 
@@ -182,5 +188,16 @@ export class ReservaComponent implements OnInit {
       
     });
   }
+   applyCategoryColor(args: EventRenderedArgs, currentView: View): void {
+    let categoryColor: string = args.data.CategoryColor as string;
+    if (!args.element || !categoryColor) {
+        return;
+    }
+    if (currentView === 'Agenda') {
+        (args.element.firstChild as HTMLElement).style.borderLeftColor = categoryColor;
+    } else {
+        args.element.style.backgroundColor = categoryColor;
+    }
+}
 }
 

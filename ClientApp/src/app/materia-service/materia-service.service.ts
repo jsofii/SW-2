@@ -28,6 +28,10 @@ export class materiaServiceService {
     return this.http.get('https://localhost:5001/api/Materia/ListaMateriasActivas');
 
   }
+  ListaCarreras() {
+    return this.http.get('https://localhost:5001/api/Materia/ListaCarreras');
+
+  }
 
   ListaMateriasPorCarrera(){
     return this.http.get('https://localhost:5001/api/Materia/ListaMateriasCarrera');

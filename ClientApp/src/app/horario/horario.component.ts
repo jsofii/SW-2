@@ -5,9 +5,13 @@ import { usuarioServiceService } from '../usuario-service/usuario-service.servic
 import { materiaServiceService } from '../materia-service/materia-service.service';
 import { horarioServiceService } from '../horario-service/horario-service.service';
 import { runInThisContext } from 'vm';
-import { Schedule, EventRenderedArgs } from '@syncfusion/ej2-schedule';
+import { Schedule, EventRenderedArgs, PopupOpenEventArgs } from '@syncfusion/ej2-schedule';
 import { applyCategoryColor } from '../reserva/helper';
-import { L10n } from '@syncfusion/ej2-base';
+import { L10n, createElement } from '@syncfusion/ej2-base';
+import { DropDownList } from '@syncfusion/ej2-dropdowns';
+import { elementDef } from '@angular/core/src/view';
+import { containerEnd } from '@angular/core/src/render3/instructions';
+import { element } from 'protractor';
 
 L10n.load({
   "en": {
@@ -151,6 +155,20 @@ export class HorarioComponent implements OnInit {
   inputLaboratorioNombre = "Seleccione el Laboratorio";
   ListaLaboratorios: any;
 
+  ListaMaterias:Array<any>;
+  Materias=[];
+  IdNuevaMateria:number;
+  NombreNuevaMateria:string;
+  dropDownMaterias:DropDownList;
+  ListaProfesores:Array<any>;
+  Profesores=[];
+  IdNuevoProfesor:number;
+  NombreNuevoProfesor:string;
+  NombreNuevoAsunto:string;
+  public dropDownProfesores:DropDownList;
+  ListaCarreras:Array<any>;
+  Carreras=[];
+  public dropDownCarreras:DropDownList;
   constructor(private serviceLaboratorio: laboratorioServiceService,
     private serviceusuario: usuarioServiceService,
     private servicemateria: materiaServiceService, private serviceCiclo: cicloServiceService,
@@ -159,11 +177,47 @@ export class HorarioComponent implements OnInit {
   }
   ngOnInit() {
     this.CargarLaboratorios();
+    this.CargarMaterias();
+    this.CargarProfesores();
+    this.CargarCarreras();
     
   }
   
+  CargarCarreras() {
+    this.servicemateria.ListaCarreras().subscribe(
+      data => {
+        this.ListaCarreras = data as Array<any>;
+        this.ListaCarreras.forEach(element => {
+          const dict = {text:element.nombre,value:element.idcarrera};
+          this.Carreras.push(dict);
+        });
+      }
+    )
+  }
   
-  
+  CargarMaterias() {
+    this.servicemateria.ListaMateriasPorCarrera().subscribe(
+      data => {
+        this.ListaMaterias = data as Array<any>;
+        this.ListaMaterias.forEach(element => {
+          const dict = {text:element.nombreM,value:element.idmateria,carrera:'Carrera: '+element.nombreC};
+          this.Materias.push(dict);
+        });
+      }
+    )
+  }
+
+  CargarProfesores() {
+    this.serviceusuario.ListaTodosUsuarios().subscribe(
+      data => {
+        this.ListaProfesores = data as Array<any>;
+        this.ListaProfesores.forEach(element => {
+          const dict = {text:element.nombrecompleto,value:element.idpersona};
+          this.Profesores.push(dict);
+        });
+      }
+    )
+  }
 
 
   
@@ -181,11 +235,103 @@ export class HorarioComponent implements OnInit {
 
   }
 
+  AgregarDropDownCarreras(args){
+    if (!args.element.querySelector('.row-carreras')) {
+      let row: HTMLElement = createElement('div', { className: 'row-carreras' });
+      let formElement: HTMLElement = args.element.querySelector('.e-schedule-form') as HTMLElement;
+      formElement.firstChild.insertBefore(row, args.element.querySelector('.e-title-location-row'));
+      let container: HTMLElement = createElement('div', { className: 'custom-field-container' });
+      let inputEle: HTMLInputElement = createElement('input', {
+          className: 'e-field', attrs: { name: 'Carrera' }
+      }) as HTMLInputElement;
+      container.appendChild(inputEle);
+      row.appendChild(container);
+      this.dropDownCarreras = new DropDownList({
+          dataSource: this.Carreras,
+            fields: { text: 'text', value: 'value' },
+            value: (<{ [key: string]: Object }>(args.data)).EventType as string,
+            floatLabelType: 'Always', placeholder: 'Carrera'
+      });
+      this.dropDownCarreras.appendTo(inputEle);
+      inputEle.setAttribute('name', 'Carrera');
+      
+      
+    }
+  }   
+
+  
+  dropDownMateriaChanged(args){
+    if(args!=null){
+      this.IdNuevaMateria=args.itemData.value;
+      this.NombreNuevaMateria=args.itemData.text;
+      console.log(args.itemData);
+
+    }
+
+  }
+  dropDownProfesorChanged(args){
+    if(args!=null){
+      this.IdNuevoProfesor=args.itemData.value;
+      this.NombreNuevoProfesor=args.itemData.text;
+      console.log(args.itemData);
+
+    }
+  }
+
+  AgregarDropDownMaterias(args){
+        if (!args.element.querySelector('.row-materias')) {
+          let row: HTMLElement = createElement('div', { className: 'row-materias' });
+          let formElement: HTMLElement = args.element.querySelector('.e-schedule-form') as HTMLElement;
+          formElement.firstChild.insertBefore(row, args.element.querySelector('.e-title-location-row'));
+          let container: HTMLElement = createElement('div', { className: 'custom-field-container' });
+          let inputEle: HTMLInputElement = createElement('input', {
+              className: 'e-field', attrs: { name: 'Materia' }
+          }) as HTMLInputElement;
+          container.appendChild(inputEle);
+          row.appendChild(container);
+          this.dropDownMaterias = new DropDownList({
+              dataSource: this.Materias,
+                fields: { groupBy:'carrera',text: 'text', value: 'value' },
+                value: (<{ [key: string]: Object }>(args.data)).EventType as string,
+                floatLabelType: 'Always', placeholder: 'Materia',allowFiltering: true,
+                change:this.dropDownMateriaChanged
+                // bind change event handler
+          });
+          console.log(this.dropDownMaterias);
+          this.dropDownMaterias.appendTo(inputEle);
+          inputEle.setAttribute('name', 'Materia');
+    }
+  }
+
+  AgregarDropDownProfesores(args){
+    if (!args.element.querySelector('.row-profesores')) {
+      let row: HTMLElement = createElement('div', { className: 'row-profesores' });
+      let formElement: HTMLElement = args.element.querySelector('.e-schedule-form') as HTMLElement;
+      formElement.firstChild.insertBefore(row, args.element.querySelector('.e-title-location-row'));
+      let container: HTMLElement = createElement('div', { className: 'custom-field-container' });
+      let inputEle: HTMLInputElement = createElement('input', {
+          className: 'e-field', attrs: { name: 'Profesor' }
+      }) as HTMLInputElement;
+      container.appendChild(inputEle);
+      row.appendChild(container);
+      this.dropDownProfesores= new DropDownList({
+          dataSource: this.Profesores,
+            fields: { text: 'text', value: 'value' },
+            value: (<{ [key: string]: Object }>(args.data)).EventType as string,
+            floatLabelType: 'Always', placeholder: 'Profesor',allowFiltering: true,
+            change:this.dropDownProfesorChanged
+      });
+      this.dropDownProfesores.appendTo(inputEle);
+      inputEle.setAttribute('name', 'Profesor');
+    }
+  }
+
+  
+
   CargarHorario() {
     this.scheduleData = new Array<any>();
     this.CargarLaboratorios();
   
-
 
     this.serviceLaboratorio.GetHorarios(this.inputLaboratorioID).subscribe(
       data => {
@@ -195,7 +341,6 @@ export class HorarioComponent implements OnInit {
         this.scheduleData3 = this.scheduleData2;
         this.ListaReservasOriginal=this.scheduleData3;
         this.cont = this.scheduleData3.length;
-        console.log(this.cont);
         this.scheduleData3.forEach(element => {
           let tem = {
             Id: element.id,
@@ -212,11 +357,10 @@ export class HorarioComponent implements OnInit {
           this.scheduleData.push(tem);
 
         });
-        // this.scheduleObj.data
-       // this.scheduleObj.destroy();
        if(this.scheduleObj!=null){
           this.scheduleObj.destroy();
        }
+
         this.scheduleObj = new Schedule({
           width: 'auto',
           height: 'auto',
@@ -230,6 +374,17 @@ export class HorarioComponent implements OnInit {
           },
 
           views: ['WorkWeek'],
+          popupOpen: (args: PopupOpenEventArgs) => {
+              if (args.type === 'Editor') {
+                  // Create required custom elements in initial time
+                 
+                  //this.AgregarDropDownCarreras(args);
+                  this.AgregarDropDownMaterias(args);
+                  this.AgregarDropDownProfesores(args);
+                
+             
+            }
+          },
           eventSettings: {
             dataSource: this.scheduleData,
 
@@ -256,6 +411,20 @@ export class HorarioComponent implements OnInit {
     
   }
   
+  
+
+
+  obtenerMateriaPorID(id:number):any{
+    this.Materias.forEach(function(element){
+      if(element.value==id){
+        return element;
+      }
+    });
+  }
+
+  obtenerProfesorPorID(id:number){
+
+  }
 
   GuardarHorario() {
     this.tamaño = this.scheduleData.length;
@@ -267,11 +436,14 @@ export class HorarioComponent implements OnInit {
       this.fechaInicio = this.x.StartTime;
       this.fechaFin = this.x.EndTime;
       const fechaUntil=this.x.RecurrenceRule;
+      const materia =this.Materias.filter(i => i.value==this.x.Materia)[0];
+      const profesor =this.Profesores.filter(i => i.value==this.x.Profesor)[0];
+      const asunto=materia.text+" - "+profesor.text;
 
       this.serviceLaboratorio.AddReserva(this.fechaInicio.getFullYear(), this.fechaInicio.getMonth(),
         this.fechaInicio.getDate(), this.fechaInicio.getHours(), this.fechaInicio.getMinutes(),
         this.fechaFin.getFullYear(), this.fechaFin.getMonth(), this.fechaFin.getDate(), this.fechaFin.getHours(),
-        this.fechaFin.getMinutes(), this.x.Subject, this.inputLaboratorioID,"H",fechaUntil).subscribe(
+        this.fechaFin.getMinutes(), asunto, this.inputLaboratorioID,"H",fechaUntil).subscribe(
           data => {
 
           }

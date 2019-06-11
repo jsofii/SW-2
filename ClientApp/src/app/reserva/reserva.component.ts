@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 import { EventSettingsModel, DayService, WeekService, WorkWeekService, MonthService, AgendaService } from '@syncfusion/ej2-ng-schedule';
-import { Schedule, Day, Week, WorkWeek, Month, Agenda, EventRenderedArgs, Resize, DragAndDrop, View } from '@syncfusion/ej2-schedule';
+import { Schedule, Day, Week, WorkWeek, Month, Agenda, EventRenderedArgs, Resize, DragAndDrop, View, RecurrenceEditor, PopupOpenEventArgs } from '@syncfusion/ej2-schedule';
 import { applyCategoryColor } from './helper';
-import { extend, L10n } from '@syncfusion/ej2-base';
+import { extend, L10n, createElement } from '@syncfusion/ej2-base';
 import { laboratorioServiceService } from '../laboratorio-service/laboratorio-service.service';
 import { elementEnd } from '@angular/core/src/render3/instructions';
 import{horarioServiceService} from '../horario-service/horario-service.service';
+import { DropDownList } from '@syncfusion/ej2-dropdowns';
 
 Schedule.Inject(WorkWeek);
 

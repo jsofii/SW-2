@@ -82,6 +82,13 @@ namespace SW_2.Controllers
             return this.context.Materia.Where(x=>x.Estado==estado).ToList();
         }
 
+        [HttpGet]
+        [Route("ListaCarreras")]
+        public List<Carrera> ListaCarreras()
+        {
+            return this.context.Carrera.ToList();
+        }
+
 
         [HttpGet]
         [Route("Get/{id}")]

@@ -238,7 +238,7 @@ export class ReservaComponent implements OnInit {
       this.serviceLaboratorio.AddReserva(this.fechaInicio.getFullYear(), this.fechaInicio.getMonth(),
         this.fechaInicio.getDate(), this.fechaInicio.getHours(), this.fechaInicio.getMinutes(),
         this.fechaFin.getFullYear(), this.fechaFin.getMonth(), this.fechaFin.getDate(), this.fechaFin.getHours(),
-        this.fechaFin.getMinutes(), this.x.Subject, this.inputLaboratorioID,"R",fechaUntil).subscribe(
+        this.fechaFin.getMinutes(), this.x.Subject, this.inputLaboratorioID,"R",fechaUntil,null,null).subscribe(
           data => {
 
           }

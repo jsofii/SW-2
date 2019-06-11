@@ -62,7 +62,7 @@ export class laboratorioServiceService {
     return this.http.post('https://localhost:5001/api/Laboratorio/Addlab/', temp);
 
   }
-  AddReserva(Anio, Mes, Dia, Hora, Minutos, AnioFin, MesFin, Diafin, Horafin, Minutosfin, Subject, InputLaboratorioID, Tipo, Until) {
+  AddReserva(Anio, Mes, Dia, Hora, Minutos, AnioFin, MesFin, Diafin, Horafin, Minutosfin, Subject, InputLaboratorioID, Tipo, Until, IdMateria, IdProfesor) {
     var temp = {
       Anio: Anio,
       Mes: Mes,
@@ -77,7 +77,9 @@ export class laboratorioServiceService {
       Subject: Subject,
       Tipo:Tipo,
       Idlaboratorio:InputLaboratorioID,
-      Until:Until
+      Until:Until,
+      IdMateria:IdMateria,
+      IdProfesor:IdProfesor
 
 
     }

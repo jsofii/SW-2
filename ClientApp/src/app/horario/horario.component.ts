@@ -261,19 +261,25 @@ export class HorarioComponent implements OnInit {
 
   
   dropDownMateriaChanged(args){
-    if(args!=null){
-      this.IdNuevaMateria=args.itemData.value;
-      this.NombreNuevaMateria=args.itemData.text;
-      console.log(args.itemData);
+    if(args!=undefined){
+      if(args.itemData!=undefined){
+        this.IdNuevaMateria=args.itemData.value;
+        this.NombreNuevaMateria=args.itemData.text;
+        console.log(args.itemData);
+
+      }
 
     }
 
   }
   dropDownProfesorChanged(args){
-    if(args!=null){
-      this.IdNuevoProfesor=args.itemData.value;
-      this.NombreNuevoProfesor=args.itemData.text;
-      console.log(args.itemData);
+    if(args!=undefined){
+      if(args.itemData!=undefined){
+        this.IdNuevoProfesor=args.itemData.value;
+        this.NombreNuevoProfesor=args.itemData.text;
+        console.log(args.itemData);
+
+      }
 
     }
   }
@@ -443,7 +449,7 @@ export class HorarioComponent implements OnInit {
       this.serviceLaboratorio.AddReserva(this.fechaInicio.getFullYear(), this.fechaInicio.getMonth(),
         this.fechaInicio.getDate(), this.fechaInicio.getHours(), this.fechaInicio.getMinutes(),
         this.fechaFin.getFullYear(), this.fechaFin.getMonth(), this.fechaFin.getDate(), this.fechaFin.getHours(),
-        this.fechaFin.getMinutes(), asunto, this.inputLaboratorioID,"H",fechaUntil).subscribe(
+        this.fechaFin.getMinutes(), asunto, this.inputLaboratorioID,"H",fechaUntil,materia.value,profesor.value).subscribe(
           data => {
 
           }

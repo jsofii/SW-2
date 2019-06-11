@@ -5,8 +5,120 @@ import { usuarioServiceService } from '../usuario-service/usuario-service.servic
 import { materiaServiceService } from '../materia-service/materia-service.service';
 import { horarioServiceService } from '../horario-service/horario-service.service';
 import { runInThisContext } from 'vm';
-import { Schedule, EventRenderedArgs } from '@syncfusion/ej2-schedule';
+import { Schedule, EventRenderedArgs, PopupOpenEventArgs } from '@syncfusion/ej2-schedule';
 import { applyCategoryColor } from '../reserva/helper';
+import { L10n, createElement } from '@syncfusion/ej2-base';
+import { DropDownList } from '@syncfusion/ej2-dropdowns';
+import { elementDef } from '@angular/core/src/view';
+import { containerEnd } from '@angular/core/src/render3/instructions';
+import { element } from 'protractor';
+
+L10n.load({
+  "en": {
+    "schedule": {
+        "day": "Día",
+        "week": "Semana",
+        "workWeek": "Semana laborable",
+        "month": "Mes",
+        "agenda": "Agenda",
+        "weekAgenda": "Semana de Agenda",
+        "workWeekAgenda": "Semana de Agenda Laboral",
+        "monthAgenda": "Month Agenda",
+        "today": "Hoy",
+        "noEvents": "No events",
+        "emptyContainer": "There are no events scheduled on this day.",
+        "allDay": "Todo el día",
+        "start": "Inicio",
+        "end": "Fin",
+        "more": "más",
+        "close": "Cerrar",
+        "cancel": "Cancelar",
+        "noTitle": "(Sin título)",
+        "delete": "Eliminar",
+        "deleteEvent": "Eliminar Horario",
+        "deleteMultipleEvent": "Eliminar Múltiples Horarios",
+        "selectedItems": "Elementos seleccionados",
+        "deleteSeries": "Eliminar series",
+        "edit": "Editar",
+        "editSeries": "Editar Series",
+        "editEvent": "Editar Horario",
+        "createEvent": "Crear",
+        "subject": "Asunto",
+        "addTitle": "Agregar título",
+        "moreDetails": "Más Detalles",
+        "save": "Guardar",
+        "editContent": "¿Quiere editar este horario o toda la serie?",
+        "deleteRecurrenceContent": "¿Quiere eliminar este horario o toda la serie?",
+        "deleteContent": "¿Está seguro de que desea eliminar este horario?",
+        "deleteMultipleContent": "Are you sure you want to delete the selected events?",
+        "newEvent": "Nuevo Horario",
+        "title": "Título",
+        "location": "Ubicación",
+        "description": "Descripción",
+        "timezone": "Zona horaria",
+        "startTimezone": "Start Timezone",
+        "endTimezone": "End Timezone",
+        "repeat": "Repetir",
+        "saveButton": "Guardar",
+        "cancelButton": "Cancelar",
+        "deleteButton": "Eliminar",
+        "recurrence": "Recurrencia",
+        "wrongPattern": "The recurrence pattern is not valid.",
+        "seriesChangeAlert": "The changes made to specific instances of this series will be cancelled and those events will match the series again.",
+        "createError": "The duration of the event must be shorter than how frequently it occurs. Shorten the duration, or change the recurrence pattern in the recurrence event editor.",
+        "recurrenceDateValidation": "Some months have fewer than the selected date. For these months, the occurrence will fall on the last date of the month.",
+        "sameDayAlert": "Two occurrences of the same event cannot occur on the same day.",
+        "editRecurrence": "Editar recurrencia",
+        "repeats": "Repeticiones",
+        "alert": "Alerta",
+        "startEndError": "The selected end date occurs before the start date.",
+        "invalidDateError": "The entered date value is invalid.",
+        "ok": "Ok",
+        "occurrence": "Occurrence",
+        "series": "Series",
+        "previous": "Anterior",
+        "next": "Siguiente",
+        "timelineDay": "Timeline Day",
+        "timelineWeek": "Timeline Week",
+        "timelineWorkWeek": "Timeline Work Week",
+        "timelineMonth": "Timeline Month"
+    },
+    "recurrenceeditor": {
+        "none": "Niguno",
+        "daily": "Diario",
+        "weekly": "Semanal",
+        "monthly": "Mensual",
+        "month": "Mes",
+        "yearly": "Anual",
+        "never": "Nunca",
+        "until": "Hasta",
+        "count": "Número de veces",
+        "first": "Primero",
+        "second": "Segundo",
+        "third": "Tercero",
+        "fourth": "Cuarto",
+        "last": "Último",
+        "repeat": "Repetir",
+        "repeatEvery": "Repetir cada",
+        "on": "Repeat On",
+        "end": "Fin",
+        "onDay": "Día",
+        "days": "Día(s)",
+        "weeks": "Semana(s)",
+        "months": "Mes(es)",
+        "years": "Año(s)",
+        "every": "cada",
+        "summaryTimes": "vece(s)",
+        "summaryOn": "on",
+        "summaryUntil": "hasta",
+        "summaryRepeat": "Repeticiones",
+        "summaryDay": "día(s)",
+        "summaryWeek": "semana(s)",
+        "summaryMonth": "mes(es)",
+        "summaryYear": "año(s)"
+    }
+  }
+});
 
 
 @Component({
@@ -43,6 +155,20 @@ export class HorarioComponent implements OnInit {
   inputLaboratorioNombre = "Seleccione el Laboratorio";
   ListaLaboratorios: any;
 
+  ListaMaterias:Array<any>;
+  Materias=[];
+  IdNuevaMateria:number;
+  NombreNuevaMateria:string;
+  dropDownMaterias:DropDownList;
+  ListaProfesores:Array<any>;
+  Profesores=[];
+  IdNuevoProfesor:number;
+  NombreNuevoProfesor:string;
+  NombreNuevoAsunto:string;
+  public dropDownProfesores:DropDownList;
+  ListaCarreras:Array<any>;
+  Carreras=[];
+  public dropDownCarreras:DropDownList;
   constructor(private serviceLaboratorio: laboratorioServiceService,
     private serviceusuario: usuarioServiceService,
     private servicemateria: materiaServiceService, private serviceCiclo: cicloServiceService,
@@ -51,11 +177,47 @@ export class HorarioComponent implements OnInit {
   }
   ngOnInit() {
     this.CargarLaboratorios();
+    this.CargarMaterias();
+    this.CargarProfesores();
+    this.CargarCarreras();
     
   }
   
+  CargarCarreras() {
+    this.servicemateria.ListaCarreras().subscribe(
+      data => {
+        this.ListaCarreras = data as Array<any>;
+        this.ListaCarreras.forEach(element => {
+          const dict = {text:element.nombre,value:element.idcarrera};
+          this.Carreras.push(dict);
+        });
+      }
+    )
+  }
   
-  
+  CargarMaterias() {
+    this.servicemateria.ListaMateriasPorCarrera().subscribe(
+      data => {
+        this.ListaMaterias = data as Array<any>;
+        this.ListaMaterias.forEach(element => {
+          const dict = {text:element.nombreM,value:element.idmateria,carrera:'Carrera: '+element.nombreC};
+          this.Materias.push(dict);
+        });
+      }
+    )
+  }
+
+  CargarProfesores() {
+    this.serviceusuario.ListaTodosUsuarios().subscribe(
+      data => {
+        this.ListaProfesores = data as Array<any>;
+        this.ListaProfesores.forEach(element => {
+          const dict = {text:element.nombrecompleto,value:element.idpersona};
+          this.Profesores.push(dict);
+        });
+      }
+    )
+  }
 
 
   
@@ -73,11 +235,109 @@ export class HorarioComponent implements OnInit {
 
   }
 
+  AgregarDropDownCarreras(args){
+    if (!args.element.querySelector('.row-carreras')) {
+      let row: HTMLElement = createElement('div', { className: 'row-carreras' });
+      let formElement: HTMLElement = args.element.querySelector('.e-schedule-form') as HTMLElement;
+      formElement.firstChild.insertBefore(row, args.element.querySelector('.e-title-location-row'));
+      let container: HTMLElement = createElement('div', { className: 'custom-field-container' });
+      let inputEle: HTMLInputElement = createElement('input', {
+          className: 'e-field', attrs: { name: 'Carrera' }
+      }) as HTMLInputElement;
+      container.appendChild(inputEle);
+      row.appendChild(container);
+      this.dropDownCarreras = new DropDownList({
+          dataSource: this.Carreras,
+            fields: { text: 'text', value: 'value' },
+            value: (<{ [key: string]: Object }>(args.data)).EventType as string,
+            floatLabelType: 'Always', placeholder: 'Carrera'
+      });
+      this.dropDownCarreras.appendTo(inputEle);
+      inputEle.setAttribute('name', 'Carrera');
+      
+      
+    }
+  }   
+
+  
+  dropDownMateriaChanged(args){
+    if(args!=undefined){
+      if(args.itemData!=undefined){
+        this.IdNuevaMateria=args.itemData.value;
+        this.NombreNuevaMateria=args.itemData.text;
+        console.log(args.itemData);
+
+      }
+
+    }
+
+  }
+  dropDownProfesorChanged(args){
+    if(args!=undefined){
+      if(args.itemData!=undefined){
+        this.IdNuevoProfesor=args.itemData.value;
+        this.NombreNuevoProfesor=args.itemData.text;
+        console.log(args.itemData);
+
+      }
+
+    }
+  }
+
+  AgregarDropDownMaterias(args){
+        if (!args.element.querySelector('.row-materias')) {
+          let row: HTMLElement = createElement('div', { className: 'row-materias' });
+          let formElement: HTMLElement = args.element.querySelector('.e-schedule-form') as HTMLElement;
+          formElement.firstChild.insertBefore(row, args.element.querySelector('.e-title-location-row'));
+          let container: HTMLElement = createElement('div', { className: 'custom-field-container' });
+          let inputEle: HTMLInputElement = createElement('input', {
+              className: 'e-field', attrs: { name: 'Materia' }
+          }) as HTMLInputElement;
+          container.appendChild(inputEle);
+          row.appendChild(container);
+          this.dropDownMaterias = new DropDownList({
+              dataSource: this.Materias,
+                fields: { groupBy:'carrera',text: 'text', value: 'value' },
+                value: (<{ [key: string]: Object }>(args.data)).EventType as string,
+                floatLabelType: 'Always', placeholder: 'Materia',allowFiltering: true,
+                change:this.dropDownMateriaChanged
+                // bind change event handler
+          });
+          console.log(this.dropDownMaterias);
+          this.dropDownMaterias.appendTo(inputEle);
+          inputEle.setAttribute('name', 'Materia');
+    }
+  }
+
+  AgregarDropDownProfesores(args){
+    if (!args.element.querySelector('.row-profesores')) {
+      let row: HTMLElement = createElement('div', { className: 'row-profesores' });
+      let formElement: HTMLElement = args.element.querySelector('.e-schedule-form') as HTMLElement;
+      formElement.firstChild.insertBefore(row, args.element.querySelector('.e-title-location-row'));
+      let container: HTMLElement = createElement('div', { className: 'custom-field-container' });
+      let inputEle: HTMLInputElement = createElement('input', {
+          className: 'e-field', attrs: { name: 'Profesor' }
+      }) as HTMLInputElement;
+      container.appendChild(inputEle);
+      row.appendChild(container);
+      this.dropDownProfesores= new DropDownList({
+          dataSource: this.Profesores,
+            fields: { text: 'text', value: 'value' },
+            value: (<{ [key: string]: Object }>(args.data)).EventType as string,
+            floatLabelType: 'Always', placeholder: 'Profesor',allowFiltering: true,
+            change:this.dropDownProfesorChanged
+      });
+      this.dropDownProfesores.appendTo(inputEle);
+      inputEle.setAttribute('name', 'Profesor');
+    }
+  }
+
+  
+
   CargarHorario() {
     this.scheduleData = new Array<any>();
     this.CargarLaboratorios();
   
-
 
     this.serviceLaboratorio.GetHorarios(this.inputLaboratorioID).subscribe(
       data => {
@@ -87,7 +347,6 @@ export class HorarioComponent implements OnInit {
         this.scheduleData3 = this.scheduleData2;
         this.ListaReservasOriginal=this.scheduleData3;
         this.cont = this.scheduleData3.length;
-        console.log(this.cont);
         this.scheduleData3.forEach(element => {
           let tem = {
             Id: element.id,
@@ -104,11 +363,10 @@ export class HorarioComponent implements OnInit {
           this.scheduleData.push(tem);
 
         });
-        // this.scheduleObj.data
-       // this.scheduleObj.destroy();
        if(this.scheduleObj!=null){
           this.scheduleObj.destroy();
        }
+
         this.scheduleObj = new Schedule({
           width: 'auto',
           height: 'auto',
@@ -116,11 +374,23 @@ export class HorarioComponent implements OnInit {
           currentView: 'WorkWeek',
           startHour: '07:00',
           endHour: '21:00',
+          locale:'en',
           workHours: {
             highlight: false
           },
 
           views: ['WorkWeek'],
+          popupOpen: (args: PopupOpenEventArgs) => {
+              if (args.type === 'Editor') {
+                  // Create required custom elements in initial time
+                 
+                  //this.AgregarDropDownCarreras(args);
+                  this.AgregarDropDownMaterias(args);
+                  this.AgregarDropDownProfesores(args);
+                
+             
+            }
+          },
           eventSettings: {
             dataSource: this.scheduleData,
 
@@ -147,6 +417,20 @@ export class HorarioComponent implements OnInit {
     
   }
   
+  
+
+
+  obtenerMateriaPorID(id:number):any{
+    this.Materias.forEach(function(element){
+      if(element.value==id){
+        return element;
+      }
+    });
+  }
+
+  obtenerProfesorPorID(id:number){
+
+  }
 
   GuardarHorario() {
     this.tamaño = this.scheduleData.length;
@@ -158,11 +442,14 @@ export class HorarioComponent implements OnInit {
       this.fechaInicio = this.x.StartTime;
       this.fechaFin = this.x.EndTime;
       const fechaUntil=this.x.RecurrenceRule;
+      const materia =this.Materias.filter(i => i.value==this.x.Materia)[0];
+      const profesor =this.Profesores.filter(i => i.value==this.x.Profesor)[0];
+      const asunto=materia.text+" - "+profesor.text;
 
       this.serviceLaboratorio.AddReserva(this.fechaInicio.getFullYear(), this.fechaInicio.getMonth(),
         this.fechaInicio.getDate(), this.fechaInicio.getHours(), this.fechaInicio.getMinutes(),
         this.fechaFin.getFullYear(), this.fechaFin.getMonth(), this.fechaFin.getDate(), this.fechaFin.getHours(),
-        this.fechaFin.getMinutes(), this.x.Subject, this.inputLaboratorioID,"H",fechaUntil).subscribe(
+        this.fechaFin.getMinutes(), asunto, this.inputLaboratorioID,"H",fechaUntil,materia.value,profesor.value).subscribe(
           data => {
 
           }

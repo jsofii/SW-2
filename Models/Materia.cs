@@ -8,6 +8,7 @@ namespace SW_2.Models
         public Materia()
         {
             Horario = new HashSet<Horario>();
+            Reservas = new HashSet<Reservas>();
         }
 
         public int Idmateria { get; set; }
@@ -18,5 +19,6 @@ namespace SW_2.Models
 
         public virtual Carrera CarreraNavigation { get; set; }
         public virtual ICollection<Horario> Horario { get; set; }
+        public virtual ICollection<Reservas> Reservas { get; set; }
     }
 }

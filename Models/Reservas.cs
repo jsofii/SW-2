@@ -20,5 +20,10 @@ namespace SW_2.Models
         public string Tipo { get; set; }
         public int? Idlaboratorio { get; set; }
         public string Until { get; set; }
+        public int? IdMateria { get; set; }
+        public int? IdProfesor { get; set; }
+
+        public virtual Materia IdMateriaNavigation { get; set; }
+        public virtual Persona IdProfesorNavigation { get; set; }
     }
 }

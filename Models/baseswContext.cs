@@ -321,6 +321,12 @@ namespace SW_2.Models
             {
                 entity.ToTable("reservas", "basesw");
 
+                entity.HasIndex(e => e.IdMateria)
+                    .HasName("fk_reservas_materia_idx");
+
+                entity.HasIndex(e => e.IdProfesor)
+                    .HasName("fk_reservas_persona_idx");
+
                 entity.Property(e => e.Id).HasColumnType("int(11)");
 
                 entity.Property(e => e.Anio).HasColumnType("int(11)");
@@ -334,6 +340,10 @@ namespace SW_2.Models
                 entity.Property(e => e.Hora).HasColumnType("int(11)");
 
                 entity.Property(e => e.Horafin).HasColumnType("int(11)");
+
+                entity.Property(e => e.IdMateria).HasColumnType("int(11)");
+
+                entity.Property(e => e.IdProfesor).HasColumnType("int(11)");
 
                 entity.Property(e => e.Idlaboratorio).HasColumnType("int(11)");
 
@@ -356,6 +366,16 @@ namespace SW_2.Models
                 entity.Property(e => e.Until)
                     .HasMaxLength(80)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.IdMateriaNavigation)
+                    .WithMany(p => p.Reservas)
+                    .HasForeignKey(d => d.IdMateria)
+                    .HasConstraintName("fk_reservas_materia");
+
+                entity.HasOne(d => d.IdProfesorNavigation)
+                    .WithMany(p => p.Reservas)
+                    .HasForeignKey(d => d.IdProfesor)
+                    .HasConstraintName("fk_reservas_persona");
             });
 
             modelBuilder.Entity<Semana>(entity =>

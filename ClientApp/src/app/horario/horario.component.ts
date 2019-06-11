@@ -348,6 +348,7 @@ export class HorarioComponent implements OnInit {
         this.ListaReservasOriginal=this.scheduleData3;
         this.cont = this.scheduleData3.length;
         this.scheduleData3.forEach(element => {
+          console.log(element);
           let tem = {
             Id: element.id,
             Subject: element.subject,
@@ -359,6 +360,10 @@ export class HorarioComponent implements OnInit {
           }
           if(element.tipo=="H"){
             tem['RecurrenceRule']=element.until;
+            tem['Materia']=element.idMateria;
+            console.log(element.idMateria);
+              tem['Profesor']=element.idProfesor;
+              console.log(element.idProfesor);
           }
           this.scheduleData.push(tem);
 

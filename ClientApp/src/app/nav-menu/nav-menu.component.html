@@ -8,9 +8,14 @@
     <ul class="nav navbar-nav">
         <li [routerLinkActive]='["link-active"]'>
             <a [routerLink]='["/home"]'>
-              <span class='glyphicon glyphicon-calendar'></span> HORARIOS
+              <span class='glyphicon glyphicon-calendar'></span> REPORTE DE HORARIOS Y RESERVAS
             </a>
           </li>
+          <li [routerLinkActive]='["link-active"]'>
+              <a [routerLink]='["/consulta-horario"]'>
+                <span class='glyphicon glyphicon-search'></span> CONSULTA DE HORARIOS
+              </a>
+            </li>
         <li [routerLinkActive]='["link-active"]'>
             <a [routerLink]='["/laboratorio"]'>
               <span class='glyphicon glyphicon-modal-window'></span> LABORATORIOS

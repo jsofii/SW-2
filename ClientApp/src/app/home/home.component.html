@@ -1,3 +1,104 @@
-<div class="fondo">
 
-</div>
+<body>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+  
+  
+        
+  
+      <div class="panel panel-success">
+            <div class="panel-heading">
+                    <div style="text-align:center">
+                            <h1>
+                              Reporte de Horarios y Reservas
+                            </h1>
+                           
+                            
+                          
+                  
+                      </div>
+            </div>
+      
+            <div class="panel-body">
+                    <div class="panel panel-info">
+                            <div class="panel-body">
+                                    <div class="col-lg-12">
+                                            <div class="form-group">
+                                                    <div class="col-lg-3">
+                                                            Seleccione un Laboratorio:
+                                                          </div>
+                                                          <div class="col-lg-4">
+                                                            <div class="btn-group" style="width: 100%">
+                                                                <button type="button" class="btn btn-default dropdown-toggle" style="width: 100%" data-toggle="dropdown">{{inputLaboratorioNombre}}
+                                                                  <span class="caret"></span></button>
+                                                                <ul class="dropdown-menu scrollable-menu" role="menu">
+                                                                  <li *ngFor="let item of ListaLaboratorios">
+                                                                    <a (click)="CargarLaboratoriosID(item.idlaboratorio, item.nombre)">
+                                                                      {{item.nombre}}
+                                                                    </a>
+                                                                  </li>
+                                                                </ul>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-lg-1">
+
+                                                          </div>
+                                                          <div class="col-lg-3">
+                                                              <div class="row item-info" >
+                                                                Horarios
+                                                              </div>
+                                                              <br>
+                                                              <div class="row item-info" style="background-color: #4682B4">
+                                                                Reservas
+
+                                                              </div>
+                                                          </div>
+                                              
+                                            </div>
+                                          </div>
+  
+  
+                                
+  
+                                              
+                                          
+  
+                                </div>
+                                
+                            </div>
+                        
+                            <div class="panel-heading">
+                                    <legend align="center"> {{'Reservas del laboratorio "' + inputLaboratorioNombre + '"'}} </legend>
+                                  </div>
+              <div>
+                    <div class="row">
+                            <div class="col-md-12">
+                                  <div id="Schedule"  >
+                                  </div>
+  
+                              </div>
+                          </div>
+                </div>
+              
+      
+            </div>
+      
+      
+          </div>
+  
+    </div>
+    <div class="col-lg-2"></div>
+    <div>
+      <div class="row" >
+          
+              <div class="col-md-8" >
+                    <div id="Schedule" >
+                    </div>
+                </div>
+                
+            </div>
+  </div>
+  
+  </body>
+  
+  

@@ -35,6 +35,8 @@ import { CheckBoxAllModule } from '@syncfusion/ej2-ng-buttons';
 import { ToolbarAllModule } from '@syncfusion/ej2-ng-navigations';
 import { MaskedTextBoxModule } from '@syncfusion/ej2-ng-inputs';
 import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-ng-dropdowns';
+import { ConsultaHorarioComponent } from './consulta-horario/consulta-horario.component';
+import { ConsultaHorarioServiceService } from './consulta-horario-service/consulta-horario-service.service';
 
 
 
@@ -70,7 +72,9 @@ import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-ng-
 
     PipemateriaPipe,
 
-    FiltrousuarioPipe
+    FiltrousuarioPipe,
+
+    ConsultaHorarioComponent
 
     
 
@@ -97,10 +101,12 @@ import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-ng-
       { path: 'reserva', component: ReservaComponent },
       { path: 'laboratorio', component: LaboratorioComponent },
       { path: 'ciclo-gestion/:idciclo', component: CicloGestionComponent },
+      { path: 'consulta-horario', component: ConsultaHorarioComponent },
+
     ])
   ],
 
-  providers: [usuarioServiceService, materiaServiceService, loginServiceService,laboratorioServiceService,cicloServiceService, horarioServiceService],
+  providers: [usuarioServiceService, materiaServiceService, loginServiceService,laboratorioServiceService,cicloServiceService, horarioServiceService, ConsultaHorarioServiceService],
   bootstrap: [AppComponent]
 
 })

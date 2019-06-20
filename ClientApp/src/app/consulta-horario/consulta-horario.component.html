@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+</head>
+
+<body>
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <div style="text-align:center">
+                    <h1>
+                      Consulta de Horarios
+                    </h1>
+                  
+                    
+                  
+          
+              </div>
+    </div>
+
+      <div class="panel-body">
+        
+        <div>
+          <br>
+          <div style="margin-left: 15px">
+            <div class="row">
+              <div class="col-md-2">
+                Buscar por:
+              </div>
+
+              <div class="dropdown col-md-4">
+                <div class="form-group">
+                  <select (change)="selectParametro($event)" class="form-control" id="sel1">
+                    <option value="0">Asunto</option>
+  
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <input style="margin-left: 40px" class="form-control" id="idBusqueda" [(ngModel)]="busqueda"
+                  type="text" placeholder="Buscar..">
+              </div>
+
+              <div class="col-md-2 text-center">
+                <button type="button" class="btn btn-info" (click)="buscarHorarioPorParametro()">
+                  <span class="glyphicon glyphicon-search"></span> Buscar
+                </button>
+              </div>
+            </div>
+
+            </div>
+            
+            
+            
+        </div>
+
+        <div class="col-lg-12">
+
+          <div class="panel-body">
+
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th class="col-md-6">Asunto</th>
+                  <th class="col-md-2">Laboratorio</th>
+                  <th class="col-md-1">Año</th>
+                  <th class="col-md-1">Semestre</th>
+                  <th class="col-md-1">Hora Inicio</th>
+                  <th class="col-md-1">Hora Fin</th>
+
+                </tr>
+              </thead>
+              <tbody id="myTable">
+                <tr class="active" *ngFor="let horario of listaHorarios ">
+
+                  <td class="col-md-6">{{horario.asunto}}</td>
+                  <td class="col-md-2">{{horario.laboratorio}}</td>
+                  <td class="col-md-1">{{horario.anio}}</td>
+                  <td class="col-md-1">{{horario.semestre}}</td>
+                  <td class="col-md-1">{{horario.horaInicio}}</td>
+                  <td class="col-md-1">{{horario.horaFin}}</td>
+
+
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+  
+
+</body>
+
+</html>

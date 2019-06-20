@@ -75,6 +75,14 @@ namespace SW_2.Controllers
             return this.context.Reservas.Where(x=>(x.Idlaboratorio==id && x.Tipo=="H")).ToList();
         }
 
+        [HttpGet]
+        [Route("todos_horarios")]
+        public List<Reservas> todos_horarios(int id)
+        {
+
+            return this.context.Reservas.Where(x=> x.Tipo=="H").ToList();
+        }
+
 
         [HttpPost]
         [Route("addReserva")]

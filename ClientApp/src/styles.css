@@ -1,6 +1,15 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,500");
 /*! recurrence editor theme wise definitions*/
 /*! Schedule component's material theme definitions and variables */
+
+.item-info{
+  background-color: #20B2AA;
+  text-align: center;
+  color: azure;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 5px;
+}
 .e-schedule .e-schedule-toolbar .e-icon-prev::before {
   content: '\e937';
 }

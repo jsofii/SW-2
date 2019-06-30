@@ -2570,7 +2570,7 @@
 
 .e-schedule-dialog .e-all-day-time-zone-row {
   display: -ms-flexbox;
-  display: flex;
+  display: none;
   padding-bottom: 14px;
   padding-top: 8px;
   width: 100%;
@@ -6833,7 +6833,7 @@
 
 .e-schedule-dialog .e-all-day-time-zone-row {
   display: -ms-flexbox;
-  display: flex;
+  display: none;
   padding-bottom: 14px;
   padding-top: 8px;
   width: 100%;
@@ -11113,7 +11113,7 @@
 
 .e-schedule-dialog .e-all-day-time-zone-row {
   display: -ms-flexbox;
-  display: flex;
+  display: none;
   padding-bottom: 14px;
   padding-top: 8px;
   width: 100%;
@@ -15385,7 +15385,7 @@
 
 .e-schedule-dialog .e-all-day-time-zone-row {
   display: -ms-flexbox;
-  display: flex;
+  display: none;
   padding-bottom: 14px;
   padding-top: 8px;
   width: 100%;
@@ -19651,7 +19651,7 @@
 
 .e-schedule-dialog .e-all-day-time-zone-row {
   display: -ms-flexbox;
-  display: flex;
+  display: none;
   padding-bottom: 14px;
   padding-top: 8px;
   width: 100%;
@@ -43915,7 +43915,7 @@ ejs-multiselect {
 
 .e-schedule-dialog .e-all-day-time-zone-row {
   display: -ms-flexbox;
-  display: flex;
+  display: none;
   padding-bottom: 14px;
   padding-top: 8px;
   width: 100%;
@@ -44179,6 +44179,10 @@ ejs-multiselect {
   padding-top: 20px;
 }
 
+.e-description-row{
+  display:none;
+}
+
 .e-schedule-dialog.e-device .e-resources {
   padding-bottom: 0;
   padding-top: 20px;
@@ -44253,6 +44257,10 @@ ejs-multiselect {
 .e-schedule-dialog.e-device.e-rtl .e-end-time-zone-container,
 .e-schedule-dialog.e-device.e-rtl .e-all-day-container {
   padding-right: 0;
+}
+
+.e-location-container{
+  display:none;
 }
 
 .e-schedule-dialog.e-device .e-recurrence-container {
@@ -44334,14 +44342,15 @@ ejs-multiselect {
   background-color: #3f51b5;
 }
 
-.e-quick-popup-wrapper .e-event-popup .e-popup-header .e-header-icon-wrapper {
+.e-quick-popup-wrapper .e-event-popup .e-popup-header .e-header-icon-wrapper {  
   padding: 5px 5px 2px;
 }
 
-.e-quick-popup-wrapper .e-event-popup .e-popup-header .e-header-icon-wrapper .e-edit,
-.e-quick-popup-wrapper .e-event-popup .e-popup-header .e-header-icon-wrapper .e-delete {
+.e-quick-popup-wrapper .e-event-popup .e-popup-header .e-header-icon-wrapper .e-edit{
   display: none;
-  display: block;
+}
+.e-quick-popup-wrapper .e-event-popup .e-popup-header .e-header-icon-wrapper .e-delete {
+  display:block;
 }
 
 .e-quick-popup-wrapper .e-event-popup .e-popup-header .e-header-icon-wrapper .e-edit:focus, .e-quick-popup-wrapper .e-event-popup .e-popup-header .e-header-icon-wrapper .e-edit:hover,
@@ -44376,7 +44385,7 @@ ejs-multiselect {
 
 .e-quick-popup-wrapper .e-event-popup .e-popup-header .e-subject-wrap .e-subject {
   cursor: default;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 1.5;
   max-height: 87px;
@@ -44577,6 +44586,10 @@ ejs-multiselect {
 .e-quick-popup-wrapper.e-device .e-multiple-event-popup .e-popup-header .e-edit-icon,
 .e-quick-popup-wrapper.e-device .e-multiple-event-popup .e-popup-header .e-delete-icon {
   font-size: 14px;
+}
+
+div.e-popup-header > div.e-header-icon-wrapper > button.e-edit{
+  display:none;
 }
 
 .e-quick-popup-wrapper.e-device.e-rtl .e-event-popup .e-popup-header .e-close {
@@ -46475,6 +46488,9 @@ ejs-multiselect {
     padding-left: 0;
     padding-right: 10px;
   }
+
+  
+  
 }
 
 /*! Recurrence-Editor component theme */

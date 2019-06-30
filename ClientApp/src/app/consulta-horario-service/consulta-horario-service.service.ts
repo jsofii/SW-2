@@ -11,16 +11,29 @@ export class ConsultaHorarioServiceService {
   todosHorariosConsultados:ItemHorarioConsulta[]=[];
   todosHorarios:any;
   ListaLaboratorios:Array<any>;
-
+   accentMap = {
+    'á':'a', 'é':'e', 'í':'i','ó':'o','ú':'u'
+  };
   constructor(private _serviceLaboratorio: laboratorioServiceService,
     private http: HttpClient) {
     this.host = "https://localhost:5001";
    }
 
+    accent_fold (s) {
+    if (!s) { return ''; }
+    var ret = '';
+    for (var i = 0; i < s.length; i++) {
+      ret += this.accentMap[s.charAt(i)] || s.charAt(i);
+    }
+    return ret;
+  };
+
    buscarHorarioPorParametro(busqueda: string): ItemHorarioConsulta[] {
     var tempArray:ItemHorarioConsulta[]=[];
+    busqueda=this.accent_fold(busqueda).toUpperCase();
     this.todosHorariosConsultados.forEach(element => {
-      if(element.asunto.includes(busqueda)){
+      const tempAsunto=this.accent_fold(element.asunto).toUpperCase();
+      if(tempAsunto.includes(busqueda)){
         tempArray.push(element);
       }
     });

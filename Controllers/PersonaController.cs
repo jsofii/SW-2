@@ -256,6 +256,27 @@ namespace SW_2.Controllers
             return lista;
         }
 
+        [HttpGet]
+        [Route("ListaProfesores")]
+        public List<JoinPersona> ListaProfesores()
+        {
+            var query = from persona in context.Persona
+                        join
+            tipoPersona in context.Tipopersona on persona.Idtipopersona equals tipoPersona.Idtipopersona
+                        select new JoinPersona
+                        {
+                            Idpersona = persona.Idpersona,
+                            Nombrecompleto = persona.Nombrecompleto,
+                            Identificacionpersonal = persona.Identificacionpersonal,
+                            Correo = persona.Correo,
+                            Idtipopersona = persona.Idtipopersona,
+                            Nombre = tipoPersona.Nombre
+                        };
+
+            List<JoinPersona> lista = query.Where(x=> x.Idtipopersona==2).ToList();
+            return lista;
+        }
+
     }
 
 

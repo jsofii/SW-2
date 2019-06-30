@@ -8,10 +8,11 @@ import { runInThisContext } from 'vm';
 import { Schedule, EventRenderedArgs, PopupOpenEventArgs } from '@syncfusion/ej2-schedule';
 import { applyCategoryColor } from '../reserva/helper';
 import { L10n, createElement } from '@syncfusion/ej2-base';
-import { DropDownList } from '@syncfusion/ej2-dropdowns';
+import { DropDownList, revertHighlightSearch } from '@syncfusion/ej2-dropdowns';
 import { elementDef } from '@angular/core/src/view';
 import { containerEnd } from '@angular/core/src/render3/instructions';
 import { element } from 'protractor';
+import { isUndefined } from 'util';
 
 L10n.load({
   "en": {
@@ -157,6 +158,8 @@ export class HorarioComponent implements OnInit {
 
   ListaMaterias:Array<any>;
   Materias=[];
+  Grupos= [{value:1,text:'GR1'},{value:2,text:'GR2'},{value:3,text:'GR3'}];
+  public dropDownGrupos:DropDownList;
   IdNuevaMateria:number;
   NombreNuevaMateria:string;
   dropDownMaterias:DropDownList;
@@ -208,7 +211,7 @@ export class HorarioComponent implements OnInit {
   }
 
   CargarProfesores() {
-    this.serviceusuario.ListaTodosUsuarios().subscribe(
+    this.serviceusuario.ListaTodosProfesores().subscribe(
       data => {
         this.ListaProfesores = data as Array<any>;
         this.ListaProfesores.forEach(element => {
@@ -252,6 +255,7 @@ export class HorarioComponent implements OnInit {
             value: (<{ [key: string]: Object }>(args.data)).EventType as string,
             floatLabelType: 'Always', placeholder: 'Carrera'
       });
+    
       this.dropDownCarreras.appendTo(inputEle);
       inputEle.setAttribute('name', 'Carrera');
       
@@ -283,6 +287,17 @@ export class HorarioComponent implements OnInit {
 
     }
   }
+  dropDownGrupoChanged(args){
+    if(args!=undefined){
+      if(args.itemData!=undefined){
+        //this.IdNuevoProfesor=args.itemData.value;
+       // this.NombreNuevoProfesor=args.itemData.text;
+        console.log(args.itemData);
+
+      }
+
+    }
+  }
 
   AgregarDropDownMaterias(args){
         if (!args.element.querySelector('.row-materias')) {
@@ -303,7 +318,6 @@ export class HorarioComponent implements OnInit {
                 change:this.dropDownMateriaChanged
                 // bind change event handler
           });
-          console.log(this.dropDownMaterias);
           this.dropDownMaterias.appendTo(inputEle);
           inputEle.setAttribute('name', 'Materia');
     }
@@ -323,15 +337,38 @@ export class HorarioComponent implements OnInit {
       this.dropDownProfesores= new DropDownList({
           dataSource: this.Profesores,
             fields: { text: 'text', value: 'value' },
-            value: (<{ [key: string]: Object }>(args.data)).EventType as string,
+            value:3,
             floatLabelType: 'Always', placeholder: 'Profesor',allowFiltering: true,
             change:this.dropDownProfesorChanged
       });
+      console.log(this.dropDownProfesores);
       this.dropDownProfesores.appendTo(inputEle);
       inputEle.setAttribute('name', 'Profesor');
     }
   }
-
+  AgregarDropDownGrupos(args){
+    if (!args.element.querySelector('.row-grupos')) {
+      let row: HTMLElement = createElement('div', { className: 'row-grupos' });
+      let formElement: HTMLElement = args.element.querySelector('.e-schedule-form') as HTMLElement;
+      formElement.firstChild.insertBefore(row, args.element.querySelector('.e-title-location-row'));
+      let container: HTMLElement = createElement('div', { className: 'custom-field-container' });
+      let inputEle: HTMLInputElement = createElement('input', {
+          className: 'e-field', attrs: { name: 'Grupo' }
+      }) as HTMLInputElement;
+      container.appendChild(inputEle);
+      row.appendChild(container);
+      this.dropDownGrupos= new DropDownList({
+          dataSource:this.Grupos,
+            fields: { text: 'text', value: 'value' },
+            value: 1,
+            floatLabelType: 'Always', placeholder: 'Grupo',
+            change:this.dropDownGrupoChanged
+      });
+      this.dropDownGrupos.appendTo(inputEle);
+    
+      inputEle.setAttribute('name', 'Grupo');
+    }
+  }
   
 
   CargarHorario() {
@@ -392,6 +429,7 @@ export class HorarioComponent implements OnInit {
                   //this.AgregarDropDownCarreras(args);
                   this.AgregarDropDownMaterias(args);
                   this.AgregarDropDownProfesores(args);
+                  this.AgregarDropDownGrupos(args);
                 
              
             }
@@ -449,12 +487,24 @@ export class HorarioComponent implements OnInit {
       const fechaUntil=this.x.RecurrenceRule;
       const materia =this.Materias.filter(i => i.value==this.x.Materia)[0];
       const profesor =this.Profesores.filter(i => i.value==this.x.Profesor)[0];
-      const asunto=materia.text+" - "+profesor.text;
+      const grupo = this.Grupos.filter(i => i.value==this.x.Grupo)[0];
+      var asunto=materia.text;
+      var profesorValue=3;
+      if(!isUndefined(profesor)){
+        asunto+=' - '+profesor.text;
+        profesorValue=profesor.value;
+      }else{
+        asunto+=' - SIN PROFESOR';
+
+      }
+      if(!isUndefined(grupo)){
+        asunto+=' - '+grupo.text;
+      }
 
       this.serviceLaboratorio.AddReserva(this.fechaInicio.getFullYear(), this.fechaInicio.getMonth(),
         this.fechaInicio.getDate(), this.fechaInicio.getHours(), this.fechaInicio.getMinutes(),
         this.fechaFin.getFullYear(), this.fechaFin.getMonth(), this.fechaFin.getDate(), this.fechaFin.getHours(),
-        this.fechaFin.getMinutes(), asunto, this.inputLaboratorioID,"H",fechaUntil,materia.value,profesor.value).subscribe(
+        this.fechaFin.getMinutes(), asunto, this.inputLaboratorioID,"H",fechaUntil,materia.value,profesorValue).subscribe(
           data => {
 
           }

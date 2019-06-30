@@ -30,21 +30,14 @@
           <br>
           <div style="margin-left: 15px">
             <div class="row">
-              <div class="col-md-2">
-                Buscar por:
+              <div class="col-md-4">
+                Buscar por Materia o Profesor:
               </div>
 
-              <div class="dropdown col-md-4">
-                <div class="form-group">
-                  <select (change)="selectParametro($event)" class="form-control" id="sel1">
-                    <option value="0">Asunto</option>
-  
-                  </select>
-                </div>
-              </div>
+              
 
               <div class="col-md-4">
-                <input style="margin-left: 40px" class="form-control" id="idBusqueda" [(ngModel)]="busqueda"
+                <input  class="form-control" id="idBusqueda" [(ngModel)]="busqueda"
                   type="text" placeholder="Buscar..">
               </div>
 
@@ -68,7 +61,7 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th class="col-md-6">Asunto</th>
+                  <th class="col-md-6">Materia - Profesor</th>
                   <th class="col-md-2">Laboratorio</th>
                   <th class="col-md-1">Año</th>
                   <th class="col-md-1">Semestre</th>

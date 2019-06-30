@@ -25,6 +25,10 @@ export class usuarioServiceService {
     return this.http.get('https://localhost:5001/api/Persona/InfoPersonas');
 
   }
+  ListaTodosProfesores() {
+    return this.http.get('https://localhost:5001/api/Persona/ListaProfesores');
+
+  }
   ListaTipoPersona() {
     return this.http.get('https://localhost:5001/api/TipoPersona/Lista');
   }

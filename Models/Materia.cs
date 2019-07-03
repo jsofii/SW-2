@@ -17,8 +17,8 @@ namespace SW_2.Models
         public int? Carrera { get; set; }
         public string Estado { get; set; }
 
-        public virtual Carrera CarreraNavigation { get; set; }
-        public virtual ICollection<Horario> Horario { get; set; }
-        public virtual ICollection<Reservas> Reservas { get; set; }
+        public Carrera CarreraNavigation { get; set; }
+        public ICollection<Horario> Horario { get; set; }
+        public ICollection<Reservas> Reservas { get; set; }
     }
 }

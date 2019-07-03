@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SW_2.Models;
+using Microsoft.Extensions.Configuration;
+
 
 namespace SW_2.Controllers
 {
@@ -30,7 +32,15 @@ namespace SW_2.Controllers
             public string Nombre { get; set; }
 
         }
-        baseswContext context = new baseswContext();
+         private IConfiguration configuration;
+        private baseswContext context;
+        public HorarioController(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+            this.context = new baseswContext(this.configuration);
+        }
+
+
         [HttpGet]
         [Route("ListaHorarioMateria/{idlaboratorio}/{idciclo}")]
         public List<JoinHorario> Lista(int idlaboratorio, int idciclo, int idmateria)

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { HttpHeaders } from '@angular/common/http';
@@ -12,15 +12,17 @@ import { Observable } from 'rxjs/Observable';
 export class loginServiceService {
 
 
-  constructor(private http: HttpClient) {
+  baseUrl: string = "";
+  constructor( @Inject('BASE_URL') baseUrlH: string, private http: HttpClient) {
     this.host = "https://localhost:5001";
+    this.baseUrl = baseUrlH;
   }
 
   host: string;
 
 
   ListaTodasMaterias() {
-    return this.http.get('https://localhost:5001/api/Materia/ListaMaterias');
+    return this.http.get(this.baseUrl+'api/Materia/ListaMaterias');
 
   }
   
@@ -32,12 +34,12 @@ export class loginServiceService {
     }
 
     
-    return this.http.post('https://localhost:5001/api/Materia/Addmat/', temp);
+    return this.http.post(this.baseUrl+'api/Materia/Addmat/', temp);
 
   }
   verificar(usuario:any, contrasenia:any) {
 
-   return  this.http.get('https://localhost:5001/api/Usuario/verificarUsuario/' + usuario + '/' + contrasenia);
+   return  this.http.get(this.baseUrl+'api/Usuario/verificarUsuario/' + usuario + '/' + contrasenia);
 
    
 
@@ -45,7 +47,7 @@ export class loginServiceService {
   }
 
   DeleteMateria(idmateria: number){
-    return this.http.delete('https://localhost:5001/api/Materia/Eliminar/' + idmateria);
+    return this.http.delete(this.baseUrl+'api/Materia/Eliminar/' + idmateria);
   
   }
 

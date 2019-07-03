@@ -19,9 +19,9 @@ namespace SW_2.Models
         public string Correo { get; set; }
         public string Estado { get; set; }
 
-        public virtual Tipopersona IdtipopersonaNavigation { get; set; }
-        public virtual ICollection<Reservalaboratorio> Reservalaboratorio { get; set; }
-        public virtual ICollection<Reservas> Reservas { get; set; }
-        public virtual ICollection<Usuario> Usuario { get; set; }
+        public Tipopersona IdtipopersonaNavigation { get; set; }
+        public ICollection<Reservalaboratorio> Reservalaboratorio { get; set; }
+        public ICollection<Reservas> Reservas { get; set; }
+        public ICollection<Usuario> Usuario { get; set; }
     }
 }

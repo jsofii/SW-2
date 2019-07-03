@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,Inject } from '@angular/core';
 import { ItemHorarioConsulta } from '../consulta-horario/modelo/itemHorarioConsulta';
 import { HttpClient } from '@angular/common/http';
 import { laboratorioServiceService } from '../laboratorio-service/laboratorio-service.service';
@@ -14,9 +14,12 @@ export class ConsultaHorarioServiceService {
    accentMap = {
     'á':'a', 'é':'e', 'í':'i','ó':'o','ú':'u'
   };
-  constructor(private _serviceLaboratorio: laboratorioServiceService,
+
+  baseUrl: string = "";
+  constructor(@Inject('BASE_URL') baseUrlH: string,private _serviceLaboratorio: laboratorioServiceService,
     private http: HttpClient) {
     this.host = "https://localhost:5001";
+    this.baseUrl = baseUrlH;
    }
 
     accent_fold (s) {
@@ -91,7 +94,7 @@ export class ConsultaHorarioServiceService {
   }
   
   GetHorarios(){
-    return this.http.get('https://localhost:5001/api/Horario/todos_horarios/');
+    return this.http.get(this.baseUrl+'api/Horario/todos_horarios/');
   }
 
 }

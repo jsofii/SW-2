@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { HttpHeaders } from '@angular/common/http';
@@ -12,33 +12,35 @@ import { Observable } from 'rxjs/Observable';
 export class materiaServiceService {
 
 
-  constructor(private http: HttpClient) {
+  baseUrl: string = "";
+  constructor( @Inject('BASE_URL') baseUrlH: string, private http: HttpClient) {
     this.host = "https://localhost:5001";
+    this.baseUrl = baseUrlH;
   }
 
   host: string;
 
 
   ListaTodasMaterias() {
-    return this.http.get('https://localhost:5001/api/Materia/ListaMaterias');
+    return this.http.get(this.baseUrl+'api/Materia/ListaMaterias');
 
   }
 
   ListaTodasMateriasActivas() {
-    return this.http.get('https://localhost:5001/api/Materia/ListaMateriasActivas');
+    return this.http.get(this.baseUrl+'api/Materia/ListaMateriasActivas');
 
   }
   ListaCarreras() {
-    return this.http.get('https://localhost:5001/api/Materia/ListaCarreras');
+    return this.http.get(this.baseUrl+'api/Materia/ListaCarreras');
 
   }
 
   ListaMateriasPorCarrera(){
-    return this.http.get('https://localhost:5001/api/Materia/ListaMateriasCarrera');
+    return this.http.get(this.baseUrl+'api/Materia/ListaMateriasCarrera');
   }
 
   GetMateriaId(id: number) {
-    return this.http.get('https://localhost:5001/api/Materia/Get/' + id);
+    return this.http.get(this.baseUrl+'api/Materia/Get/' + id);
   }
   EditMateria(idmateria: any, nombreMateria: any, codMateria: any, carrera: any, estado: any) {
     var temp = {
@@ -51,7 +53,7 @@ export class materiaServiceService {
     }
 
 
-    return this.http.put('https://localhost:5001/api/Materia/Edit/', temp);
+    return this.http.put(this.baseUrl+'api/Materia/Edit/', temp);
 
   }
 
@@ -65,12 +67,12 @@ export class materiaServiceService {
     }
 
 
-    return this.http.post('https://localhost:5001/api/Materia/Addmat/', temp);
+    return this.http.post(this.baseUrl+'api/Materia/Addmat/', temp);
 
   }
 
   DeleteMateria(idmateria: number) {
-    return this.http.delete('https://localhost:5001/api/Materia/Eliminar/' + idmateria);
+    return this.http.delete(this.baseUrl+'api/Materia/Eliminar/' + idmateria);
 
   }
 

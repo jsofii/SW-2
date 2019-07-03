@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -7,26 +7,28 @@ import { HttpClient } from '@angular/common/http';
 export class cicloServiceService {
 
 
-  constructor(private http: HttpClient) {
+  baseUrl: string = "";
+  constructor( @Inject('BASE_URL') baseUrlH: string, private http: HttpClient) {
     this.host = "https://localhost:5001";
+    this.baseUrl = baseUrlH;
   }
 
   host: string;
 
 
   ListaTodosCiclos() {
-    return this.http.get('https://localhost:5001/api/Ciclo/ListaCiclos');
+    return this.http.get(this.baseUrl+'api/Ciclo/ListaCiclos');
 
   }
 
   ListaTodosCiclosActivos() {
-    return this.http.get('https://localhost:5001/api/Ciclo/ListaCiclosActivos');
+    return this.http.get(this.baseUrl+'api/Ciclo/ListaCiclosActivos');
 
   }
 
 
   GetCicloId(id: number) {
-    return this.http.get('https://localhost:5001/api/Ciclo/Get/' + id);
+    return this.http.get(this.baseUrl+'api/Ciclo/Get/' + id);
   }
   EditCiclo(idciclo: any, nombreCiclo: any, fechainicio: any, fechaifin: any, estado: any) {
     var temp = {
@@ -40,7 +42,7 @@ export class cicloServiceService {
     }
 
 
-    return this.http.put('https://localhost:5001/api/Ciclo/Edit/', temp);
+    return this.http.put(this.baseUrl+'api/Ciclo/Edit/', temp);
 
   }
 
@@ -53,12 +55,12 @@ export class cicloServiceService {
     }
 
 
-    return this.http.post('https://localhost:5001/api/Ciclo/Addciclo/', temp);
+    return this.http.post(this.baseUrl+'api/Ciclo/Addciclo/', temp);
 
   }
 
   DeleteCiclo(idciclo: number) {
-    return this.http.delete('https://localhost:5001/api/Ciclo/Eliminar/' + idciclo);
+    return this.http.delete(this.baseUrl+'api/Ciclo/Eliminar/' + idciclo);
 
   }
 

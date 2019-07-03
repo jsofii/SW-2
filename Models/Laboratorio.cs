@@ -16,7 +16,7 @@ namespace SW_2.Models
         public string Nombre { get; set; }
         public string Estado { get; set; }
 
-        public virtual ICollection<Horario> Horario { get; set; }
-        public virtual ICollection<Reservalaboratorio> Reservalaboratorio { get; set; }
+        public ICollection<Horario> Horario { get; set; }
+        public ICollection<Reservalaboratorio> Reservalaboratorio { get; set; }
     }
 }

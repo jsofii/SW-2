@@ -23,7 +23,7 @@ namespace SW_2.Models
         public int? IdMateria { get; set; }
         public int? IdProfesor { get; set; }
 
-        public virtual Materia IdMateriaNavigation { get; set; }
-        public virtual Persona IdProfesorNavigation { get; set; }
+        public Materia IdMateriaNavigation { get; set; }
+        public Persona IdProfesorNavigation { get; set; }
     }
 }

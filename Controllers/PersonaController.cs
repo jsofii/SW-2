@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using SW_2.Models;
 using System.Net.Mail;
 using System.Web;
+using Microsoft.Extensions.Configuration;
 
 
 
@@ -102,7 +103,13 @@ namespace SW_2.Controllers
         }
 
 
-        baseswContext context = new baseswContext();
+         private IConfiguration configuration;
+        private baseswContext context;
+        public PersonaController(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+            this.context = new baseswContext(this.configuration);
+        }
 
 
         [HttpPost]

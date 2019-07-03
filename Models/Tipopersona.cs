@@ -13,6 +13,6 @@ namespace SW_2.Models
         public int Idtipopersona { get; set; }
         public string Nombre { get; set; }
 
-        public virtual ICollection<Persona> Persona { get; set; }
+        public ICollection<Persona> Persona { get; set; }
     }
 }

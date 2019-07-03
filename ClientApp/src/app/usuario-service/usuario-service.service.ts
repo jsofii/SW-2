@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { HttpHeaders } from '@angular/common/http';
@@ -14,29 +14,31 @@ import { core } from '@angular/compiler';
 export class usuarioServiceService {
 
 
-  constructor(private http: HttpClient) {
+  baseUrl: string = "";
+  constructor( @Inject('BASE_URL') baseUrlH: string, private http: HttpClient) {
     this.host = "https://localhost:5001";
+    this.baseUrl = baseUrlH;
   }
 
   host: string;
 
 
   ListaTodosUsuarios() {
-    return this.http.get('https://localhost:5001/api/Persona/InfoPersonas');
+    return this.http.get(this.baseUrl+'api/Persona/InfoPersonas');
 
   }
   ListaTodosProfesores() {
-    return this.http.get('https://localhost:5001/api/Persona/ListaProfesores');
+    return this.http.get(this.baseUrl+'api/Persona/ListaProfesores');
 
   }
   ListaTipoPersona() {
-    return this.http.get('https://localhost:5001/api/TipoPersona/Lista');
+    return this.http.get(this.baseUrl+'api/TipoPersona/Lista');
   }
   ListaUsuario() {
-    return this.http.get('https://localhost:5001/api/Usuario/ListaUsuario');
+    return this.http.get(this.baseUrl+'api/Usuario/ListaUsuario');
   }
   RemoveUsuario(idusuario: number) {
-    return this.http.delete('https://localhost:5001/api/Usuario/DeleteUsuario/' + idusuario);
+    return this.http.delete(this.baseUrl+'api/Usuario/DeleteUsuario/' + idusuario);
   }
   EditarUsuario(idusuario: number, nombreusuario: string, password: string, estado: string) {
     var user = {
@@ -45,19 +47,19 @@ export class usuarioServiceService {
       Password: password,
       Estado: estado
     }
-    return this.http.post('https://localhost:5001/api/Usuario/Editar/', user);
+    return this.http.post(this.baseUrl+'api/Usuario/Editar/', user);
   }
   existeUsuario(correo: string) {
-    return this.http.get('https://localhost:5001/api/Persona/existeUsuario/' + correo);
+    return this.http.get(this.baseUrl+'api/Persona/existeUsuario/' + correo);
   }
   temporalPass(corr: string) {
     var correo = {
       Correo: corr
     }
-    return this.http.post('https://localhost:5001/api/Persona/temporalPass/', correo);
+    return this.http.post(this.baseUrl+'api/Persona/temporalPass/', correo);
   }
   CargarUsuario(idusuario: number) {
-    return this.http.get('https://localhost:5001/api/Usuario/UsuarioEditar/' + idusuario);
+    return this.http.get(this.baseUrl+'api/Usuario/UsuarioEditar/' + idusuario);
   }
   AddPersona(nombreCompleto: any, idPersonal: any, idTipoPersona: any, correoE: any) {
     var temp = {
@@ -66,12 +68,12 @@ export class usuarioServiceService {
       Idtipopersona: idTipoPersona,
       Correo: correoE
     }
-    return this.http.post('https://localhost:5001/api/Persona/Add/', temp);
+    return this.http.post(this.baseUrl+'api/Persona/Add/', temp);
 
   }
 
   GetPersonaId(idperson: number) {
-    return this.http.get('https://localhost:5001/api/Persona/Get/' + idperson);
+    return this.http.get(this.baseUrl+'api/Persona/Get/' + idperson);
   }
 
   EditPersona(idperson: number, nombrecompleto: any, idpersonal: any, idTipoPersona: any, correoE: any) {
@@ -82,7 +84,7 @@ export class usuarioServiceService {
       Idtipopersona: idTipoPersona,
       Correo: correoE
     }
-    return this.http.put('https://localhost:5001/api/Persona/Editpersona/', temp);
+    return this.http.put(this.baseUrl+'api/Persona/Editpersona/', temp);
 
   }
 
@@ -94,7 +96,7 @@ export class usuarioServiceService {
       Password: password,
       Estado: estado
     }
-    return this.http.post('https://localhost:5001/api/Usuario/addUsuario/', user);
+    return this.http.post(this.baseUrl+'api/Usuario/addUsuario/', user);
   }
 
 

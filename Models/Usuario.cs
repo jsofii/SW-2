@@ -11,6 +11,6 @@ namespace SW_2.Models
         public string Password { get; set; }
         public string Estado { get; set; }
 
-        public virtual Persona IdpersonaNavigation { get; set; }
+        public Persona IdpersonaNavigation { get; set; }
     }
 }

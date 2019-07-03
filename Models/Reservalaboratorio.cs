@@ -14,7 +14,7 @@ namespace SW_2.Models
         public string Estadoreserva { get; set; }
         public int Idpersona { get; set; }
 
-        public virtual Laboratorio IdlaboratorioNavigation { get; set; }
-        public virtual Persona IdpersonaNavigation { get; set; }
+        public Laboratorio IdlaboratorioNavigation { get; set; }
+        public Persona IdpersonaNavigation { get; set; }
     }
 }

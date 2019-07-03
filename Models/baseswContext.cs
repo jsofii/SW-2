@@ -1,14 +1,22 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace SW_2.Models
 {
     public partial class baseswContext : DbContext
     {
-        public baseswContext()
+
+
+        
+        string cnx;
+        public baseswContext(IConfiguration configuration)
         {
+            this.cnx = configuration.GetSection("database").Value;
+           
         }
+
 
         public baseswContext(DbContextOptions<baseswContext> options)
             : base(options)
@@ -32,14 +40,13 @@ namespace SW_2.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySQL("Server=localhost;port=3306;user=root;password=;database=basesw");
+                 //optionsBuilder.UseMySQL("Server=localhost;port=3306;user=root;password=cesar1996;database=basesw");
+                optionsBuilder.UseMySQL(this.cnx);
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
-
             modelBuilder.Entity<Carrera>(entity =>
             {
                 entity.HasKey(e => e.Idcarrera);

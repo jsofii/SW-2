@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   usuario: any;
   password: any;
   correo:any;
+
+  error:any;
   ngOnInit() {
   }
   onKeydown(event) {

@@ -10,6 +10,10 @@ import { error } from 'util';
 })
 export class UsuarioComponent implements OnInit {
 
+
+  busquedaUser:any;
+
+
   constructor(private serviceUsuario: usuarioServiceService) {
     this.CargarTipoPersona();
     this.CargarUsuarios();

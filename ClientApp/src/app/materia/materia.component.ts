@@ -8,6 +8,7 @@ import { materiaServiceService } from '../materia-service/materia-service.servic
 })
 export class MateriaComponent implements OnInit {
   idmateria: any;
+  busquedamateria:any;
   constructor(private serviceMateria: materiaServiceService) {
     this.idmateria = 0;
   }

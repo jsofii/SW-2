@@ -9,6 +9,7 @@ import { Alert } from 'selenium-webdriver';
 })
 export class LaboratorioComponent implements OnInit {
   idlaboratorio: any;
+  busquedalabo:any;
   constructor(private serviceLaboratorio: laboratorioServiceService) {
     this.idlaboratorio = 0;
     this.ListaTodosLaboratorios = new Array<any>();

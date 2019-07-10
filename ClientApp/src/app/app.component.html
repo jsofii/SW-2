@@ -1,15 +1,15 @@
-<div >
-  
-  <!-- <div *ngIf="!log"   >
-    <app-login (logIn)="Enter($event)"  (nombre)="Nombre($event)" ></app-login>
-  </div> -->
-  
+<div>
+
   <div *ngIf="!log">
-    <div >
-    
-      <app-nav-menu ></app-nav-menu>
+    <app-login (logIn)="Enter($event)" (nombre)="Nombre($event)"></app-login>
+  </div>
+
+  <div *ngIf="log">
+    <div>
+
+      <app-nav-menu></app-nav-menu>
     </div>
-    <div >
+    <div>
       <router-outlet></router-outlet>
     </div>
   </div>
